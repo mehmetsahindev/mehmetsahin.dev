@@ -55,7 +55,7 @@ export function Overview() {
             </IntroItemContent>
           </IntroItem>
 
-          <CurrentLocalTimeItem timeZone={USER.timeZone} />
+          {/* <CurrentLocalTimeItem timeZone={USER.timeZone} /> */}
 
           <PhoneItem phoneNumber={USER.phoneNumber} />
 
@@ -75,12 +75,12 @@ export function Overview() {
             </IntroItemContent>
           </IntroItem>
 
-          <IntroItem>
+          {/* <IntroItem>
             <IntroItemIcon>{getGenderIcon(USER.gender)}</IntroItemIcon>
             <IntroItemContent aria-label={`Pronouns: ${USER.pronouns}`}>
               {USER.pronouns}
             </IntroItemContent>
-          </IntroItem>
+          </IntroItem> */}
         </div>
       </PanelContent>
     </Panel>

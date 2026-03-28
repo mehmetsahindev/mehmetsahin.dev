@@ -1,7 +1,6 @@
 "use client"
 
-import { DownloadIcon, TriangleDashedIcon, TypeIcon } from "lucide-react"
-import Link from "next/link"
+import { TypeIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { toast } from "sonner"
 
@@ -48,7 +47,7 @@ export function BrandContextMenu({ children }: { children: React.ReactNode }) {
           Copy Logotype as SVG
         </ContextMenuItem>
 
-        <ContextMenuItem asChild>
+        {/* <ContextMenuItem asChild>
           <Link href="/blog/chanhdai-brand">
             <TriangleDashedIcon />
             Brand Guidelines
@@ -60,7 +59,7 @@ export function BrandContextMenu({ children }: { children: React.ReactNode }) {
             <DownloadIcon />
             Download Brand Assets
           </a>
-        </ContextMenuItem>
+        </ContextMenuItem> */}
       </ContextMenuContent>
     </ContextMenu>
   )

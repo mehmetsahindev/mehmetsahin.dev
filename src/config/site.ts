@@ -15,22 +15,22 @@ export const META_THEME_COLORS = {
 }
 
 export const MAIN_NAV: NavItem[] = [
-  {
+  /* {
     title: "Components",
     href: "/components",
   },
   {
     title: "Blocks",
     href: "/blocks",
-  },
+  }, */
   {
     title: "Blog",
     href: "/blog",
   },
-  {
+  /* {
     title: "Sponsors",
     href: "/sponsors",
-  },
+  }, */
 ]
 
 export const MOBILE_NAV: NavItem[] = [
@@ -49,5 +49,5 @@ export const SOURCE_CODE_GITHUB_URL = "https://github.com/ncdai/chanhdai.com"
 export const SPONSORSHIP_URL = "https://github.com/sponsors/ncdai"
 
 export const UTM_PARAMS = {
-  utm_source: "chanhdai.com",
+  utm_source: "mehmetsahin.dev",
 }

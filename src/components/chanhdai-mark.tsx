@@ -2,19 +2,91 @@ export function ChanhDaiMark(props: React.ComponentProps<"svg">) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 512 256"
+      viewBox="0 0 400 200"
       aria-hidden
       {...props}
     >
-      <path
-        fill="currentColor"
-        d="M192 256H64v-64h128v64ZM448 64H320v128h128v64H256V0h192v64ZM64 192H0V64h64v128ZM512 192h-64V64h64v128ZM192 64H64V0h128v64Z"
-      />
+      <defs>
+        <pattern
+          id="logo-pixel"
+          width="20"
+          height="20"
+          patternUnits="userSpaceOnUse"
+          patternTransform="scale(40)"
+        >
+          <rect width="1" height="1" x="0" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="1" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="2" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="3" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="4" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="6" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="7" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="8" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="9" y="0" fill="currentColor"></rect>
+          <rect width="1" height="1" x="0" y="1" fill="currentColor"></rect>
+          <rect width="1" height="1" x="2" y="1" fill="currentColor"></rect>
+          <rect width="1" height="1" x="4" y="1" fill="currentColor"></rect>
+          <rect width="1" height="1" x="6" y="1" fill="currentColor"></rect>
+          <rect width="1" height="1" x="0" y="2" fill="currentColor"></rect>
+          <rect width="1" height="1" x="2" y="2" fill="currentColor"></rect>
+          <rect width="1" height="1" x="4" y="2" fill="currentColor"></rect>
+          <rect width="1" height="1" x="6" y="2" fill="currentColor"></rect>
+          <rect width="1" height="1" x="7" y="2" fill="currentColor"></rect>
+          <rect width="1" height="1" x="8" y="2" fill="currentColor"></rect>
+          <rect width="1" height="1" x="9" y="2" fill="currentColor"></rect>
+          <rect width="1" height="1" x="0" y="3" fill="currentColor"></rect>
+          <rect width="1" height="1" x="4" y="3" fill="currentColor"></rect>
+          <rect width="1" height="1" x="9" y="3" fill="currentColor"></rect>
+          <rect width="1" height="1" x="0" y="4" fill="currentColor"></rect>
+          <rect width="1" height="1" x="4" y="4" fill="currentColor"></rect>
+          <rect width="1" height="1" x="6" y="4" fill="currentColor"></rect>
+          <rect width="1" height="1" x="7" y="4" fill="currentColor"></rect>
+          <rect width="1" height="1" x="8" y="4" fill="currentColor"></rect>
+          <rect width="1" height="1" x="9" y="4" fill="currentColor"></rect>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#logo-pixel)"></rect>
     </svg>
   )
 }
 
 export function getMarkSVG(color: string) {
-  return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 256 128"><path fill="${color}" d="M96 128H32V96h64v32ZM224 32h-64v64h64v32h-96V0h96v32ZM32 96H0V32h32v64ZM256 96h-32V32h32v64ZM96 32H32V0h64v32Z"/></svg>`
+  return `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+      <defs>
+        <pattern id="logo-pixel" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="scale(40)">
+          <rect width="1" height="1" x="0" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="1" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="2" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="3" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="4" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="6" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="7" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="8" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="9" y="0" fill="${color}"></rect>
+          <rect width="1" height="1" x="0" y="1" fill="${color}"></rect>
+          <rect width="1" height="1" x="2" y="1" fill="${color}"></rect>
+          <rect width="1" height="1" x="4" y="1" fill="${color}"></rect>
+          <rect width="1" height="1" x="6" y="1" fill="${color}"></rect>
+          <rect width="1" height="1" x="0" y="2" fill="${color}"></rect>
+          <rect width="1" height="1" x="2" y="2" fill="${color}"></rect>
+          <rect width="1" height="1" x="4" y="2" fill="${color}"></rect>
+          <rect width="1" height="1" x="6" y="2" fill="${color}"></rect>
+          <rect width="1" height="1" x="7" y="2" fill="${color}"></rect>
+          <rect width="1" height="1" x="8" y="2" fill="${color}"></rect>
+          <rect width="1" height="1" x="9" y="2" fill="${color}"></rect>
+          <rect width="1" height="1" x="0" y="3" fill="${color}"></rect>
+          <rect width="1" height="1" x="4" y="3" fill="${color}"></rect>
+          <rect width="1" height="1" x="9" y="3" fill="${color}"></rect>
+          <rect width="1" height="1" x="0" y="4" fill="${color}"></rect>
+          <rect width="1" height="1" x="4" y="4" fill="${color}"></rect>
+          <rect width="1" height="1" x="6" y="4" fill="${color}"></rect>
+          <rect width="1" height="1" x="7" y="4" fill="${color}"></rect>
+          <rect width="1" height="1" x="8" y="4" fill="${color}"></rect>
+          <rect width="1" height="1" x="9" y="4" fill="${color}"></rect>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#logo-pixel)"></rect>
+    </svg>
+  `
 }

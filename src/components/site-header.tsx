@@ -53,8 +53,8 @@ export function SiteHeader() {
           <DesktopNav items={MAIN_NAV} />
 
           <div className="flex items-center *:first:mr-2 max-sm:*:data-[slot=command-menu-trigger]:hidden">
-            <CommandMenu posts={postPreviews} blocks={blocks} enabledHotkeys />
-            <NavItemGitHub />
+            {/* <CommandMenu posts={postPreviews} blocks={blocks} enabledHotkeys /> */}
+            {/* <NavItemGitHub /> */}
             <Separator
               orientation="vertical"
               className="mx-2 data-vertical:h-4 data-vertical:self-center"
@@ -72,7 +72,7 @@ export function SiteHeader() {
           "*:data-[slot=command-menu-trigger]:min-w-20 *:data-[slot=command-menu-trigger]:gap-2 *:data-[slot=command-menu-trigger]:rounded-none *:data-[slot=command-menu-trigger]:border-none *:data-[slot=command-menu-trigger]:bg-transparent *:data-[slot=command-menu-trigger]:px-0 *:data-[slot=command-menu-trigger]:hover:bg-transparent *:data-[slot=command-menu-trigger]:active:scale-none"
         )}
       >
-        <CommandMenu posts={postPreviews} blocks={blocks} />
+        {/* <CommandMenu posts={postPreviews} blocks={blocks} /> */}
         <Separator
           orientation="vertical"
           className="mr-1 ml-2.5 data-vertical:h-6 data-vertical:self-center"
