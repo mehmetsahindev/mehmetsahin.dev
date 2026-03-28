@@ -46,12 +46,13 @@ export default function Page() {
         <Separator />
 
         <About />
-        <div className="flex h-2 w-full border-x border-line" />
+        <Separator />
+        {/* <div className="flex h-2 w-full border-x border-line" />
 
         <Testimonials />
         <div className="flex h-2 w-full border-x border-line" />
 
-        <GitHubContributions />
+        <GitHubContributions /> 
         <Separator />
 
         <Sponsors />
@@ -64,22 +65,22 @@ export default function Page() {
         <Separator />
 
         <Blog />
-        <Separator />
+        <Separator /> */}
 
         <Experiences />
         <Separator />
 
-        <Projects />
-        <Separator />
+        {/* <Projects />
+        <Separator /> */}
 
-        <Awards />
+        {/* <Awards />
         <Separator />
 
         <Certifications />
         <Separator />
 
         <Bookmarks />
-        <Separator />
+        <Separator /> */}
       </div>
     </>
   )
