@@ -1,7 +1,7 @@
 import type { Award } from "../types/awards"
 
 export const AWARDS: Award[] = [
-  {
+  /* {
     id: "a144bd19-3706-4e4c-ba22-0e0d8302642a",
     prize: "1st Prize",
     title: "Can Tho City Young Informatics Contest 2014",
@@ -284,5 +284,5 @@ export const AWARDS: Award[] = [
       "- Selected for [▲Vercel OSS Program](https://vercel.com/blog/summer-2025-oss-program#react-wheel-picker) summer 2025 cohort\n- Received $3,600 in platform credits, OSS Starter Pack, and priority community support\n- Project: [React Wheel Picker](https://react-wheel-picker.chanhdai.com)",
     referenceLink:
       "https://vercel.com/blog/summer-2025-oss-program#react-wheel-picker",
-  },
+  }, */
 ]

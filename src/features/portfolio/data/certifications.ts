@@ -1,7 +1,7 @@
 import type { Certification } from "../types/certifications"
 
 export const CERTIFICATIONS: Certification[] = [
-  {
+  /* {
     title: "Gemini Certified Educator",
     issuer: "Google for Education",
     issuerIconName: "google",
@@ -161,5 +161,5 @@ export const CERTIFICATIONS: Certification[] = [
     credentialID: "w9YXr-FMR8",
     credentialURL:
       "https://drive.google.com/file/d/1-NHhjKlQbhlcO7bpRue1XzDgDaudOf2N/view?usp=sharing",
-  },
+  }, */
 ]

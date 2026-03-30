@@ -47,6 +47,7 @@ export const EXPERIENCES: Experience[] = [
         icon: "code",
         description: `- I actively participated in project management processes, ensuring effective team coordination. In addition, I was responsible for system administration tasks, including server management, maintenance, and backup processes.`,
         skills: ["Linux", "Server Management", "DevOps"],
+        isExpanded: true,
       },
       {
         id: "1",
@@ -59,6 +60,7 @@ export const EXPERIENCES: Experience[] = [
         icon: "code",
         description: `- I actively took part in the development of web and mobile applications for new startup initiatives. Additionally, I contributed to various digital projects by delivering corporate websites and mobile application solutions for different companies.`,
         skills: ["React", "Flutter", "PHP", "MySQL", "Git"],
+        isExpanded: true,
       },
     ],
     isCurrentEmployer: false,

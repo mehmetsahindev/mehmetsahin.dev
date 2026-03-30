@@ -1,7 +1,7 @@
 import type { Project } from "../types/projects"
 
 export const PROJECTS: Project[] = [
-  {
+  /* {
     id: "react-wheel-picker",
     title: "React Wheel Picker",
     period: {
@@ -236,5 +236,5 @@ export const PROJECTS: Project[] = [
 - Consolation Prize — National Youth and Children's Creativity Contest 2016
 - 1st Prize — Can Tho City Youth and Children's Creativity Contest 2016
 - Consolation Prize — Can Tho City Young Informatics Contest 2016`,
-  },
+  }, */
 ]
