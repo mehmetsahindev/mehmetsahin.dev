@@ -31,6 +31,28 @@ export const EXPERIENCES: Experience[] = [
     isCurrentEmployer: true,
   },
   {
+    id: "freelance",
+    companyName: "Freelance",
+    companyLogo: null as unknown as string,
+    companyWebsite: "https://mehmetsahin.dev",
+    positions: [
+      {
+        id: "1",
+        title: "Software Developer",
+        employmentPeriod: {
+          start: "01.2021",
+        },
+        employmentType: "Full-time",
+        icon: "code",
+        description:
+          "- As a freelance developer, I build personal projects and actively contribute to open-source. I provide end-to-end web and mobile application solutions, turning ideas into fully functional, production-ready products.",
+        skills: ["TypeScript", "React", "React Native", "Node.js"],
+        isExpanded: true,
+      },
+    ],
+    isCurrentEmployer: true,
+  },
+  {
     id: "sofft",
     companyName: "Sofft IT Inc.",
     companyLogo: "/images/sofft.jpg",
@@ -60,7 +82,7 @@ export const EXPERIENCES: Experience[] = [
         icon: "code",
         description: `- I actively took part in the development of web and mobile applications for new startup initiatives. Additionally, I contributed to various digital projects by delivering corporate websites and mobile application solutions for different companies.`,
         skills: ["React", "Flutter", "PHP", "MySQL", "Git"],
-        isExpanded: true,
+        isExpanded: false,
       },
     ],
     isCurrentEmployer: false,
