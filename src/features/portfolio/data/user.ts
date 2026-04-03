@@ -27,7 +27,7 @@ export const USER: User = {
 - Skilled in **React**, **React Native**, **TypeScript**, **Node.js**, and modern web technologies; building high-quality, user-centric web and mobile applications.
 - Passionate about building software, continuously improving, and bringing ideas to life through well-crafted projects.
 `,
-  avatar: "/images/avatar.png",
+  avatar: "/images/avatar.webp",
   ogImage:
     "https://assets.chanhdai.com/images/screenshot-og-image-dark.png?v=8",
   namePronunciationUrl: null,
