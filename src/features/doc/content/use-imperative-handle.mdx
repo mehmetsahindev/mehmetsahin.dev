@@ -1,0 +1,283 @@
+---
+title: React useImperativeHandle Nedir? Örneklerle Rehber
+description: React'in useImperativeHandle hook'unu örneklerle öğren. forwardRef ile kullanımı, TypeScript tip güvenliği ve ne zaman tercih edilmeli?
+image: /images/blog/use-imperative-handle.webp
+createdAt: 2026-04-18
+updatedAt: 2026-04-21
+---
+
+## useImperativeHandle nedir?
+
+`useImperativeHandle`, bir child bileşenin dışarıya hangi metodları açacağını kontrol etmeni sağlayan bir React hook'udur. Focus atma, scroll ettirme, animasyon tetikleme gibi doğrudan davranış komutları için kullanılır.
+
+React'te genellikle işler şöyle yürür: state veya prop değişir, bileşen kendini yeniden çizer. Yani sen "şöyle görünsün" dersin, React da bunu halleder. Buna "declarative" yaklaşım deniyor — yani sen ne istediğini söylüyorsun, React da nasıl yapacağını kendi hallediyor.
+
+Bu çoğu zaman harika çalışır. Ama bazen işler farklılaşıyor.
+
+Örneğin, "şu butona tıklanınca şu input'a focus at" ya da "videoyu durdur" gibi **doğrudan komut** vermen gereken anlar olabiliyor. Buna da **emirsel (imperative) yaklaşım** deniyor — yani React'e "ne göster" demek yerine, "şu işi yap" diyorsun.
+
+Şimdi bu farkı kodda görelim. Diyelim ki parent bileşen, child'daki bir input'a focus atmak istiyor:
+
+**❌ Prop ile zorlama yönetim**
+
+```jsx
+// Parent
+const [shouldFocus, setShouldFocus] = useState(false);
+
+<CustomInput shouldFocus={shouldFocus} />
+<button onClick={() => setShouldFocus(true)}>
+  Focus
+</button>
+
+// Child
+useEffect(() => {
+  if (shouldFocus) {
+    inputRef.current?.focus();
+    // Focus sonrası state'i nasıl
+    // false yapacağız? İşler karışır.
+  }
+}, [shouldFocus]);
+```
+
+Bir "focus at" komutu için state, `useEffect`, resetleme derken işin içinden çıkamıyorsun.
+
+**✅ useImperativeHandle ile**
+
+```jsx
+// Parent — doğrudan "focus at" diyor
+const ref = useRef();
+
+<CustomInput ref={ref} />
+
+<button onClick={() => ref.current?.focus()}>
+  Focus
+</button>
+
+// Child — dışarıya sadece focus metodunu açıyor
+useImperativeHandle(ref, () => ({
+  focus: () => inputRef.current?.focus()
+}));
+```
+
+Çok daha temiz, değil mi? Parent bileşen, child'a doğrudan "focus at" diyor. Ekstra state yok, `useEffect` yok.
+
+İşte `useImperativeHandle` bunun için var: Child'ın dışarıya ne vereceğine sen karar veriyorsun, gerisi gizli kalıyor. Buna **kapsülleme** (encapsulation) deniyor.
+
+> **useRef vs useImperativeHandle:** `useRef` bir DOM elementine veya değere referans tutar. `useImperativeHandle` ise bu referansın dışarıya **ne göstereceğini** belirler.
+
+> **Kapsülleme**: Dışarıya "sana sadece şu metodları veriyorum, bileşenin içindeki diğer her şey benim özelimdir" demiş oluyorsun. Bu, bileşenlerini güvenli ve bağımsız tutar.
+
+`useImperativeHandle` üç parametre alır:
+
+```jsx
+useImperativeHandle(ref, createHandle, deps?)
+```
+
+1. **ref** — Parent'tan gelen ref.
+2. **createHandle** — Dışarıya açmak istediğin metodları döndüren fonksiyon.
+3. **deps** (opsiyonel) — `useEffect`'teki gibi bir dependency array. Bu array değiştiğinde dışarıya açılan nesne yeniden oluşturulur. Vermezsen her render'da yeniden yaratılır, boş array (`[]`) verirsen sadece ilk render'da oluşturulur.
+
+---
+
+## forwardRef ile ilişkisi
+
+`useImperativeHandle` tek başına çalışmaz; her zaman `forwardRef` ile birlikte kullanılır. Peki neden?
+
+React'te `ref` özel bir kelimedir — normal bir prop gibi davranmaz. React bunu bilerek yapar: Bileşenlerinin birbirine sıkıca bağlanmasını (tight coupling) engellemek için ref'leri normal prop akışından ayrı tutar. Deneyelim:
+
+```jsx
+// Bu çalışmaz!
+function MyInput({ ref }) {
+  return <input ref={ref} />
+}
+
+// Parent'ta:
+;<MyInput ref={myRef} /> // ref prop olarak gelmez, undefined olur
+```
+
+Bir alt bileşene dışarıdan ref gönderebilmek için `forwardRef` kullanman gerekiyor. Onu bir köprü gibi düşünebilirsin — dışarıdan gelen ref'i yakalayıp bileşenin içine aktarır:
+
+```jsx
+// forwardRef ile ref artık bileşene ulaşır
+const CustomInput = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => ({
+    focus: () => inputRef.current?.focus(),
+  }))
+  return <input ref={inputRef} />
+})
+```
+
+> **React 19 notu:** React 19 ile birlikte `ref` artık normal bir prop olarak geçilebiliyor. Yani `forwardRef` sarmalına gerek kalmıyor. Ancak React 18 ve altı kullanıyorsan `forwardRef` hâlâ gerekli. Daha fazla bilgi için [React dokümantasyonuna](https://react.dev/reference/react/useImperativeHandle) göz atabilirsin.
+
+---
+
+## TypeScript ile tip güvenliği
+
+Eğer projende TypeScript kullanıyorsan, dışarıya açtığın API'yi mutlaka bir `interface` ile tanımlamanı öneririm. Sadece hataları erken yakalamazsın, IDE'den gelen autocomplete desteği de cabası.
+
+Düşün: Parent bileşeninde `ref.current.` yazdığın an IDE sana sadece senin izin verdiğin metodları gösteriyor. 50+ bileşenli bir projede hangi ref'in ne açtığını hatırlamak imkansız — tip tanımı burada devreye giriyor.
+
+```tsx
+// 1. Dışarıya açacağın metodları tanımla
+interface CustomInputHandle {
+  focus: () => void
+  clear: () => void
+}
+
+// 2. forwardRef'e bu tipi ver
+const CustomInput = forwardRef<
+  CustomInputHandle,
+  InputHTMLAttributes<HTMLInputElement>
+>((props, ref) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // 3. Sadece tanımladığın metodları aç
+  useImperativeHandle(ref, () => ({
+    focus: () => inputRef.current?.focus(),
+    clear: () => {
+      if (inputRef.current) inputRef.current.value = ""
+    },
+  }))
+
+  return <input ref={inputRef} {...props} />
+})
+
+// Parent'ta kullanımı:
+const ref = useRef<CustomInputHandle>(null)
+ref.current?.reset() // TS Hata! 'reset' interface içinde tanımlı değil
+```
+
+`reset` diye bir metod tanımlamadık, TypeScript bunu anında yakaladı. Güvenli ve net.
+
+---
+
+## Temel kullanım örnekleri
+
+Şimdi öğrendiklerimizi bir araya getirelim.
+
+### Input: focus ve temizleme
+
+Parent bileşen bir butona tıkladığında, child'daki input'a focus atıyor veya içeriğini temizliyor:
+
+```tsx
+// ---------- CustomInput.tsx ----------
+
+interface CustomInputHandle {
+  focus: () => void
+  clear: () => void
+}
+
+const CustomInput = forwardRef<CustomInputHandle>((props, ref) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useImperativeHandle(ref, () => ({
+    focus: () => inputRef.current?.focus(),
+    clear: () => {
+      if (inputRef.current) inputRef.current.value = ""
+    },
+  }))
+
+  return <input ref={inputRef} placeholder="Bir şeyler yaz..." />
+})
+
+// ---------- Parent.tsx ----------
+
+function Parent() {
+  const inputRef = useRef<CustomInputHandle>(null)
+
+  return (
+    <>
+      <CustomInput ref={inputRef} />
+      <button onClick={() => inputRef.current?.focus()}>Focus</button>
+      <button onClick={() => inputRef.current?.clear()}>Temizle</button>
+    </>
+  )
+}
+```
+
+> **Dikkat et:** Parent, `CustomInput`'un içinde hangi HTML elementinin olduğunu bilmiyor. Sadece `focus` ve `clear` metodlarını biliyor. Bu tam olarak istediğimiz izole mimari.
+
+### Video: oynat ve durdur
+
+Aynı mantık farklı senaryolara da uygulanabilir. Aşağıda bir video bileşenini parent'tan kontrol eden örnek:
+
+```tsx
+interface VideoPlayerHandle {
+  play: () => void
+  pause: () => void
+}
+
+const VideoPlayer = forwardRef<VideoPlayerHandle>((props, ref) => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useImperativeHandle(ref, () => ({
+    play: () => videoRef.current?.play(),
+    pause: () => videoRef.current?.pause(),
+  }))
+
+  return <video ref={videoRef} src="/demo.mp4" />
+})
+
+// Parent
+function Parent() {
+  const playerRef = useRef<VideoPlayerHandle>(null)
+
+  return (
+    <>
+      <VideoPlayer ref={playerRef} />
+      <button onClick={() => playerRef.current?.play()}>Oynat</button>
+      <button onClick={() => playerRef.current?.pause()}>Durdur</button>
+    </>
+  )
+}
+```
+
+Mantık aynı: Parent bileşen `<video>` elementine doğrudan erişemiyor, sadece `play` ve `pause` metodlarını biliyor.
+
+---
+
+## Performans etkisi
+
+Merak edebilirsin: "Bu hook render'ı tetikler mi?"
+
+Kısa cevap: **Hayır.** `useImperativeHandle` çağrıldığında bileşen yeniden render olmaz. Hook sadece ref nesnesine atanan metodları tanımlar — render döngüsüne bir etkisi yok.
+
+Ancak şunu bil: Eğer dependency array vermezsen, her render'da dışarıya açılan nesne yeniden oluşturulur. Bu genelde bir performans sorunu yaratmaz ama gereksiz nesne oluşturmaktan kaçınmak istersen boş bir array (`[]`) geçebilirsin.
+
+---
+
+## Ne zaman kullanmamalısın?
+
+Bu hook güçlü bir araç, ama her yerde kullanırsan React'in prop/state akışını devre dışı bırakmış olursun. Eğer bir işi prop veya state ile çözebiliyorsan, o yolu tercih et.
+
+Örneğin bileşenin temasını, başlığını ya da içeriğini değiştirmek istiyorsan, bunun yolu her zaman prop'lardır. `useImperativeHandle` veri akışı için değil, **davranış tetiklemek** için var (focus, scroll, animasyon gibi).
+
+**❌ Yanlış**
+
+```jsx
+useImperativeHandle(ref, () => ({
+  setTitle: (t) => setTitle(t),
+  setTheme: (t) => setTheme(t),
+}))
+```
+
+**✅ Doğru**
+
+```jsx
+<MyCard title="Yeni Başlık" theme="dark" />
+```
+
+---
+
+## Özet
+
+`useImperativeHandle`, React'in normal veri akışının (prop ve state) yeterli olmadığı anlarda devreye giren bir hook. Focus atma, scroll ettirme, animasyon tetikleme gibi **doğrudan davranış komutları** için tasarlanmış.
+
+Prop veya state ile çözülebildiği sürece bu hook'a dönme. Ama gerçekten lazım olduğunda, bileşenini dışarıya ne kadar açacağını kontrol etmenin en temiz yolu bu.
+
+**Aklında tutman gerekenler:**
+
+- Her zaman `forwardRef` ile birlikte kullan (React 19 öncesi).
+- Dışarıya açtığın API'yi TypeScript ile mutlaka tiplendir.
+- Sadece davranış tetiklemek için kullan (focus, scroll vb.), state değiştirmek için değil.
+- Bileşenin iç detaylarını gizli tut — sadece parent'ın ihtiyacı olanı dışarıya ver.
