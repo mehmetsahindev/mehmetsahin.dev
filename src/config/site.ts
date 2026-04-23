@@ -41,12 +41,13 @@ export const MOBILE_NAV: NavItem[] = [
   ...MAIN_NAV,
 ]
 
-export const X_USERNAME = "@iamncdai"
-export const GITHUB_USERNAME = "ncdai"
-export const SOURCE_CODE_GITHUB_REPO = "ncdai/chanhdai.com"
-export const SOURCE_CODE_GITHUB_URL = "https://github.com/ncdai/chanhdai.com"
+export const X_USERNAME = "@mehmetsahindev"
+export const GITHUB_USERNAME = "mehmetsahindev"
+export const SOURCE_CODE_GITHUB_REPO = "mehmetsahindev/mehmetsahin.dev"
+export const SOURCE_CODE_GITHUB_URL =
+  "https://github.com/mehmetsahindev/mehmetsahin.dev"
 
-export const SPONSORSHIP_URL = "https://github.com/sponsors/ncdai"
+export const SPONSORSHIP_URL = "https://github.com/sponsors/mehmetsahindev"
 
 export const UTM_PARAMS = {
   utm_source: "mehmetsahin.dev",

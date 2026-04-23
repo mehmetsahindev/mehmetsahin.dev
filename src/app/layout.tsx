@@ -47,11 +47,11 @@ export const metadata: Metadata = {
   keywords: SITE_INFO.keywords,
   authors: [
     {
-      name: "ncdai",
+      name: "mehmetsahindev",
       url: SITE_INFO.url,
     },
   ],
-  creator: "ncdai",
+  creator: "mehmetsahindev",
   openGraph: {
     siteName: SITE_INFO.name,
     url: "/",
@@ -108,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="tr" className={fontVariables} suppressHydrationWarning>
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
       <head>
         <script
           type="text/javascript"
