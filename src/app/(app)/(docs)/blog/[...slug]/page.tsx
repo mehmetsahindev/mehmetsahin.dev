@@ -32,18 +32,38 @@ export const revalidate = false
 export const dynamic = "force-static"
 export const dynamicParams = false
 
+// Parses [...slug] into { locale?, slug }
+// ["my-post"]        -> { slug: "my-post" }
+// ["tr", "my-post"]  -> { locale: "tr", slug: "my-post" }
+function parseSlug(parts: string[]) {
+  if (parts.length === 2) {
+    return { locale: parts[0], slug: parts[1] }
+  }
+  return { locale: undefined, slug: parts[0] }
+}
+
+// Returns the URL path for a doc
+function getDocUrl(doc: Doc) {
+  if (doc.metadata.category === "components") {
+    return `/components/${doc.slug}`
+  }
+  return doc.locale ? `/blog/${doc.locale}/${doc.slug}` : `/blog/${doc.slug}`
+}
+
 export async function generateStaticParams() {
   const docs = getAllDocs()
-  return docs.map((doc) => ({ slug: doc.slug }))
+  return docs.map((doc) => ({
+    slug: doc.locale ? [doc.locale, doc.slug] : [doc.slug],
+  }))
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string[] }>
 }): Promise<Metadata> {
-  const slug = (await params).slug
-  const doc = getDocBySlug(slug)
+  const { locale, slug } = parseSlug((await params).slug)
+  const doc = getDocBySlug(slug, locale)
 
   if (!doc) {
     return notFound()
@@ -107,12 +127,10 @@ function getPageJsonLd(doc: Doc): WithContext<PageSchema> {
 export default async function Page({
   params,
 }: {
-  params: Promise<{
-    slug: string
-  }>
+  params: Promise<{ slug: string[] }>
 }) {
-  const slug = (await params).slug
-  const doc = getDocBySlug(slug)
+  const { locale, slug } = parseSlug((await params).slug)
+  const doc = getDocBySlug(slug, locale)
 
   if (!doc) {
     notFound()
@@ -165,7 +183,7 @@ export default async function Page({
                     size="icon-sm"
                     asChild
                   >
-                    <Link href={`/blog/${previous.slug}`}>
+                    <Link href={getDocUrl(previous)}>
                       <ArrowLeftIcon />
                       <span className="sr-only">Previous</span>
                     </Link>
@@ -193,7 +211,7 @@ export default async function Page({
                     size="icon-sm"
                     asChild
                   >
-                    <Link href={`/blog/${next.slug}`}>
+                    <Link href={getDocUrl(next)}>
                       <span className="sr-only">Next</span>
                       <ArrowRightIcon />
                     </Link>
@@ -240,9 +258,4 @@ export default async function Page({
       <div className="screen-line-top h-4 w-full" />
     </>
   )
-}
-
-function getDocUrl(doc: Doc) {
-  const isComponent = doc.metadata.category === "components"
-  return isComponent ? `/components/${doc.slug}` : `/blog/${doc.slug}`
 }

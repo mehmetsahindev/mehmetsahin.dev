@@ -35,6 +35,8 @@ export type Doc = {
   slug: string
   /** MDX content body without frontmatter. */
   content: string
+  /** Locale prefix for sub-folder posts (e.g. "tr", "ru"). Undefined for root-level posts. */
+  locale?: string
 }
 
 /**

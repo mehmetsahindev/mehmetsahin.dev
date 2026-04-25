@@ -5,6 +5,8 @@ import { cache } from "react"
 
 import type { Doc, DocMetadata } from "@/features/doc/types/document"
 
+const CONTENT_DIR = path.join(process.cwd(), "src/features/doc/content")
+
 function parseFrontmatter(fileContent: string) {
   const file = matter(fileContent)
 
@@ -23,38 +25,49 @@ function readMDXFile(filePath: string) {
   return parseFrontmatter(rawContent)
 }
 
-function getMDXData(dir: string) {
+function getMDXData(dir: string, locale?: string): Doc[] {
   const mdxFiles = getMDXFiles(dir)
 
-  return mdxFiles.map<Doc>((file) => {
+  return mdxFiles.map((file) => {
     const { metadata, content } = readMDXFile(path.join(dir, file))
-
     const slug = path.basename(file, path.extname(file))
 
     return {
       metadata,
       slug,
       content,
+      ...(locale ? { locale } : {}),
     }
   })
 }
 
 export const getAllDocs = cache(() => {
-  return getMDXData(path.join(process.cwd(), "src/features/doc/content")).sort(
-    (a, b) => {
-      if (a.metadata.pinned && !b.metadata.pinned) return -1
-      if (!a.metadata.pinned && b.metadata.pinned) return 1
+  const docs: Doc[] = []
 
-      return (
-        new Date(b.metadata.createdAt).getTime() -
-        new Date(a.metadata.createdAt).getTime()
-      )
+  // Root-level MDX files (default posts)
+  docs.push(...getMDXData(CONTENT_DIR))
+
+  // Sub-folder MDX files (e.g. tr/, ru/)
+  const entries = fs.readdirSync(CONTENT_DIR, { withFileTypes: true })
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      docs.push(...getMDXData(path.join(CONTENT_DIR, entry.name), entry.name))
     }
-  )
+  }
+
+  return docs.sort((a, b) => {
+    if (a.metadata.pinned && !b.metadata.pinned) return -1
+    if (!a.metadata.pinned && b.metadata.pinned) return 1
+
+    return (
+      new Date(b.metadata.createdAt).getTime() -
+      new Date(a.metadata.createdAt).getTime()
+    )
+  })
 })
 
-export function getDocBySlug(slug: string) {
-  return getAllDocs().find((doc) => doc.slug === slug)
+export function getDocBySlug(slug: string, locale?: string) {
+  return getAllDocs().find((doc) => doc.slug === slug && doc.locale === locale)
 }
 
 export function getDocsByCategory(category: string) {
