@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import type { ProfilePage as PageSchema, WithContext } from "schema-dts"
 
 import { About } from "@/features/portfolio/components/about"
+import { Blog } from "@/features/portfolio/components/blog"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { Overview } from "@/features/portfolio/components/overview"
 import { ProfileCover } from "@/features/portfolio/components/profile-cover"
@@ -52,12 +53,12 @@ export default function Page() {
         <Separator />
 
         <Components />
+        <Separator />  */}
+
+        <Experiences />
         <Separator />
 
         <Blog />
-        <Separator /> */}
-
-        <Experiences />
         <Separator />
 
         {/* <Projects />

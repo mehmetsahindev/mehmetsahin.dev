@@ -23,26 +23,16 @@ export const USER: User = {
     },
   ],
   about: `
-- **Software Developer** with 5+ years of experience, driven by passion, consistently delivering high-quality work while continuously improving skills.
-- Skilled in **React**, **React Native**, **TypeScript**, **Node.js**, and modern web technologies; building high-quality, user-centric web and mobile applications.
-- Passionate about building software, continuously improving, and bringing ideas to life through well-crafted projects.
+- 5 yılı aşkın deneyime sahip bir **Yazılım Geliştiriciyim**.
+- **React**, **React Native**, **TypeScript** ve **Node.js** teknolojilerinde uzmanlığa sahibim.
+- Ölçeklenebilir ve kullanıcı odaklı **web/mobil** uygulamalar geliştirme konusunda yetkinim.
+- Temiz kod prensiplerine, performans optimizasyonuna ve karmaşık fikirleri kusursuz dijital ürünlere dönüştürmeye odaklanıyorum.
 `,
   avatar: "/images/avatar.webp",
   ogImage:
     "https://assets.chanhdai.com/images/screenshot-og-image-dark.png?v=8",
   namePronunciationUrl: null,
   timeZone: "Europe/Istanbul",
-  keywords: [
-    "ncdai",
-    "nguyenchanhdai",
-    "nguyen chanh dai",
-    "chanhdai",
-    "chanh dai",
-    "iamncdai",
-    "quaric",
-    "zadark",
-    "nguyễn chánh đại",
-    "chánh đại",
-  ],
-  dateCreated: "2023-10-20", // YYYY-MM-DD
+  keywords: ["mehmetsahin", "mehmetsahindev", "mehmet şahin"],
+  dateCreated: "2026-04-13", // YYYY-MM-DD
 }

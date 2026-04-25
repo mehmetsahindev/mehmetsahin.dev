@@ -8,7 +8,7 @@ export function About() {
   return (
     <Panel id="about">
       <PanelHeader>
-        <PanelTitle>About</PanelTitle>
+        <PanelTitle>Hakkımda</PanelTitle>
       </PanelHeader>
 
       <PanelContent>

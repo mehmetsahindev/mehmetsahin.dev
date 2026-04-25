@@ -16,7 +16,7 @@ export const EXPERIENCES: Experience[] = [
         employmentType: "Full-time",
         icon: "code",
         description:
-          "- I develop user-focused digital solutions for robotic systems. I am involved in building web and mobile applications while also working on user experience and interface design.",
+          "- Robotik sistemler için kullanıcı odaklı dijital çözümler geliştiriyorum. Web ve mobil uygulamalar geliştirmenin yanı sıra kullanıcı deneyimi ve arayüz tasarımı üzerinde de çalışıyorum.",
         skills: [
           "TypeScript",
           "React",
@@ -45,7 +45,7 @@ export const EXPERIENCES: Experience[] = [
         employmentType: "Full-time",
         icon: "code",
         description:
-          "- As a freelance developer, I build personal projects and actively contribute to open-source. I provide end-to-end web and mobile application solutions, turning ideas into fully functional, production-ready products.",
+          "- Freelance geliştirici olarak kişisel projeler geliştiriyor ve açık kaynağa aktif olarak katkıda bulunuyorum. Fikirleri tamamen çalışan, yayına hazır ürünlere dönüştürerek uçtan uca web ve mobil uygulama çözümleri sunuyorum.",
         skills: ["TypeScript", "React", "React Native", "Node.js"],
         isExpanded: true,
       },
@@ -67,7 +67,7 @@ export const EXPERIENCES: Experience[] = [
         },
         employmentType: "Full-time",
         icon: "code",
-        description: `- I actively participated in project management processes, ensuring effective team coordination. In addition, I was responsible for system administration tasks, including server management, maintenance, and backup processes.`,
+        description: `- Proje yönetim süreçlerine aktif olarak katıldım ve ekip içi koordinasyonun etkin şekilde sağlanmasına katkıda bulundum. Ayrıca sunucu yönetimi, bakım ve yedekleme süreçleri dahil olmak üzere sistem yönetimi görevlerinden sorumluydum.`,
         skills: ["Linux", "Server Management", "DevOps"],
         isExpanded: true,
       },
@@ -80,7 +80,7 @@ export const EXPERIENCES: Experience[] = [
         },
         employmentType: "Full-time",
         icon: "code",
-        description: `- I actively took part in the development of web and mobile applications for new startup initiatives. Additionally, I contributed to various digital projects by delivering corporate websites and mobile application solutions for different companies.`,
+        description: `- Yeni startup girişimleri için web ve mobil uygulamaların geliştirilmesinde aktif rol aldım. Ayrıca farklı şirketler için kurumsal web siteleri ve mobil uygulama çözümleri sunarak çeşitli dijital projelere katkıda bulundum.`,
         skills: ["React", "Flutter", "PHP", "MySQL", "Git"],
         isExpanded: false,
       },

@@ -39,7 +39,7 @@ export function Blog() {
           nativeButton={false}
           render={<Link href="/blog" />}
         >
-          All Posts
+          Tüm Yazılar
           <ArrowRightIcon />
         </Button>
       </div>

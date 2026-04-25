@@ -8,8 +8,7 @@ import { PostSearchInput } from "@/features/blog/components/post-search-input"
 import { getAllDocs } from "@/features/doc/data/documents"
 
 const title = "Blog"
-const description =
-  "A collection of articles on development, design, and ideas."
+const description = "Bildiklerimi ve deneyimlerimi paylaştığım bir yer."
 
 const ogImage = `/og/simple?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`
 

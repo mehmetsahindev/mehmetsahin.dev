@@ -17,7 +17,6 @@ import { Kbd } from "@/components/ui/kbd"
 import { Prose } from "@/components/ui/typography"
 import { SITE_INFO, X_USERNAME } from "@/config/site"
 import { PostKeyboardShortcuts } from "@/features/blog/components/post-keyboard-shortcuts"
-import { LLMCopyButtonWithViewOptions } from "@/features/blog/components/post-page-actions"
 import { PostShareMenu } from "@/features/blog/components/post-share-menu"
 import {
   findNeighbour,
@@ -148,10 +147,10 @@ export default async function Page({
         </Button>
 
         <div className="flex items-center gap-2">
-          <LLMCopyButtonWithViewOptions
+          {/* <LLMCopyButtonWithViewOptions
             markdownUrl={`${getDocUrl(doc)}.mdx`}
             isComponent={doc.metadata.category === "components"}
-          />
+          /> */}
 
           <PostShareMenu title={doc.metadata.title} url={getDocUrl(doc)} />
 
@@ -167,14 +166,14 @@ export default async function Page({
                   >
                     <Link href={`/blog/${previous.slug}`}>
                       <ArrowLeftIcon />
-                      <span className="sr-only">Previous</span>
+                      <span className="sr-only">Önceki</span>
                     </Link>
                   </Button>
                 }
               />
               <TooltipContent className="pr-2 pl-3">
                 <div className="flex items-center gap-3">
-                  Previous Post
+                  Önceki Yazı
                   <Kbd>
                     <ArrowLeftIcon />
                   </Kbd>
@@ -194,7 +193,7 @@ export default async function Page({
                     asChild
                   >
                     <Link href={`/blog/${next.slug}`}>
-                      <span className="sr-only">Next</span>
+                      <span className="sr-only">Sonraki</span>
                       <ArrowRightIcon />
                     </Link>
                   </Button>
@@ -202,7 +201,7 @@ export default async function Page({
               />
               <TooltipContent className="pr-2 pl-3">
                 <div className="flex items-center gap-3">
-                  Next Post
+                  Sonraki Yazı
                   <Kbd>
                     <ArrowRightIcon />
                   </Kbd>

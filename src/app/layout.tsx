@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     siteName: SITE_INFO.name,
     url: "/",
     type: "profile",
-    locale: "en_US",
+    locale: "tr_TR",
     firstName: USER.firstName,
     lastName: USER.lastName,
     username: USER.username,
@@ -108,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={fontVariables} suppressHydrationWarning>
+    <html lang="tr" className={fontVariables} suppressHydrationWarning>
       <head>
         <script
           type="text/javascript"
