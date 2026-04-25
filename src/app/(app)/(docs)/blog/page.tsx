@@ -1,11 +1,13 @@
 import type { Metadata } from "next"
+import { cookies, headers } from "next/headers"
+import { redirect } from "next/navigation"
 import { Suspense } from "react"
 
 import { X_USERNAME } from "@/config/site"
 import { PostList } from "@/features/blog/components/post-list"
 import { PostListWithSearch } from "@/features/blog/components/post-list-with-search"
 import { PostSearchInput } from "@/features/blog/components/post-search-input"
-import { getDocsByLocale } from "@/features/doc/data/documents"
+import { getDocsByLocale, getLocales } from "@/features/doc/data/documents"
 
 const title = "Blog"
 const description =
@@ -37,7 +39,31 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Page() {
+export default async function Page() {
+  const supportedLocales = getLocales()
+
+  // 1. Çerez kontrolü
+  const cookieStore = await cookies()
+  const localeCookie = cookieStore.get("NEXT_LOCALE")
+  if (localeCookie && supportedLocales.includes(localeCookie.value)) {
+    redirect(`/${localeCookie.value}/blog`)
+  }
+
+  // 2. Accept-Language (Tarayıcı Dili) kontrolü
+  const headersList = await headers()
+  const acceptLanguage = headersList.get("accept-language")
+  if (acceptLanguage) {
+    const preferredLocales = acceptLanguage
+      .split(",")
+      .map((lang) => lang.split(";")[0].trim().substring(0, 2).toLowerCase())
+
+    for (const preferred of preferredLocales) {
+      if (supportedLocales.includes(preferred)) {
+        redirect(`/${preferred}/blog`)
+      }
+    }
+  }
+
   const allPosts = getDocsByLocale(undefined)
 
   return (
