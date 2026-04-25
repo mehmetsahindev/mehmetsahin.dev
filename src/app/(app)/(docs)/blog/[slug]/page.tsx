@@ -21,8 +21,8 @@ import { LLMCopyButtonWithViewOptions } from "@/features/blog/components/post-pa
 import { PostShareMenu } from "@/features/blog/components/post-share-menu"
 import {
   findNeighbour,
-  getAllDocs,
   getDocBySlug,
+  getDocsByLocale,
 } from "@/features/doc/data/documents"
 import type { Doc } from "@/features/doc/types/document"
 import { USER } from "@/features/portfolio/data/user"
@@ -32,38 +32,24 @@ export const revalidate = false
 export const dynamic = "force-static"
 export const dynamicParams = false
 
-// Parses [...slug] into { locale?, slug }
-// ["my-post"]        -> { slug: "my-post" }
-// ["tr", "my-post"]  -> { locale: "tr", slug: "my-post" }
-function parseSlug(parts: string[]) {
-  if (parts.length === 2) {
-    return { locale: parts[0], slug: parts[1] }
-  }
-  return { locale: undefined, slug: parts[0] }
-}
-
-// Returns the URL path for a doc
 function getDocUrl(doc: Doc) {
   if (doc.metadata.category === "components") {
     return `/components/${doc.slug}`
   }
-  return doc.locale ? `/blog/${doc.locale}/${doc.slug}` : `/blog/${doc.slug}`
+  return `/blog/${doc.slug}`
 }
 
 export async function generateStaticParams() {
-  const docs = getAllDocs()
-  return docs.map((doc) => ({
-    slug: doc.locale ? [doc.locale, doc.slug] : [doc.slug],
-  }))
+  return getDocsByLocale(undefined).map((doc) => ({ slug: doc.slug }))
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string[] }>
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const { locale, slug } = parseSlug((await params).slug)
-  const doc = getDocBySlug(slug, locale)
+  const slug = (await params).slug
+  const doc = getDocBySlug(slug)
 
   if (!doc) {
     return notFound()
@@ -127,10 +113,12 @@ function getPageJsonLd(doc: Doc): WithContext<PageSchema> {
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string[] }>
+  params: Promise<{
+    slug: string
+  }>
 }) {
-  const { locale, slug } = parseSlug((await params).slug)
-  const doc = getDocBySlug(slug, locale)
+  const slug = (await params).slug
+  const doc = getDocBySlug(slug)
 
   if (!doc) {
     notFound()
@@ -138,7 +126,7 @@ export default async function Page({
 
   const toc = getTableOfContents(doc.content)
 
-  const allDocs = getAllDocs()
+  const allDocs = getDocsByLocale(undefined)
   const { previous, next } = findNeighbour(allDocs, slug)
 
   return (
@@ -183,7 +171,7 @@ export default async function Page({
                     size="icon-sm"
                     asChild
                   >
-                    <Link href={getDocUrl(previous)}>
+                    <Link href={`/blog/${previous.slug}`}>
                       <ArrowLeftIcon />
                       <span className="sr-only">Previous</span>
                     </Link>
@@ -211,7 +199,7 @@ export default async function Page({
                     size="icon-sm"
                     asChild
                   >
-                    <Link href={getDocUrl(next)}>
+                    <Link href={`/blog/${next.slug}`}>
                       <span className="sr-only">Next</span>
                       <ArrowRightIcon />
                     </Link>

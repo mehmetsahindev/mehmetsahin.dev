@@ -14,7 +14,9 @@ export function PostItem({
 }) {
   return (
     <Link
-      href={`/blog/${post.locale ? `${post.locale}/` : ""}${post.slug}`}
+      href={
+        post.locale ? `/${post.locale}/blog/${post.slug}` : `/blog/${post.slug}`
+      }
       className={cn(
         "group flex flex-col gap-2 p-2 transition-[background-color] ease-out hover:bg-accent-muted",
         "max-sm:screen-line-top max-sm:screen-line-bottom",

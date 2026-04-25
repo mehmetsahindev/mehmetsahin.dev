@@ -88,3 +88,12 @@ export function findNeighbour(docs: Doc[], slug: string) {
 
   return { previous: null, next: null }
 }
+
+export function getDocsByLocale(locale?: string) {
+  return getAllDocs().filter((doc) => doc.locale === locale)
+}
+
+export function getLocales() {
+  const entries = fs.readdirSync(CONTENT_DIR, { withFileTypes: true })
+  return entries.filter((e) => e.isDirectory()).map((e) => e.name)
+}
