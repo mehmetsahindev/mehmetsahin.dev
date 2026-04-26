@@ -32,7 +32,7 @@ export function NotFound({ className }: { className?: string }) {
 
       <Button asChild>
         <Link href="/">
-          Go to Home
+          Ana Sayfaya Git
           <ArrowRightIcon />
         </Link>
       </Button>
