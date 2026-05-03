@@ -7,6 +7,7 @@ import { Experiences } from "@/features/portfolio/components/experiences"
 import { Overview } from "@/features/portfolio/components/overview"
 import { ProfileCover } from "@/features/portfolio/components/profile-cover"
 import { ProfileHeader } from "@/features/portfolio/components/profile-header"
+import { Projects } from "@/features/portfolio/components/projects"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
 import { USER } from "@/features/portfolio/data/user"
 import { cn } from "@/lib/utils"
@@ -61,8 +62,8 @@ export default function Page() {
         <Blog />
         <Separator />
 
-        {/* <Projects />
-        <Separator /> */}
+        <Projects />
+        <Separator />
 
         {/* <Awards />
         <Separator />

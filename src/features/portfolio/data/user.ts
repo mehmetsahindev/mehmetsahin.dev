@@ -25,7 +25,7 @@ export const USER: User = {
   about: `
 - 5 yılı aşkın deneyime sahip bir **Yazılım Geliştiriciyim**.
 - **React**, **React Native**, **TypeScript** ve **Node.js** teknolojilerinde uzmanlığa sahibim.
-- Ölçeklenebilir ve kullanıcı odaklı **web/mobil** uygulamalar geliştirme konusunda yetkinim.
+- Pixel-perfect ve kullanıcı odaklı **web/mobil** uygulamalar geliştirme konusunda yetkinim.
 - Temiz kod prensiplerine, performans optimizasyonuna ve karmaşık fikirleri kusursuz dijital ürünlere dönüştürmeye odaklanıyorum.
 `,
   avatar: "/images/avatar.webp",
