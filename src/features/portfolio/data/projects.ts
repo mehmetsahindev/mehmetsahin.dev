@@ -5,7 +5,7 @@ export const PROJECTS: Project[] = [
     id: "senam-ui",
     title: "Senam UI",
     period: {
-      start: "04.2025",
+      start: "04.2026",
     },
     link: "https://senamui.mehmetsahin.dev",
     skills: [
@@ -14,36 +14,25 @@ export const PROJECTS: Project[] = [
       "TypeScript",
       "Shadcn",
       "Component Library",
-      "Reusable",
-      "Package Publishing",
-      "NPM Registry",
     ],
     description: `Senam UI, React için geliştirdiğim, shadcn uyumlu modern bir UI kütüphanesidir. Esnek, yeniden kullanılabilir komponentler sunar ve aktif olarak geliştirilmektedir.`,
     logo: "",
     isExpanded: true,
   },
-  /*{
-    id: "chanhdaidotcom",
-    title: "chanhdai.com",
-    period: {
-      start: "01.2025",
-    },
-    link: "https://github.com/ncdai/chanhdai.com",
-    skills: [
-      "Open Source",
-      "Next.js 16",
-      "Tailwind CSS v4",
-      "Radix UI",
-      "Motion",
-      "shadcn/ui",
-      "shadcn registry",
-      "Vercel",
-    ],
-    description:
-      "A minimal, pixel-perfect dev portfolio, shadcn registry, and blog.",
-    logo: "https://assets.chanhdai.com/images/project-logos/chanhdaidotcom.svg",
-  },
   {
+    id: "gitlab-todo-checker",
+    title: "Gitlab Todo Checker",
+    period: {
+      start: "12.2025",
+    },
+    link: "https://github.com/mehmetsahindev/gitlab-todo-checker",
+    skills: ["Open Source", "React", "TypeScript", "Electron"],
+    description:
+      "Sistem tepsisinde çalışan ve GitLab To-Do'larınızı gerçek zamanlı takip eden hafif bir Electron masaüstü uygulaması. Belirli aralıklarla GitLab'ı kontrol eder, yeni görevler geldiğinde masaüstü bildirimi gönderir ve tarayıcıya geçmeden doğrudan uygulama üzerinden görevleri tamamlamanızı sağlar. Koyu/açık tema, özelleştirilebilir kontrol aralığı ve self-signed SSL desteği sunar.",
+    logo: "/images/project/gitlab-todo-checker.webp",
+    isExpanded: true,
+  },
+  /*{
     id: "quaricdotcom",
     title: "quaric.com",
     period: {
