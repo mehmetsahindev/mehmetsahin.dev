@@ -1,10 +1,12 @@
 import Link from "next/link"
+import { DEFAULT_LOCALE } from "@/i18n/config"
 import { ArrowRightIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { PostItem } from "@/features/blog/components/post-item"
-import { getBlogPosts } from "@/features/doc/data/documents"
+import { getPublishedPosts } from "@/features/blog/data/queries"
+import { blogPath } from "@/features/blog/lib/paths"
 import {
   Panel,
   PanelHeader,
@@ -15,8 +17,9 @@ import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy
 
 const ID = "blog"
 
-export function Blog() {
-  const allPosts = getBlogPosts()
+export async function Blog() {
+  // The home page is in the default language.
+  const allPosts = await getPublishedPosts(DEFAULT_LOCALE)
 
   return (
     <Panel id={ID}>
@@ -37,7 +40,7 @@ export function Blog() {
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {allPosts.slice(0, 4).map((post) => (
             <li
-              key={post.slug}
+              key={post.id}
               className={cn(
                 "max-sm:screen-line-top max-sm:screen-line-bottom",
                 "sm:nth-[2n+1]:screen-line-top sm:nth-[2n+1]:screen-line-bottom"
@@ -55,7 +58,7 @@ export function Blog() {
           variant="secondary"
           size="sm"
           nativeButton={false}
-          render={<Link href="/blog" />}
+          render={<Link href={blogPath(DEFAULT_LOCALE)} />}
         >
           All posts
           <ArrowRightIcon />

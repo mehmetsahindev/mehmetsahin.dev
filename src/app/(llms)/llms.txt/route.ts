@@ -1,13 +1,32 @@
+import { LOCALE_LABELS, LOCALES } from "@/i18n/config"
+
 import { SITE_URL } from "@/config/site"
 import { markdownResponse } from "@/lib/markdown-response"
-import { getBlogPosts } from "@/features/doc/data/documents"
+import { getPublishedPosts } from "@/features/blog/data/queries"
+import { postPath } from "@/features/blog/lib/paths"
 import { getProfile } from "@/features/portfolio/data/queries"
 
 export const dynamic = "force-dynamic"
 
 export async function GET() {
-  const profile = await getProfile()
-  const allPosts = getBlogPosts()
+  const [profile, ...sections] = await Promise.all([
+    getProfile(),
+    ...LOCALES.map(async (locale) => ({
+      locale,
+      posts: await getPublishedPosts(locale),
+    })),
+  ])
+
+  const blogSections = sections
+    .filter(({ posts }) => posts.length > 0)
+    .map(({ locale, posts }) => {
+      const lines = posts.map(
+        (item) =>
+          `- [${item.title}](${SITE_URL}${postPath(locale, item.slug)}.md): ${item.description}`
+      )
+      return `## Blog (${LOCALE_LABELS[locale]})\n\n${lines.join("\n")}`
+    })
+    .join("\n\n")
 
   return markdownResponse(`# ${profile.displayName}
 
@@ -20,8 +39,6 @@ export async function GET() {
 - [Blog](${SITE_URL}/blog.md): Every blog post, newest first, with publish dates.
 - [Bookmarks](${SITE_URL}/bookmarks.md): Articles, courses, books, references, and tools I recommend.
 
-## Blog
-
-${allPosts.map((item) => `- [${item.metadata.title}](${SITE_URL}/blog/${item.slug}.md): ${item.metadata.description}`).join("\n")}
+${blogSections}
 `)
 }

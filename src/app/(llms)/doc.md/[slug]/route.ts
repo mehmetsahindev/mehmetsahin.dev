@@ -1,36 +1,24 @@
 import { notFound } from "next/navigation"
 
-import { getAllDocs } from "@/features/doc/data/documents"
-import { getLLMText } from "@/features/doc/lib/get-llm-text"
+import { markdownResponse } from "@/lib/markdown-response"
+import { getPublishedPost } from "@/features/blog/data/queries"
+import { getPostLLMText } from "@/features/blog/lib/llm-text"
+import { getRequestLocale } from "@/features/blog/lib/request-locale"
 
-export const revalidate = false
-export const dynamic = "force-static"
-export const dynamicParams = false
+export const dynamic = "force-dynamic"
 
-export async function generateStaticParams() {
-  const docs = getAllDocs()
-
-  return docs.map((doc) => ({
-    slug: doc.slug,
-  }))
-}
-
+/** Reached through src/proxy.ts from `/blog/<slug>.md` and `/tr/blog/<slug>.md`. */
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params
+  const post = await getPublishedPost(
+    getRequestLocale(request),
+    decodeURIComponent(slug)
+  )
 
-  const allDocs = getAllDocs()
-  const post = allDocs.find((doc) => doc.slug === slug)
+  if (!post) notFound()
 
-  if (!post) {
-    notFound()
-  }
-
-  return new Response(await getLLMText(post), {
-    headers: {
-      "Content-Type": "text/markdown;charset=utf-8",
-    },
-  })
+  return markdownResponse(await getPostLLMText(post))
 }

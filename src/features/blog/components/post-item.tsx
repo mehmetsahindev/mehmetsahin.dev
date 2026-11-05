@@ -1,9 +1,11 @@
 import type { ImageProps } from "next/image"
 import Image from "next/image"
 import Link from "next/link"
+import { DATE_LOCALES } from "@/i18n/messages"
 import { format } from "date-fns"
 
-import type { Doc } from "@/features/doc/types/document"
+import { postPath } from "../lib/paths"
+import type { PostSummary } from "../types"
 
 type HeadingTypes = "h2" | "h3" | "h4"
 
@@ -11,21 +13,23 @@ export function PostItem({
   post,
   headingAs,
   imageLoading = "lazy",
+  publishedLabel = "Published on",
 }: {
-  post: Doc
+  post: PostSummary
   headingAs?: HeadingTypes
   imageLoading?: ImageProps["loading"]
+  publishedLabel?: string
 }) {
   const Heading = headingAs ?? "h2"
 
   return (
     <div className="group/post relative flex h-full flex-col gap-2 p-2 transition-[background-color] ease-out hover:bg-accent-muted">
-      {post.metadata.image && (
+      {post.coverUrl && (
         <div className="relative select-none [--image-radius:var(--radius-xl)]">
           <Image
-            className="aspect-1200/630 rounded-(--image-radius) grayscale transition-[filter] duration-300 ease-[cubic-bezier(0.42,0,0.58,1)] group-hover/post:grayscale-0"
-            src={post.metadata.image}
-            alt={post.metadata.title}
+            className="aspect-1200/630 rounded-(--image-radius) object-cover grayscale transition-[filter] duration-300 ease-[cubic-bezier(0.42,0,0.58,1)] group-hover/post:grayscale-0"
+            src={post.coverUrl}
+            alt={post.title}
             width={1200}
             height={630}
             quality={100}
@@ -38,25 +42,19 @@ export function PostItem({
 
       <div className="flex flex-col gap-1 p-2">
         <Heading className="text-lg/snug font-medium text-balance">
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={postPath(post.locale, post.slug)}>
             <span className="absolute inset-0" aria-hidden />
-            {post.metadata.title}
+            {post.title}
           </Link>
-
-          {(post.metadata.new || post.metadata.updated) && (
-            <span className="pointer-events-none ml-2 inline-block size-1.5 -translate-y-px rounded-full bg-info">
-              <span className="sr-only">
-                {post.metadata.new ? " (New)" : " (Updated)"}
-              </span>
-            </span>
-          )}
         </Heading>
 
         <dl>
-          <dt className="sr-only">Published on</dt>
+          <dt className="sr-only">{publishedLabel}</dt>
           <dd className="text-sm text-muted-foreground">
-            <time dateTime={new Date(post.metadata.createdAt).toISOString()}>
-              {format(new Date(post.metadata.createdAt), "d MMM yyyy")}
+            <time dateTime={post.publishedAt}>
+              {format(new Date(post.publishedAt), "d MMM yyyy", {
+                locale: DATE_LOCALES[post.locale],
+              })}
             </time>
           </dd>
         </dl>

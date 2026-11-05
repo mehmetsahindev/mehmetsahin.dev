@@ -15,7 +15,8 @@ export const META_THEME_COLORS = {
 export const MAIN_NAV: NavItem<Route>[] = [
   {
     title: "Blog",
-    href: "/blog",
+    // Served through src/proxy.ts, so it is not a typed route.
+    href: "/blog" as Route,
   },
   {
     title: "Bookmarks",

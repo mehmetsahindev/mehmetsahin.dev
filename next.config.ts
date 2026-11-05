@@ -62,25 +62,8 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return {
-      // beforeFiles so these run before prerendered pages are served;
-      // afterFiles rewrites never fire for SSG pages on Vercel, which
-      // silently breaks Accept-based markdown negotiation in production
+      // Blog Markdown versions are rewritten in src/proxy.ts (per locale).
       beforeFiles: [
-        {
-          source: "/blog/:slug.md",
-          destination: "/doc.md/:slug",
-        },
-        {
-          source: "/blog/:slug",
-          destination: "/doc.md/:slug",
-          has: [
-            {
-              type: "header",
-              key: "accept",
-              value: "(?<accept>.*text/markdown.*)",
-            },
-          ],
-        },
         {
           source: "/index.md",
           destination: "/llms.txt",

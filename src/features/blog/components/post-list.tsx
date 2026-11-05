@@ -1,9 +1,15 @@
 import { cn } from "@/lib/utils"
-import type { Doc } from "@/features/doc/types/document"
 
+import type { PostSummary } from "../types"
 import { PostItem } from "./post-item"
 
-export function PostList({ posts }: { posts: Doc[] }) {
+export function PostList({
+  posts,
+  emptyLabel = "No posts found.",
+}: {
+  posts: PostSummary[]
+  emptyLabel?: string
+}) {
   return (
     <div className="relative pt-4">
       <div className="pointer-events-none absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
@@ -14,7 +20,7 @@ export function PostList({ posts }: { posts: Doc[] }) {
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {posts.map((post, index) => (
           <li
-            key={post.slug}
+            key={post.id}
             className={cn(
               "max-sm:screen-line-top max-sm:screen-line-bottom",
               "sm:nth-[2n+1]:screen-line-top sm:nth-[2n+1]:screen-line-bottom"
@@ -29,7 +35,7 @@ export function PostList({ posts }: { posts: Doc[] }) {
 
         {posts.length === 0 && (
           <li className="screen-line-top screen-line-bottom p-4">
-            <p className="font-mono text-sm">No posts found.</p>
+            <p className="font-mono text-sm">{emptyLabel}</p>
           </li>
         )}
       </ul>

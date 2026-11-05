@@ -1,40 +1,48 @@
-import { escapeXml, toISODateSafe } from "@/utils/string"
+import { LOCALE_TAGS } from "@/i18n/config"
+import { getMessages } from "@/i18n/messages"
+import { escapeXml } from "@/utils/string"
 
 import { SITE_URL } from "@/config/site"
-import { getBlogPosts } from "@/features/doc/data/documents"
+import { getPublishedPosts } from "@/features/blog/data/queries"
+import { blogPath, postPath } from "@/features/blog/lib/paths"
+import { getRequestLocale } from "@/features/blog/lib/request-locale"
 import { getProfile } from "@/features/portfolio/data/queries"
 
 export const dynamic = "force-dynamic"
 
-export async function GET() {
-  const profile = await getProfile()
-  const itemsXml = getBlogPosts()
-    .map((doc) => {
-      const pubDate = toISODateSafe(doc.metadata.createdAt)
-      if (!pubDate) return null
-      return `<item>
-          <title>${escapeXml(doc.metadata.title)}</title>
-          <link>${SITE_URL}/blog/${doc.slug}</link>
-          <description>${escapeXml(doc.metadata.description || "")}</description>
-          <pubDate>${pubDate}</pubDate>
+/** `/blog/rss` and `/tr/blog/rss` (rewritten by src/proxy.ts). */
+export async function GET(request: Request) {
+  const locale = getRequestLocale(request)
+  const t = getMessages(locale).blog
+  const [profile, posts] = await Promise.all([
+    getProfile(),
+    getPublishedPosts(locale),
+  ])
+
+  const itemsXml = posts
+    .map(
+      (post) => `<item>
+          <title>${escapeXml(post.title)}</title>
+          <link>${SITE_URL}${postPath(locale, post.slug)}</link>
+          <guid>${SITE_URL}${postPath(locale, post.slug)}</guid>
+          <description>${escapeXml(post.description)}</description>
+          <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
         </item>`
-    })
-    .filter(Boolean)
+    )
     .join("\n")
 
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-      <title>Blog | ${profile.displayName}</title>
-      <link>${SITE_URL}/blog</link>
-      <description>Stories, milestones, and things I learn along the way.</description>
+      <title>${escapeXml(`${t.title} | ${profile.displayName}`)}</title>
+      <link>${SITE_URL}${blogPath(locale)}</link>
+      <description>${escapeXml(t.description)}</description>
+      <language>${LOCALE_TAGS[locale]}</language>
       ${itemsXml}
     </channel>
   </rss>`
 
   return new Response(rssFeed, {
-    headers: {
-      "Content-Type": "text/xml",
-    },
+    headers: { "Content-Type": "application/rss+xml; charset=utf-8" },
   })
 }

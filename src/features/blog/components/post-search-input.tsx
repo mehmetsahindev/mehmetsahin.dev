@@ -15,7 +15,11 @@ import { SearchIcon } from "@/components/icons"
 
 import { useSearchQuery } from "../hooks/use-search-query"
 
-export function PostSearchInput() {
+export function PostSearchInput({
+  placeholder = "Search blog…",
+}: {
+  placeholder?: string
+}) {
   const { query, setQuery } = useSearchQuery()
 
   useHotkeys("esc", () => setQuery(null), { enableOnFormTags: true })
@@ -39,7 +43,7 @@ export function PostSearchInput() {
   return (
     <InputGroup className="rounded-lg shadow-none">
       <InputGroupInput
-        placeholder="Search blog…"
+        placeholder={placeholder}
         value={query}
         onChange={(e) => {
           setQuery(e.target.value)

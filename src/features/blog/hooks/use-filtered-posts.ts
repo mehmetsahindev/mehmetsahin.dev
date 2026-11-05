@@ -1,12 +1,11 @@
-import type { Doc } from "@/features/doc/types/document"
-
+import type { PostSummary } from "../types"
 import { useSearchQuery } from "./use-search-query"
 
-const normalize = (text: string) => text.toLowerCase().replaceAll(" ", "")
+const normalize = (text: string) => text.toLocaleLowerCase().replaceAll(" ", "")
 
-const matchesQuery = (post: Doc, normalizedQuery: string) => {
-  const normalizedTitle = normalize(post.metadata.title)
-  const normalizedDescription = normalize(post.metadata.description)
+const matchesQuery = (post: PostSummary, normalizedQuery: string) => {
+  const normalizedTitle = normalize(post.title)
+  const normalizedDescription = normalize(post.description)
 
   return (
     normalizedTitle.includes(normalizedQuery) ||
@@ -14,14 +13,14 @@ const matchesQuery = (post: Doc, normalizedQuery: string) => {
   )
 }
 
-const searchPosts = (posts: Doc[], query: string | null) => {
+const searchPosts = (posts: PostSummary[], query: string | null) => {
   if (!query) return posts
 
   const normalizedQuery = normalize(query)
   return posts.filter((post) => matchesQuery(post, normalizedQuery))
 }
 
-export function useFilteredPosts(posts: Doc[]) {
+export function useFilteredPosts(posts: PostSummary[]) {
   const { query } = useSearchQuery()
   return searchPosts(posts, query)
 }

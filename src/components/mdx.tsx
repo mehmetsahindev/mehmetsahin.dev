@@ -1,6 +1,6 @@
 import { remarkHeading } from "fumadocs-core/mdx-plugins/remark-heading"
 import type { MDXRemoteProps } from "next-mdx-remote/rsc"
-import { MDXRemote } from "next-mdx-remote/rsc"
+import { compileMDX, MDXRemote } from "next-mdx-remote/rsc"
 import rehypeExternalLinks from "rehype-external-links"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
@@ -98,4 +98,13 @@ const options: MDXRemoteProps["options"] = {
 
 export function MDX({ code }: { code: string }) {
   return <MDXRemote source={code} components={components} options={options} />
+}
+
+/**
+ * Compiles up front so syntax errors can be caught and reported (used by the
+ * editor preview); `MDX` would throw them during rendering instead.
+ */
+export async function compileMarkdown(code: string) {
+  const { content } = await compileMDX({ source: code, components, options })
+  return content
 }

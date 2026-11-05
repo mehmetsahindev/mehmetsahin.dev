@@ -1,7 +1,14 @@
 import "@/styles/globals.css"
 
 import type { Metadata, Viewport } from "next"
+import { headers } from "next/headers"
 import Script from "next/script"
+import {
+  DEFAULT_LOCALE,
+  isLocale,
+  LOCALE_HEADER,
+  LOCALE_TAGS,
+} from "@/i18n/config"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
 
 import { META_THEME_COLORS, SITE_URL } from "@/config/site"
@@ -74,13 +81,20 @@ export const viewport: Viewport = {
   themeColor: META_THEME_COLORS.light,
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const requested = (await headers()).get(LOCALE_HEADER) ?? ""
+  const locale = isLocale(requested) ? requested : DEFAULT_LOCALE
+
   return (
-    <html lang="en" className={fontVariables} suppressHydrationWarning>
+    <html
+      lang={LOCALE_TAGS[locale]}
+      className={fontVariables}
+      suppressHydrationWarning
+    >
       <head>
         <script
           type="text/javascript"

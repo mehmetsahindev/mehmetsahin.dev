@@ -1,11 +1,12 @@
 import { Fragment } from "react"
 import type { Metadata } from "next"
+import { DEFAULT_LOCALE } from "@/i18n/config"
 import type { ProfilePage, WithContext } from "schema-dts"
 
 import { JSON_LD_ID } from "@/config/json-ld"
 import { JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl, cn } from "@/lib/utils"
-import { getBlogPosts } from "@/features/doc/data/documents"
+import { getPublishedPosts } from "@/features/blog/data/queries"
 import { Blog } from "@/features/portfolio/components/blog"
 import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
@@ -46,19 +47,27 @@ const SECTION_COMPONENTS: Record<HomeSectionId, () => React.ReactNode> = {
 }
 
 export default async function HomePage() {
-  const [profile, settings, techStack, experiences, education, projects] =
-    await Promise.all([
-      getProfile(),
-      getSiteSettings(),
-      getTechStack(),
-      getExperiences(),
-      getEducation(),
-      getProjects(),
-    ])
+  const [
+    profile,
+    settings,
+    techStack,
+    experiences,
+    education,
+    projects,
+    posts,
+  ] = await Promise.all([
+    getProfile(),
+    getSiteSettings(),
+    getTechStack(),
+    getExperiences(),
+    getEducation(),
+    getProjects(),
+    getPublishedPosts(DEFAULT_LOCALE),
+  ])
 
   const hasContent: Record<HomeSectionId, boolean> = {
     hello: Boolean(profile.about.trim()),
-    blog: getBlogPosts().length > 0,
+    blog: posts.length > 0,
     stack: techStack.some((category) => category.items.length > 0),
     experience: experiences.length > 0,
     education: education.length > 0,

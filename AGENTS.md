@@ -28,12 +28,12 @@ Personal website of Mehmet Şahin. Next.js 16 (App Router) portfolio and blog, o
 - Each admin section keeps `schema.ts` (zod, shared with the form), `actions.ts`, `queries.ts` and its client components together. Reuse the pieces in `src/features/admin/components/form/` (sortable list, form sheet, icon picker, markdown field, period fields).
 - Media (`src/features/media/`): files live in `UPLOADS_DIR`, are served from `/media/<key>` and tracked in `media`/`media_usage`. Pick files with `MediaField`/`MediaPicker`. Whenever a record that references media is saved, call `syncMediaUsage(owner, fields)` (ids or Markdown); call `clearMediaUsage` when it is deleted. Files in use cannot be deleted.
 
-## Content system
+## Blog and languages
 
-Blog posts currently live in `src/features/doc/content/blog/` as MDX files; they will move to the database with multi-language support.
-
-- **Data layer**: `src/features/doc/data/documents.ts`
-- **Blog UI**: `src/features/blog/` (rendering only)
+- Posts live in Postgres (`post` + one `post_translation` per language, each with its own slug and draft/published status). Edit them at `/admin/blog`; the editor preview uses the same renderer as the site (`src/components/mdx.tsx`).
+- Languages are configured in `src/i18n/config.ts` (default `en` has no URL prefix, `tr` uses `/tr`). UI strings live in `src/i18n/messages.ts`.
+- `src/proxy.ts` rewrites `/blog/...` to `app/.../[locale]/blog/...`, redirects `/en/blog/...` to the clean URL, routes `.md` and RSS requests, and passes the locale in the `x-site-locale` header (used for `<html lang>`). Only the blog is localized; to localize more pages, move them under `[locale]` and extend the proxy.
+- Public reads go through `src/features/blog/data/queries.ts` (cache tag `blog`).
 
 ## Coding guidelines
 

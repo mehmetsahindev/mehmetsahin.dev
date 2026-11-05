@@ -1,34 +1,38 @@
-import { format } from "date-fns"
+import { LOCALE_LABELS, LOCALES } from "@/i18n/config"
 
 import { SITE_URL } from "@/config/site"
-import { getBlogPosts } from "@/features/doc/data/documents"
+import { markdownResponse } from "@/lib/markdown-response"
+import { getPublishedPosts } from "@/features/blog/data/queries"
+import { postPath } from "@/features/blog/lib/paths"
 
-const allPosts = getBlogPosts()
-  .slice()
-  .sort(
-    (a, b) =>
-      new Date(b.metadata.createdAt).getTime() -
-      new Date(a.metadata.createdAt).getTime()
+export const dynamic = "force-dynamic"
+
+export async function GET() {
+  const sections = await Promise.all(
+    LOCALES.map(async (locale) => ({
+      locale,
+      posts: await getPublishedPosts(locale),
+    }))
   )
 
-const content = `# Blog
+  return markdownResponse(`# Blog
 
 > Stories, milestones, and things I learn along the way.
 
 Each link below returns the full post as Markdown. Drop the \`.md\` extension for the web page.
 
-## All posts (${allPosts.length})
+${sections
+  .filter(({ posts }) => posts.length > 0)
+  .map(
+    ({ locale, posts }) => `## ${LOCALE_LABELS[locale]} (${posts.length})
 
-${allPosts.map((item) => `- [${item.metadata.title}](${SITE_URL}/blog/${item.slug}.md) (${format(new Date(item.metadata.createdAt), "yyyy-MM-dd")}): ${item.metadata.description}`).join("\n")}
-`
-
-export const revalidate = false
-export const dynamic = "force-static"
-
-export async function GET() {
-  return new Response(content, {
-    headers: {
-      "Content-Type": "text/markdown;charset=utf-8",
-    },
-  })
+${posts
+  .map(
+    (item) =>
+      `- [${item.title}](${SITE_URL}${postPath(locale, item.slug)}.md) (${item.publishedAt}): ${item.description}`
+  )
+  .join("\n")}`
+  )
+  .join("\n\n")}
+`)
 }
