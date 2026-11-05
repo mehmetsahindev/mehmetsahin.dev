@@ -24,6 +24,7 @@ export function ConfirmDelete({
   onConfirm,
   label = "Delete",
   iconOnly = false,
+  disabled = false,
 }: {
   title: string
   description: string
@@ -31,6 +32,7 @@ export function ConfirmDelete({
   onConfirm: () => Promise<boolean | void>
   label?: string
   iconOnly?: boolean
+  disabled?: boolean
 }) {
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
@@ -44,6 +46,7 @@ export function ConfirmDelete({
             variant={iconOnly ? "ghost" : "destructive"}
             size={iconOnly ? "icon-sm" : "default"}
             aria-label={iconOnly ? label : undefined}
+            disabled={disabled}
             className={
               iconOnly
                 ? "text-muted-foreground hover:text-destructive"

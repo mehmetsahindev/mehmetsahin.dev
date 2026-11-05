@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AtSignIcon, PencilIcon, PlusIcon } from "lucide-react"
-import { Controller, useForm } from "react-hook-form"
+import { Controller, useForm, useWatch } from "react-hook-form"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -158,9 +158,9 @@ function SocialLinkSheet({
         }
       : { platform: "github", url: "", handle: "", sameAs: true },
   })
-  const { register, control, formState, watch } = form
+  const { register, control, formState } = form
   const errors = formState.errors
-  const platform = getSocialPlatform(watch("platform"))
+  const platform = getSocialPlatform(useWatch({ control, name: "platform" }))
 
   const { onSubmit, isPending } = useActionSubmit(
     form,
