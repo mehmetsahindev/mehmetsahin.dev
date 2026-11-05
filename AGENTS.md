@@ -25,6 +25,7 @@ Personal website of Mehmet Şahin. Next.js 16 (App Router) portfolio and blog, f
 - Auth: Better Auth with GitHub (`src/lib/auth.ts`). Only `ADMIN_GITHUB_USERNAME` can sign in.
 - Schema changes: edit `src/db/schema/`, run `pnpm db:generate`, commit the SQL in `drizzle/`. Migrations apply on server start (`src/instrumentation.ts`).
 - Server env vars are validated lazily in `src/lib/env.ts`.
+- Media (`src/features/media/`): files live in `UPLOADS_DIR`, are served from `/media/<key>` and tracked in `media`/`media_usage`. Pick files with `MediaField`/`MediaPicker`. Whenever a record that references media is saved, call `syncMediaUsage(owner, fields)` (ids or Markdown); call `clearMediaUsage` when it is deleted. Files in use cannot be deleted.
 
 ## Content system
 
