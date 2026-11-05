@@ -29,7 +29,7 @@ ${sections
 ${posts
   .map(
     (item) =>
-      `- [${item.title}](${SITE_URL}${postPath(locale, item.slug)}.md) (${item.publishedAt}): ${item.description}`
+      `- [${item.title}](${SITE_URL}${postPath(locale, item.slug)}.md) (${item.publishedAt}): ${item.summary}`
   )
   .join("\n")}`
   )

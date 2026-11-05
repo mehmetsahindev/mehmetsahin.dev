@@ -7,6 +7,7 @@ import { and, desc, eq } from "drizzle-orm"
 
 import { getMediaUrl } from "@/features/media/lib/constants"
 
+import { postDescription } from "../lib/excerpt"
 import type { PostDetail, PostSummary } from "../types"
 
 /** Cache tag for blog content; admin actions expire it after saving. */
@@ -23,6 +24,7 @@ export const getPublishedPosts = unstable_cache(
         slug: postTranslation.slug,
         title: postTranslation.title,
         description: postTranslation.description,
+        content: postTranslation.content,
         publishedAt: post.publishedAt,
         updatedAt: postTranslation.updatedAt,
         pinned: post.pinned,
@@ -39,8 +41,9 @@ export const getPublishedPosts = unstable_cache(
       )
       .orderBy(desc(post.pinned), desc(post.publishedAt), desc(post.createdAt))
 
-    return rows.map(({ coverKey, updatedAt, ...row }) => ({
+    return rows.map(({ coverKey, updatedAt, content, ...row }) => ({
       ...row,
+      summary: postDescription({ description: row.description, content }),
       locale,
       updatedAt: updatedAt.toISOString(),
       coverUrl: coverKey ? getMediaUrl(coverKey) : null,
@@ -65,6 +68,8 @@ export const getPublishedPost = unstable_cache(
         updatedAt: postTranslation.updatedAt,
         pinned: post.pinned,
         coverKey: media.key,
+        coverWidth: media.width,
+        coverHeight: media.height,
       })
       .from(postTranslation)
       .innerJoin(post, eq(post.id, postTranslation.postId))
@@ -94,6 +99,7 @@ export const getPublishedPost = unstable_cache(
 
     return {
       ...rest,
+      summary: postDescription(rest),
       locale,
       updatedAt: updatedAt.toISOString(),
       coverUrl: coverKey ? getMediaUrl(coverKey) : null,

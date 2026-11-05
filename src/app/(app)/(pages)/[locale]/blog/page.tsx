@@ -20,6 +20,7 @@ import { getPublishedPosts } from "@/features/blog/data/queries"
 import {
   languageAlternates,
   ogImageUrl,
+  openGraphBase,
   twitterCard,
 } from "@/features/blog/lib/metadata"
 import { blogPath, postPath } from "@/features/blog/lib/paths"
@@ -50,9 +51,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       types: { "application/rss+xml": `${path}/rss` },
     },
     openGraph: {
+      ...(await openGraphBase(
+        locale,
+        LOCALES.filter((item) => item !== locale)
+      )),
       url: path,
       type: "website",
-      locale: LOCALE_TAGS[locale].replace("-", "_"),
       images: { url: image, width: 1200, height: 630, alt: t.title },
     },
     twitter: await twitterCard(image),
@@ -78,6 +82,7 @@ function getBlogJsonLd(
     blogPost: posts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
+      description: post.summary,
       url: absoluteUrl(postPath(locale, post.slug)),
       datePublished: post.publishedAt,
     })),

@@ -25,7 +25,7 @@ export async function GET(request: Request) {
           <title>${escapeXml(post.title)}</title>
           <link>${SITE_URL}${postPath(locale, post.slug)}</link>
           <guid>${SITE_URL}${postPath(locale, post.slug)}</guid>
-          <description>${escapeXml(post.description)}</description>
+          <description>${escapeXml(post.summary)}</description>
           <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
         </item>`
     )

@@ -8,6 +8,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 import type { BlogPosting, WithContext } from "schema-dts"
 
 import { JSON_LD_ID } from "@/config/json-ld"
+import { SITE_URL } from "@/config/site"
 import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -29,6 +30,7 @@ import {
 import {
   languageAlternates,
   ogImageUrl,
+  openGraphBase,
   twitterCard,
 } from "@/features/blog/lib/metadata"
 import { blogPath, postPath } from "@/features/blog/lib/paths"
@@ -60,11 +62,28 @@ async function loadPost(params: Props["params"]) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await loadPost(params)
   const path = postPath(post.locale, post.slug)
-  const image = post.coverUrl ?? ogImageUrl(post.title, post.description)
+  const otherLocales = post.translations
+    .map((item) => item.locale)
+    .filter((locale) => locale !== post.locale)
+
+  // Real cover size when known; generated images are always 1200x630.
+  const image = post.coverUrl
+    ? {
+        url: post.coverUrl,
+        width: post.coverWidth ?? undefined,
+        height: post.coverHeight ?? undefined,
+        alt: post.title,
+      }
+    : {
+        url: ogImageUrl(post.title, post.summary),
+        width: 1200,
+        height: 630,
+        alt: post.title,
+      }
 
   return {
     title: post.title,
-    description: post.description,
+    description: post.summary,
     alternates: {
       canonical: path,
       languages: languageAlternates(
@@ -75,16 +94,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           ])
         )
       ),
+      types: { "application/rss+xml": `${blogPath(post.locale)}/rss` },
     },
     openGraph: {
+      ...(await openGraphBase(post.locale, otherLocales)),
       url: path,
       type: "article",
-      locale: LOCALE_TAGS[post.locale].replace("-", "_"),
       publishedTime: new Date(post.publishedAt).toISOString(),
       modifiedTime: post.updatedAt,
-      images: { url: image, width: 1200, height: 630, alt: post.title },
+      authors: [SITE_URL],
+      images: image,
     },
-    twitter: await twitterCard(image),
+    twitter: await twitterCard(image.url),
   }
 }
 
@@ -96,15 +117,14 @@ function getPageJsonLd(post: PostDetail): WithContext<BlogPosting> {
     "@type": "BlogPosting",
     "@id": url,
     headline: post.title,
-    description: post.description,
+    description: post.summary,
     inLanguage: LOCALE_TAGS[post.locale],
-    image: absoluteUrl(
-      post.coverUrl ?? ogImageUrl(post.title, post.description)
-    ),
+    image: absoluteUrl(post.coverUrl ?? ogImageUrl(post.title, post.summary)),
     url,
     datePublished: new Date(post.publishedAt).toISOString(),
     dateModified: post.updatedAt,
     author: { "@id": JSON_LD_ID.person },
+    publisher: { "@id": JSON_LD_ID.person },
     mainEntityOfPage: url,
     isPartOf: {
       "@type": "Blog",

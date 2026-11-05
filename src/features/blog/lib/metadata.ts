@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { LOCALE_TAGS, LOCALES, type Locale } from "@/i18n/config"
 
-import { getXHandle } from "@/features/portfolio/data/queries"
+import { getProfile, getXHandle } from "@/features/portfolio/data/queries"
 
 /** `hreflang` alternates from a locale → path map, with x-default. */
 export function languageAlternates(paths: Partial<Record<Locale, string>>) {
@@ -28,4 +28,19 @@ export async function twitterCard(image: string): Promise<Metadata["twitter"]> {
 
 export function ogImageUrl(title: string, description: string) {
   return `/og/simple?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`
+}
+
+/**
+ * Open Graph fields every localized page repeats: page-level `openGraph`
+ * replaces the root one, so the site name would otherwise be lost.
+ */
+export async function openGraphBase(locale: Locale, otherLocales: Locale[]) {
+  const profile = await getProfile()
+  return {
+    siteName: profile.displayName,
+    locale: LOCALE_TAGS[locale].replace("-", "_"),
+    alternateLocale: otherLocales.map((item) =>
+      LOCALE_TAGS[item].replace("-", "_")
+    ),
+  }
 }

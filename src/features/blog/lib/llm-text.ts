@@ -14,7 +14,7 @@ export async function getPostLLMText(post: PostDetail) {
 
   return `# ${post.title}
 
-${post.description}
+${post.summary}
 
 ${processed.value}
 

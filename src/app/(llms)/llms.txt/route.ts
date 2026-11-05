@@ -22,7 +22,7 @@ export async function GET() {
     .map(({ locale, posts }) => {
       const lines = posts.map(
         (item) =>
-          `- [${item.title}](${SITE_URL}${postPath(locale, item.slug)}.md): ${item.description}`
+          `- [${item.title}](${SITE_URL}${postPath(locale, item.slug)}.md): ${item.summary}`
       )
       return `## Blog (${LOCALE_LABELS[locale]})\n\n${lines.join("\n")}`
     })

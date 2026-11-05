@@ -11,6 +11,7 @@ import {
   PageHeadingTagline,
   PageHeadingTitle,
 } from "@/components/page-heading"
+import { twitterCard } from "@/features/blog/lib/metadata"
 import { BookmarkFilters } from "@/features/bookmark/components/bookmark-filters"
 import { BookmarkItem } from "@/features/bookmark/components/bookmark-item"
 import { BookmarkList } from "@/features/bookmark/components/bookmark-list"
@@ -19,6 +20,7 @@ import type { BookmarkListEntry } from "@/features/bookmark/types"
 import {
   getBookmarkCategories,
   getBookmarks,
+  getProfile,
 } from "@/features/portfolio/data/queries"
 
 const title = "Bookmarks"
@@ -27,26 +29,31 @@ const description =
 
 const ogImage = `/og/simple?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    canonical: "/bookmarks",
-  },
-  openGraph: {
-    url: "/bookmarks",
-    type: "website",
-    images: {
-      url: ogImage,
-      width: 1200,
-      height: 630,
-      alt: title,
+export async function generateMetadata(): Promise<Metadata> {
+  const [profile, twitter] = await Promise.all([
+    getProfile(),
+    twitterCard(ogImage),
+  ])
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: "/bookmarks",
     },
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: [ogImage],
-  },
+    openGraph: {
+      siteName: profile.displayName,
+      url: "/bookmarks",
+      type: "website",
+      images: {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: title,
+      },
+    },
+    twitter,
+  }
 }
 
 function getCollectionPageJsonLd(

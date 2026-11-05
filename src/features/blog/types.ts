@@ -6,7 +6,10 @@ export type PostSummary = {
   locale: Locale
   slug: string
   title: string
+  /** As written; may be empty. */
   description: string
+  /** Description, or an excerpt of the content when it is empty. */
+  summary: string
   coverUrl: string | null
   /** "YYYY-MM-DD". */
   publishedAt: string
@@ -17,6 +20,9 @@ export type PostSummary = {
 
 export type PostDetail = PostSummary & {
   content: string
+  /** Cover size in pixels, for Open Graph. */
+  coverWidth: number | null
+  coverHeight: number | null
   /** Published versions of this post, including this one. */
   translations: { locale: Locale; slug: string }[]
 }
