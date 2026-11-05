@@ -46,6 +46,10 @@ import { socialLinkSchema, type SocialLinkInput } from "./schema"
 
 type Editing = { link: SocialLinkData | null } | null
 
+const PLATFORM_ITEMS = Object.fromEntries(
+  Object.entries(SOCIAL_PLATFORMS).map(([key, item]) => [key, item.label])
+)
+
 export function SocialLinksManager({ links }: { links: SocialLinkData[] }) {
   const [editing, setEditing] = useState<Editing>(null)
   const { ordered, onReorder, onCommit } = useSortableItems(
@@ -195,6 +199,7 @@ function SocialLinkSheet({
           name="platform"
           render={({ field }) => (
             <Select
+              items={PLATFORM_ITEMS}
               value={field.value}
               onValueChange={(value) => field.onChange(value)}
             >

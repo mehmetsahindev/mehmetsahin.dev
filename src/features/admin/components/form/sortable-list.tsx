@@ -87,7 +87,7 @@ function SortableRow<T>({
       <button
         type="button"
         aria-label="Drag to reorder"
-        className="flex h-full cursor-grab touch-none items-center self-stretch pl-2 text-muted-foreground/60 hover:text-foreground active:cursor-grabbing"
+        className="flex cursor-grab touch-none items-center self-stretch pl-2 text-muted-foreground/60 hover:text-foreground active:cursor-grabbing"
         onPointerDown={(event) => controls.start(event)}
       >
         <GripVerticalIcon className="size-4" />
