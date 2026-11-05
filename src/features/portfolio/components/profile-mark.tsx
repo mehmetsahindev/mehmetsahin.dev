@@ -1,6 +1,14 @@
 import { useId } from "react"
 
-import { MARK_OUTLINE_PATH, MARK_PATH } from "@/components/site-mark"
+import {
+  MARK_HEIGHT,
+  MARK_OUTLINE_PATH,
+  MARK_PATH,
+  MARK_WIDTH,
+} from "@/components/site-mark"
+
+/** Breathing room around the mark inside the cover. */
+const PADDING = 20
 
 /**
  * Cover artwork beside the avatar: the site mark drawn with a hatched fill
@@ -12,7 +20,7 @@ export function ProfileMark() {
   return (
     <svg
       className="h-auto w-full overflow-visible [--pattern:color-mix(in_oklab,var(--foreground)_12%,var(--background))] [--stroke:color-mix(in_oklab,var(--foreground)_24%,var(--background))]"
-      viewBox="-32 -32 640 384"
+      viewBox={`${-PADDING} ${-PADDING} ${MARK_WIDTH + PADDING * 2} ${MARK_HEIGHT + PADDING * 2}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
