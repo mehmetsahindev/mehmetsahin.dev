@@ -8,39 +8,22 @@ import type { SocialProfile } from "@/features/portfolio/types/social-links"
 export const SOCIAL = {
   x: {
     title: "𝕏",
-    handle: "@iamncdai",
-    href: "https://x.com/iamncdai",
+    handle: "@mehmetsahindev",
+    href: "https://x.com/mehmetsahindev",
     sameAs: true,
   },
   github: {
     title: "GitHub",
-    handle: "ncdai",
-    href: "https://github.com/ncdai",
+    handle: "mehmetsahindev",
+    href: "https://github.com/mehmetsahindev",
     sameAs: true,
   },
   linkedin: {
     title: "LinkedIn",
-    handle: "ncdai",
-    href: "https://linkedin.com/in/ncdai",
+    handle: "mehmetsahindev",
+    href: "https://linkedin.com/in/mehmetsahindev",
     sameAs: true,
   },
-  // dailydotdev: {
-  //   title: "daily.dev",
-  //   handle: "@ncdai",
-  //   href: "https://app.daily.dev/ncdai",
-  //   sameAs: true,
-  // },
-  // discord: {
-  //   title: "Discord",
-  //   handle: "ncdai",
-  //   href: "https://discord.com/users/1186630645443739651",
-  // },
-  // youtube: {
-  //   title: "YouTube",
-  //   handle: "@ncdai",
-  //   href: "https://www.youtube.com/@ncdai",
-  //   sameAs: true,
-  // },
 } satisfies Record<string, SocialProfile>
 
 export type SocialName = keyof typeof SOCIAL

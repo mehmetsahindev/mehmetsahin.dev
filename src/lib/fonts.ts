@@ -21,21 +21,11 @@ const fontMono = localFont({
   variable: "--font-mono",
 })
 
-// Only the iPod uses it, so it loads on demand instead of on every page.
-const fontChicagoKare = localFont({
-  src: "../assets/fonts/ChicagoKare-Regular.woff2",
-  weight: "400",
-  display: "block",
-  preload: false,
-  variable: "--font-chicago-kare",
-})
-
 export const fontVariables = cn(
   fontSans.variable,
   fontMono.variable,
   fontSerif.variable,
   fontHandwritten.variable,
-  fontChicagoKare.variable,
   "[--font-sans:var(--font-geist-sans)]",
   "[--font-serif:var(--font-geist-serif)]"
 )

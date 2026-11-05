@@ -19,7 +19,6 @@ import {
 import {
   ClaudeIcon,
   CursorIcon,
-  GitHubIcon,
   GrokIcon,
   MarkdownIcon,
   OpenAIIcon,
@@ -127,12 +126,6 @@ export function ViewOptions({
         title: "View as Markdown",
         href: fullMarkdownUrl,
         icon: MarkdownIcon,
-      },
-      {
-        title: "Open in GitHub",
-        // Source files remain .mdx even though the public URL uses .md
-        href: `https://github.com/ncdai/chanhdai.com/blob/main/src/features/doc/content/${markdownUrl.replace(/^\//, "").replace(/\.md$/, ".mdx")}`,
-        icon: GitHubIcon,
       },
       {
         title: "Open in ChatGPT",

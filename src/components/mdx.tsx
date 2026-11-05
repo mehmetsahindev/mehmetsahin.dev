@@ -6,7 +6,6 @@ import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
 
 import { UTM_PARAMS } from "@/config/site"
-import { generator } from "@/lib/auto-type-table"
 import { rehypeAddQueryParams } from "@/lib/rehype-add-query-params"
 import {
   rehypeCodeRawString,
@@ -14,7 +13,6 @@ import {
   rehypeHighlightCodeRawString,
 } from "@/lib/rehype-code-block"
 import { rehypeNpmCommand } from "@/lib/rehype-npm-command"
-import { remarkCodeImport } from "@/lib/remark-code-import"
 import { cn } from "@/lib/utils"
 import {
   Table,
@@ -33,16 +31,10 @@ import {
 } from "@/components/ui/tabs"
 import { Code } from "@/components/ui/typography"
 import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper"
-import { ComponentSource } from "@/components/component-source"
-import { AutoTypeTable } from "@/features/doc/components/auto-type-table"
-import { DocDependencies } from "@/features/doc/components/doc-dependencies"
 import { DocPullQuote } from "@/features/doc/components/doc-pull-quote"
-import { DocSponsors } from "@/features/doc/components/doc-sponsors"
-import { DocTestimonial } from "@/features/doc/components/doc-testimonial"
 
 import { Callout } from "./callout"
 import { CodeTabs } from "./code-tabs"
-import { ComponentPreview } from "./component-preview"
 import { FramedImage, IframeEmbed, YouTubeEmbed } from "./embed"
 import { Heading } from "./heading"
 import { mdxCodeBlockComponents } from "./mdx-code-block"
@@ -62,9 +54,6 @@ const components: MDXRemoteProps["components"] = {
   td: TableCell,
   ...mdxCodeBlockComponents,
   code: Code,
-  ComponentPreview,
-  ComponentSource,
-  DocDependencies,
   CodeCollapsibleWrapper,
   CodeTabs,
   Callout,
@@ -86,25 +75,15 @@ const components: MDXRemoteProps["components"] = {
   TabsIndicator,
   TabsTrigger,
   TabsContent,
-  TabsListInstallType: () => (
-    <TabsList>
-      <TabsTrigger value="cli">Command</TabsTrigger>
-      <TabsTrigger value="manual">Manual</TabsTrigger>
-      <TabsIndicator />
-    </TabsList>
-  ),
   YouTubeEmbed,
   IframeEmbed,
   FramedImage,
   DocPullQuote,
-  DocTestimonial,
-  DocSponsors,
-  AutoTypeTable: (props) => <AutoTypeTable {...props} generator={generator} />,
 }
 
 const options: MDXRemoteProps["options"] = {
   mdxOptions: {
-    remarkPlugins: [remarkGfm, remarkCodeImport, remarkHeading],
+    remarkPlugins: [remarkGfm, remarkHeading],
     rehypePlugins: [
       [rehypeExternalLinks, { target: "_blank", rel: "nofollow noopener" }],
       rehypeSlug,

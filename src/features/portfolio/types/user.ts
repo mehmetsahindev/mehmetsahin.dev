@@ -1,5 +1,3 @@
-import type { AvatarLightsVariants } from "@/features/portfolio/components/avatar-lights"
-
 export type User = {
   firstName: string
   lastName: string
@@ -15,9 +13,9 @@ export type User = {
   taglines: string[]
   /** General location for display */
   address: string
-  /** E.164 format, base64 encoded (https://t.io.vn/base64-string-converter) */
+  /** E.164 format, base64 encoded; empty string hides the field */
   phoneNumberB64: string
-  /** base64 encoded (https://t.io.vn/base64-string-converter) */
+  /** base64 encoded; empty string hides the field */
   emailB64: string
   /** Personal/homepage URL */
   website: string
@@ -34,17 +32,11 @@ export type User = {
   about: string
   /** Public URL to avatar image */
   avatar: string
-  avatarOutline: string
-  avatarMonochrome: string
-  /** Different avatar variants based on theme and lighting */
-  avatarVariants: AvatarLightsVariants
   /** Open Graph image URL for social sharing */
   ogImage: string
-  /** Audio URL for name pronunciation */
-  namePronunciationUrl: string
   /** SEO keywords list for metadata */
   keywords: string[]
-  /** Time zone in IANA format (e.g., "Asia/Ho_Chi_Minh") */
+  /** Time zone in IANA format (e.g., "Europe/Istanbul") */
   timeZone: string
   /** Profile/site start date in YYYY-MM-DD */
   dateCreated: string

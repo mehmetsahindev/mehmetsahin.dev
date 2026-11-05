@@ -1,68 +1,25 @@
 import type { User } from "@/features/portfolio/types/user"
 
+// Placeholder profile until the admin panel (phase 4) moves this to the database.
 export const USER: User = {
-  firstName: "Chánh Đại",
-  lastName: "Nguyễn",
-  displayName: "Chánh Đại",
-  username: "ncdai",
+  firstName: "Mehmet",
+  lastName: "Şahin",
+  displayName: "Mehmet Şahin",
+  username: "mehmetsahindev",
   gender: "male",
   pronouns: "he/him",
-  bio: "Creating with code. Small details matter.",
-  taglines: [
-    "Creating with code. Small details matter.",
-    "Design Engineer.",
-    "Open source contributor.",
-    "I own a vintage iPhone.",
-  ],
-  address: "Ho Chi Minh City, Viet Nam",
-  phoneNumberB64: "Kzg0Nzc3ODg4MTQ4", // E.164 format, base64 encoded (https://t.io.vn/base64-string-converter)
-  emailB64: "ZGFpQGNoYW5oZGFpLmNvbQ==", // base64 encoded
-  website: "https://chanhdai.com",
-  jobTitle: "Design Engineer",
-  jobs: [
-    {
-      title: "Design Engineer",
-      company: "shadcncraft",
-      website: "https://shadcncraft.com?atp=ncdai",
-      experienceId: "shadcncraft",
-    },
-    // {
-    //   title: "Founder",
-    //   company: "Quaric",
-    //   website: "https://quaric.com",
-    //   experienceId: "quaric",
-    // },
-  ],
-  about: `- I’m Chánh Đại (call me Dai) — a Design Engineer with 5+ years of experience, known for pixel-perfect execution and obsessive attention to detail.
-- Passionate about exploring new technologies and turning ideas into reality through polished, thoughtfully crafted projects.
-- Creator of [chanhdai.com](https://github.com/ncdai/chanhdai.com) (2.4K stars), [React Wheel Picker](https://react-wheel-picker.chanhdai.com) (1.5M+ downloads, ▲ Vercel OSS Program), and [ZaDark](https://zadark.com) (80K+ downloads, 30K+ users) — peak metrics.
-`,
-  avatar: "https://assets.chanhdai.com/images/chanhdai-avatar-ghibli.webp",
-  avatarOutline:
-    "https://assets.chanhdai.com/images/avatar-macbook-outline.webp?t=1793321200",
-  avatarMonochrome:
-    "https://assets.chanhdai.com/images/avatar-macbook-monochrome.webp?t=1793321200",
-  avatarVariants: {
-    lightOff: "https://assets.chanhdai.com/images/avatar-light-off.webp",
-    lightOn: "https://assets.chanhdai.com/images/avatar-light-on.webp",
-    darkOff: "https://assets.chanhdai.com/images/avatar-dark-off.webp",
-    darkOn: "https://assets.chanhdai.com/images/avatar-dark-on.webp",
-  },
-  ogImage:
-    "https://assets.chanhdai.com/images/screenshot-og-image-dark.png?t=1778602757",
-  namePronunciationUrl: "https://assets.chanhdai.com/audio/chanhdai.mp3",
-  timeZone: "Asia/Ho_Chi_Minh",
-  keywords: [
-    "ncdai",
-    "nguyenchanhdai",
-    "nguyen chanh dai",
-    "chanhdai",
-    "chanh dai",
-    "iamncdai",
-    "quaric",
-    "zadark",
-    "nguyễn chánh đại",
-    "chánh đại",
-  ],
-  dateCreated: "2023-10-20", // YYYY-MM-DD
+  bio: "Software developer.",
+  taglines: ["Software developer."],
+  address: "Türkiye",
+  phoneNumberB64: "",
+  emailB64: "",
+  website: "https://mehmetsahin.dev",
+  jobTitle: "Software Developer",
+  jobs: [],
+  about: `- Hi, I'm Mehmet. This section will be editable from the admin panel.`,
+  avatar: "https://github.com/mehmetsahindev.png",
+  ogImage: "/og/simple?title=Mehmet%20%C5%9Eahin",
+  timeZone: "Europe/Istanbul",
+  keywords: ["mehmetsahindev", "mehmet sahin", "mehmet şahin"],
+  dateCreated: "2026-11-05", // YYYY-MM-DD
 }

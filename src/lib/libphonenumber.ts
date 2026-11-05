@@ -13,7 +13,7 @@ const metadata = metadataJson as MetadataJson
  * @returns The formatted phone number string.
  *
  * @remarks
- * - Only Viet Nam (VN) metadata is included by default. To add more countries, update and run the `generate-libphonenumber-metadata` script in `package.json`.
+ * - Only Türkiye (TR) metadata is included by default. To add more countries, update and run the `generate-libphonenumber-metadata` script in `package.json`.
  * - This function is useful for formatting user input as they type a phone number.
  *
  * @see https://www.npmjs.com/package/libphonenumber-js#customizing-metadata

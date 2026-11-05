@@ -1,30 +1,26 @@
+import { Fragment } from "react"
 import type { Metadata } from "next"
 import type { ProfilePage, WithContext } from "schema-dts"
 
-import { AD_PLACEMENTS, CARBON_ADS } from "@/config/ads"
 import { JSON_LD_ID } from "@/config/json-ld"
 import { JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl, cn } from "@/lib/utils"
-import { FloatingCarbonAds } from "@/components/floating-carbon-ads"
-import { Blocks } from "@/features/portfolio/components/blocks"
+import { getBlogPosts } from "@/features/doc/data/documents"
 import { Blog } from "@/features/portfolio/components/blog"
-import { Components } from "@/features/portfolio/components/components"
 import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
 import { FrameWidthDimension } from "@/features/portfolio/components/frame-width-dimension"
-import { GitHubContributions } from "@/features/portfolio/components/github-contributions"
 import { Hello } from "@/features/portfolio/components/hello"
-import { Numbers } from "@/features/portfolio/components/numbers"
 import { Overview } from "@/features/portfolio/components/overview"
 import { ProfileHeader } from "@/features/portfolio/components/profile-header"
 import { Projects } from "@/features/portfolio/components/projects"
-import { Recognition } from "@/features/portfolio/components/recognition"
 import { SeparatorHeightDimension } from "@/features/portfolio/components/separator-height-dimension"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
-import { Sponsors } from "@/features/portfolio/components/sponsors"
-import { SponsorsCarousel } from "@/features/portfolio/components/sponsors-carousel"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
-import { Testimonials } from "@/features/portfolio/components/testimonials"
+import { EDUCATION } from "@/features/portfolio/data/education"
+import { EXPERIENCES } from "@/features/portfolio/data/experiences"
+import { PROJECTS } from "@/features/portfolio/data/projects"
+import { TECH_STACK } from "@/features/portfolio/data/tech-stack"
 import { USER } from "@/features/portfolio/data/user"
 
 export const metadata: Metadata = {
@@ -33,11 +29,46 @@ export const metadata: Metadata = {
   },
 }
 
+type HomeSection = {
+  id: string
+  visible: boolean
+  render: () => React.ReactNode
+}
+
 export default function HomePage() {
+  // Sections without content are skipped so separators never stack up.
+  const sections: HomeSection[] = [
+    { id: "hello", visible: Boolean(USER.about), render: () => <Hello /> },
+    {
+      id: "blog",
+      visible: getBlogPosts().length > 0,
+      render: () => <Blog />,
+    },
+    {
+      id: "stack",
+      visible: TECH_STACK.length > 0,
+      render: () => <TechStack />,
+    },
+    {
+      id: "experience",
+      visible: EXPERIENCES.length > 0,
+      render: () => <Experiences />,
+    },
+    {
+      id: "education",
+      visible: EDUCATION.length > 0,
+      render: () => <Education />,
+    },
+    {
+      id: "projects",
+      visible: PROJECTS.length > 0,
+      render: () => <Projects />,
+    },
+  ]
+
   return (
     <>
       <JsonLdScript data={getProfilePageJsonLd()} />
-      {CARBON_ADS && AD_PLACEMENTS.home && <FloatingCarbonAds />}
 
       <div className="[--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
         <div className="mx-auto md:max-w-3xl">
@@ -50,40 +81,15 @@ export default function HomePage() {
 
           <Overview />
           <SocialLinks />
-          <GitHubContributions />
-          <Separator />
 
-          <Hello />
-          <SponsorsCarousel />
-          <Numbers />
-          <Testimonials />
-          <Separator />
-
-          <Components />
-          <Separator />
-
-          <Blocks />
-          <Separator />
-
-          <Blog />
-          <Separator />
-
-          <TechStack />
-          <Separator />
-
-          <Experiences />
-          <Separator />
-
-          <Education />
-          <Separator />
-
-          <Projects />
-          <Separator />
-
-          <Recognition />
-          <Separator />
-
-          <Sponsors />
+          {sections
+            .filter((section) => section.visible)
+            .map((section) => (
+              <Fragment key={section.id}>
+                <Separator />
+                {section.render()}
+              </Fragment>
+            ))}
         </div>
       </div>
     </>
@@ -112,14 +118,6 @@ function Separator({ className, children }: React.ComponentProps<"div">) {
       )}
     >
       {children}
-      {/* <div
-        className="absolute -top-1.25 -left-1.25 z-2 flex size-2.25 border bg-background"
-        aria-hidden
-      />
-      <div
-        className="absolute -top-1.25 -right-1.25 z-2 flex size-2.25 border bg-background"
-        aria-hidden
-      /> */}
     </div>
   )
 }
