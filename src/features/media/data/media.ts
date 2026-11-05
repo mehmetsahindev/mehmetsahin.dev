@@ -49,6 +49,25 @@ export async function listMedia(): Promise<MediaItem[]> {
   return rows.map((row) => toMediaItem(row.media, row.usageCount))
 }
 
+/** Media records by id, for showing picked files in admin forms. */
+export async function getMediaItemsByIds(
+  ids: (string | null | undefined)[]
+): Promise<Map<string, MediaItem>> {
+  const unique = [...new Set(ids.filter((id): id is string => Boolean(id)))]
+  if (unique.length === 0) return new Map()
+
+  const rows = await getDb()
+    .select({ media, usageCount: count(mediaUsage.id) })
+    .from(media)
+    .leftJoin(mediaUsage, eq(mediaUsage.mediaId, media.id))
+    .where(inArray(media.id, unique))
+    .groupBy(media.id)
+
+  return new Map(
+    rows.map((row) => [row.media.id, toMediaItem(row.media, row.usageCount)])
+  )
+}
+
 export async function getMediaUsages(
   mediaId: string
 ): Promise<MediaUsageItem[]> {
