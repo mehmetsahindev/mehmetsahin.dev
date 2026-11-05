@@ -2,7 +2,7 @@
 
 Personal website of Mehmet Şahin: portfolio, blog and admin panel.
 
-Based on [chanhdai.com](https://github.com/ncdai/chanhdai.com) by Nguyễn Chánh Đại (MIT License).
+Originally based on [chanhdai.com](https://github.com/ncdai/chanhdai.com) by Nguyễn Chánh Đại (MIT License). It is maintained independently and does not track upstream.
 
 ## Development
 
@@ -34,23 +34,6 @@ The whole stack (app + Postgres + uploads volume) is defined in `compose.yaml`.
    - `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`
    - `ADMIN_GITHUB_USERNAME`
 4. Add a domain pointing to service `app`, port `3000`, and deploy.
-
-## Pulling updates from upstream
-
-This repository is a fork of `ncdai/chanhdai.com`. The original is added as the `upstream` remote (push disabled):
-
-```bash
-git remote add upstream https://github.com/ncdai/chanhdai.com.git
-git remote set-url --push upstream no_push
-```
-
-The two codebases have diverged a lot, so prefer cherry-picking individual commits over merging everything:
-
-```bash
-git fetch upstream
-git log --oneline main..upstream/main   # see what is new upstream
-git cherry-pick <commit>                # take only what you want
-```
 
 ## License
 

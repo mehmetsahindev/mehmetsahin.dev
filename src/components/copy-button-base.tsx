@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import type { CopyState } from "@/hooks/use-copy-to-clipboard"
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
 import { Button } from "@/components/ui/button"
-import { IconSwap, IconSwapItem } from "@/registry/components/icon-swap"
+import { IconSwap, IconSwapItem } from "@/components/icon-swap"
 
 export type CopyStateIconProps = {
   state: CopyState

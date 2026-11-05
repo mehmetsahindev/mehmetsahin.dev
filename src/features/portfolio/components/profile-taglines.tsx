@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { useInView, usePageInView } from "motion/react"
 
-import { TextSwap } from "@/registry/components/text-swap"
+import { TextSwap } from "@/components/text-swap"
 
 export function ProfileTaglines({
   children,

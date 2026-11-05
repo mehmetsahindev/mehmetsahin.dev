@@ -11,14 +11,18 @@ import { MEDIA_MIME_TYPES, type MediaMimeType } from "./constants"
 import { isValidMediaKey } from "./references"
 
 function getUploadsDir() {
-  return path.resolve(process.cwd(), env.UPLOADS_DIR)
+  // The uploads directory is a runtime volume, not part of the build output.
+  return path.resolve(
+    /* turbopackIgnore: true */ process.cwd(),
+    env.UPLOADS_DIR
+  )
 }
 
 function resolveKeyPath(key: string) {
   if (!isValidMediaKey(key)) {
     throw new Error(`Invalid media key: ${key}`)
   }
-  return path.join(getUploadsDir(), key)
+  return path.join(/* turbopackIgnore: true */ getUploadsDir(), key)
 }
 
 /** `<readable-name>-<random>.<ext>`, unique enough to cache forever. */

@@ -1,21 +1,20 @@
 # AI agent guidelines for mehmetsahin.dev
 
-Personal website of Mehmet Şahin. Next.js 16 (App Router) portfolio and blog, forked from [ncdai/chanhdai.com](https://github.com/ncdai/chanhdai.com).
+Personal website of Mehmet Şahin. Next.js 16 (App Router) portfolio and blog, originally forked from [ncdai/chanhdai.com](https://github.com/ncdai/chanhdai.com) and now maintained independently: upstream changes are not merged, so restructure freely.
 
 **Stack**: TypeScript, React 19, Tailwind CSS v4, shadcn/ui (Base UI), MDX, Vitest, pnpm. Self-hosted with Docker on Dokploy.
 
 ## Project structure
 
-| Directory                              | Purpose                                                         |
-| -------------------------------------- | --------------------------------------------------------------- |
-| `src/app/`                             | App Router pages, layouts, route handlers                       |
-| `src/components/`                      | Shared UI components (`ui/` holds shadcn primitives)            |
-| `src/registry/`                        | Small set of components inherited from upstream, used by the UI |
-| `src/features/`                        | Feature modules: `doc`, `blog`, `portfolio`, `bookmark`         |
-| `src/config/`                          | Site (`site.ts`) and JSON-LD config                             |
-| `src/db/`                              | Drizzle client, schema and migration runner (Postgres)          |
-| `src/features/admin/`                  | Admin panel: nav config, layout components, session guard       |
-| `src/hooks/`, `src/lib/`, `src/utils/` | Hooks, libraries, utilities                                     |
+| Directory                              | Purpose                                                   |
+| -------------------------------------- | --------------------------------------------------------- |
+| `src/app/`                             | App Router pages, layouts, route handlers                 |
+| `src/components/`                      | Shared UI components (`ui/` holds shadcn primitives)      |
+| `src/features/`                        | Feature modules: `doc`, `blog`, `portfolio`, `bookmark`   |
+| `src/config/`                          | Site (`site.ts`) and JSON-LD config                       |
+| `src/db/`                              | Drizzle client, schema and migration runner (Postgres)    |
+| `src/features/admin/`                  | Admin panel: nav config, layout components, session guard |
+| `src/hooks/`, `src/lib/`, `src/utils/` | Hooks, libraries, utilities                               |
 
 **Key files**: `src/features/portfolio/data/` (profile and career data, moving to the database), `src/features/bookmark/data.tsx`, `src/components/site-mark.tsx` (logo), `.env.example`
 
@@ -41,7 +40,6 @@ Blog posts currently live in `src/features/doc/content/blog/` as MDX files; they
 - Descriptive names; comments only for "why", not "what"
 - No emojis in code, comments, or commit messages
 - Tailwind CSS v4 syntax; support dark/light modes
-- Keep new code in new folders where possible so upstream changes stay easy to cherry-pick
 - Headings in sentence-case (capitalize only the first word and proper nouns)
 
 ## Commands

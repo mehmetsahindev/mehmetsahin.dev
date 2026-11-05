@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
-import type { PullQuoteProps } from "@/registry/components/pull-quote"
-import { PullQuote } from "@/registry/components/pull-quote"
+import type { PullQuoteProps } from "@/components/pull-quote"
+import { PullQuote } from "@/components/pull-quote"
 
 export function DocPullQuote({ className, ...props }: PullQuoteProps) {
   return (
