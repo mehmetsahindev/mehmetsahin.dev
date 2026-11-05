@@ -114,30 +114,36 @@ export function SiteFooterCad() {
               </a>
             </Field>
 
-            <Field label="Typeface">Geist</Field>
+            <Field label="Typeface">
+              <a
+                className="link-underline"
+                href="https://vercel.com/font"
+                target="_blank"
+                rel="noopener"
+              >
+                Geist
+              </a>
+            </Field>
 
             <Field className="col-span-2" label="Stack">
               <ul className="flex flex-col gap-1">
-                {stack.map((entry) => (
-                  <li key={entry}>{entry}</li>
+                {stack.map(({ name, version }) => (
+                  <li key={name}>
+                    {name}@{version}
+                  </li>
                 ))}
               </ul>
             </Field>
 
             <Field label="Analytics">
-              <ul className="flex flex-col gap-1">
-                <li>
-                  <a
-                    className="link-underline"
-                    href={OPENPANEL_URL}
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    OpenPanel
-                  </a>
-                </li>
-                <li>Google Analytics</li>
-              </ul>
+              <a
+                className="link-underline"
+                href={OPENPANEL_URL}
+                target="_blank"
+                rel="noopener"
+              >
+                OpenPanel
+              </a>
             </Field>
 
             <Field label="For agents">
