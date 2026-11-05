@@ -36,7 +36,10 @@ import { useMediaUpload } from "@/features/media/hooks/use-media-upload"
 import { getMediaUrl } from "@/features/media/lib/constants"
 import type { MediaItem } from "@/features/media/types"
 
-import { renderPreviewAction } from "./preview-action"
+import {
+  renderPreviewAction,
+  type MarkdownRenderer,
+} from "./markdown-preview-action"
 
 type Mode = "write" | "preview" | "split"
 
@@ -98,15 +101,26 @@ const highlightStyle = HighlightStyle.define([
 ])
 
 export function MarkdownEditor({
+  id,
   value,
   onChange,
-  placeholder = "Write your post in Markdown…",
+  placeholder = "Write in Markdown…",
+  renderer = "post",
+  className,
 }: {
+  /** Set on the editable area so a `<label htmlFor>` focuses it. */
+  id?: string
   value: string
   onChange: (value: string) => void
   placeholder?: string
+  /** Which site renderer the preview uses. */
+  renderer?: MarkdownRenderer
+  /** Size of the editor; defaults to a tall, flexible area for posts. */
+  className?: string
 }) {
   const editorRef = useRef<ReactCodeMirrorRef>(null)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const canSplit = useCanSplit(rootRef)
   const [mode, setMode] = useState<Mode>("split")
   const [pickerOpen, setPickerOpen] = useState(false)
 
@@ -116,8 +130,9 @@ export function MarkdownEditor({
       syntaxHighlighting(highlightStyle),
       EditorView.lineWrapping,
       editorTheme,
+      ...(id ? [EditorView.contentAttributes.of({ id })] : []),
     ],
-    []
+    [id]
   )
 
   /** Replaces the selection, or wraps it when `after` is given. */
@@ -180,7 +195,15 @@ export function MarkdownEditor({
   }
 
   return (
-    <div className="flex min-h-128 flex-1 flex-col overflow-hidden rounded-xl border border-line">
+    <div
+      ref={rootRef}
+      className={cn(
+        // Split view depends on the editor's own width (it also lives in
+        // narrow sheets), so it uses container queries.
+        "@container/editor flex flex-col overflow-hidden rounded-xl border border-line",
+        className ?? "min-h-128 flex-1"
+      )}
+    >
       <div className="flex flex-wrap items-center gap-1 border-b border-line bg-muted/20 px-2 py-1.5">
         <ToolbarButton
           label="Heading"
@@ -236,7 +259,8 @@ export function MarkdownEditor({
           className="ml-auto"
           variant="outline"
           size="sm"
-          value={[mode]}
+          // A narrow editor shows split as plain writing; reflect that.
+          value={[mode === "split" && !canSplit ? "write" : mode]}
           onValueChange={(next) => next[0] && setMode(next[0] as Mode)}
         >
           <ToggleGroupItem value="write" aria-label="Write">
@@ -245,7 +269,7 @@ export function MarkdownEditor({
           <ToggleGroupItem
             value="split"
             aria-label="Side by side"
-            className="max-lg:hidden"
+            className="@max-xl/editor:hidden"
           >
             <Columns2Icon />
           </ToggleGroupItem>
@@ -258,14 +282,14 @@ export function MarkdownEditor({
       <div
         className={cn(
           "grid min-h-0 flex-1",
-          mode === "split" && "lg:grid-cols-2"
+          mode === "split" && "@xl/editor:grid-cols-2"
         )}
       >
         <div
           className={cn(
             "min-h-0",
             mode === "preview" && "hidden",
-            mode === "split" && "max-lg:hidden lg:border-r lg:border-line"
+            mode === "split" && "@xl/editor:border-r @xl/editor:border-line"
           )}
           onDropCapture={(event) => {
             if (handleFiles(event.dataTransfer.files)) event.preventDefault()
@@ -295,7 +319,9 @@ export function MarkdownEditor({
         {mode !== "write" && (
           <MarkdownPreview
             markdown={value}
-            className={cn(mode === "split" && "max-lg:hidden")}
+            renderer={renderer}
+            // Too narrow for two columns: split falls back to the editor.
+            className={cn(mode === "split" && "@max-xl/editor:hidden")}
           />
         )}
       </div>
@@ -343,9 +369,11 @@ function ToolbarButton({
 /** Debounced server-rendered preview using the site's Markdown pipeline. */
 function MarkdownPreview({
   markdown: source,
+  renderer,
   className,
 }: {
   markdown: string
+  renderer: MarkdownRenderer
   className?: string
 }) {
   const [preview, setPreview] = useState<React.ReactNode>(null)
@@ -355,7 +383,7 @@ function MarkdownPreview({
     let active = true
     const timer = setTimeout(() => {
       setIsLoading(true)
-      renderPreviewAction(source)
+      renderPreviewAction(source, renderer)
         .then((node) => {
           if (active) setPreview(node)
         })
@@ -367,7 +395,7 @@ function MarkdownPreview({
       active = false
       clearTimeout(timer)
     }
-  }, [source])
+  }, [source, renderer])
 
   return (
     <div
@@ -381,4 +409,26 @@ function MarkdownPreview({
       )}
     </div>
   )
+}
+
+/** Matches the `@xl/editor` container breakpoint (36rem). */
+const SPLIT_MIN_WIDTH = 576
+
+function useCanSplit(ref: React.RefObject<HTMLDivElement | null>) {
+  const [canSplit, setCanSplit] = useState(true)
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+    const measure = (width: number) => setCanSplit(width >= SPLIT_MIN_WIDTH)
+    // Measure right away; observer callbacks only arrive with a rendered frame.
+    measure(element.clientWidth)
+    const observer = new ResizeObserver(([entry]) => {
+      measure(entry.contentRect.width)
+    })
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [ref])
+
+  return canSplit
 }

@@ -37,9 +37,9 @@ import { MediaField } from "@/features/media/components/media-field"
 import type { MediaItem } from "@/features/media/types"
 
 import { ConfirmDelete } from "../components/form/confirm-delete"
+import { MarkdownEditor } from "../components/form/markdown-editor"
 import { useActionSubmit } from "../hooks/use-action-submit"
 import { deletePostAction, savePostAction } from "./actions"
-import { MarkdownEditor } from "./markdown-editor"
 import type { PostFormData } from "./queries"
 import {
   postSchema,
@@ -221,7 +221,11 @@ export function PostEditor({
             control={control}
             name={`${prefix}.content`}
             render={({ field }) => (
-              <MarkdownEditor value={field.value} onChange={field.onChange} />
+              <MarkdownEditor
+                value={field.value}
+                onChange={field.onChange}
+                placeholder="Write your post in Markdown…"
+              />
             )}
           />
         </div>
