@@ -1,0 +1,11 @@
+.git
+.github
+.next
+node_modules
+uploads
+.env*
+!.env.example
+*.log
+.eslintcache
+.vscode
+.cursor

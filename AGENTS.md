@@ -13,9 +13,18 @@ Personal website of Mehmet Şahin. Next.js 16 (App Router) portfolio and blog, f
 | `src/registry/`                        | Small set of components inherited from upstream, used by the UI |
 | `src/features/`                        | Feature modules: `doc`, `blog`, `portfolio`, `bookmark`         |
 | `src/config/`                          | Site (`site.ts`) and JSON-LD config                             |
+| `src/db/`                              | Drizzle client, schema and migration runner (Postgres)          |
+| `src/features/admin/`                  | Admin panel: nav config, layout components, session guard       |
 | `src/hooks/`, `src/lib/`, `src/utils/` | Hooks, libraries, utilities                                     |
 
 **Key files**: `src/features/portfolio/data/` (profile and career data, moving to the database), `src/features/bookmark/data.tsx`, `src/components/site-mark.tsx` (logo), `.env.example`
+
+## Admin and data
+
+- Admin routes live under `src/app/admin/`. Every page, layout, Server Action and Route Handler must call `requireAdmin()` from `src/features/admin/lib/session.ts`; `src/proxy.ts` is only an optimistic redirect.
+- Auth: Better Auth with GitHub (`src/lib/auth.ts`). Only `ADMIN_GITHUB_USERNAME` can sign in.
+- Schema changes: edit `src/db/schema/`, run `pnpm db:generate`, commit the SQL in `drizzle/`. Migrations apply on server start (`src/instrumentation.ts`).
+- Server env vars are validated lazily in `src/lib/env.ts`.
 
 ## Content system
 
@@ -43,6 +52,8 @@ pnpm test:run           # Vitest (single run)
 pnpm lint               # ESLint
 pnpm format:write       # Prettier
 pnpm check-types        # Type checking (run after a build so PageProps types exist)
+pnpm db:generate        # Generate a SQL migration from the Drizzle schema
+pnpm db:studio          # Browse the database
 ```
 
 <!-- BEGIN:nextjs-agent-rules -->
