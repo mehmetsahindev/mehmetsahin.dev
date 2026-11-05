@@ -1,19 +1,20 @@
 import { escapeXml, toISODateSafe } from "@/utils/string"
 
-import { SITE_INFO } from "@/config/site"
+import { SITE_URL } from "@/config/site"
 import { getBlogPosts } from "@/features/doc/data/documents"
+import { getProfile } from "@/features/portfolio/data/queries"
 
-export const revalidate = false
-export const dynamic = "force-static"
+export const dynamic = "force-dynamic"
 
-export function GET() {
+export async function GET() {
+  const profile = await getProfile()
   const itemsXml = getBlogPosts()
     .map((doc) => {
       const pubDate = toISODateSafe(doc.metadata.createdAt)
       if (!pubDate) return null
       return `<item>
           <title>${escapeXml(doc.metadata.title)}</title>
-          <link>${SITE_INFO.url}/blog/${doc.slug}</link>
+          <link>${SITE_URL}/blog/${doc.slug}</link>
           <description>${escapeXml(doc.metadata.description || "")}</description>
           <pubDate>${pubDate}</pubDate>
         </item>`
@@ -24,8 +25,8 @@ export function GET() {
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-      <title>Blog | ${SITE_INFO.name}</title>
-      <link>${SITE_INFO.url}/blog</link>
+      <title>Blog | ${profile.displayName}</title>
+      <link>${SITE_URL}/blog</link>
       <description>Stories, milestones, and things I learn along the way.</description>
       ${itemsXml}
     </channel>

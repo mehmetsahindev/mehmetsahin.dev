@@ -3,25 +3,15 @@ import "@/styles/globals.css"
 import type { Metadata, Viewport } from "next"
 import Script from "next/script"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
-import type { WebSite, WithContext } from "schema-dts"
 
-import { JSON_LD_ID, personJsonLd } from "@/config/json-ld"
-import { META_THEME_COLORS, SITE_INFO, X_HANDLE } from "@/config/site"
+import { META_THEME_COLORS, SITE_URL } from "@/config/site"
 import { fontVariables } from "@/lib/fonts"
-import { JsonLdScript } from "@/lib/json-ld"
 import { Providers } from "@/components/providers"
-import { USER } from "@/features/portfolio/data/user"
+import { getProfile, getXHandle } from "@/features/portfolio/data/queries"
 
-function getWebSiteJsonLd(): WithContext<WebSite> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": JSON_LD_ID.website,
-    name: SITE_INFO.name,
-    url: SITE_INFO.url,
-    author: personJsonLd,
-  }
-}
+// Content comes from the database (cached and revalidated on save), which is
+// not reachable while building the Docker image.
+export const dynamic = "force-dynamic"
 
 // Thanks @shadcn-ui, @tailwindcss
 const darkModeScript = String.raw`
@@ -38,45 +28,43 @@ const darkModeScript = String.raw`
   } catch (_) {}
 `
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_INFO.url),
-  title: {
-    template: `%s – ${SITE_INFO.name}`,
-    default: `${USER.displayName} – ${USER.jobTitle}`,
-  },
-  description: SITE_INFO.description,
-  keywords: SITE_INFO.keywords,
-  authors: [
-    {
-      name: USER.displayName,
-      url: SITE_INFO.url,
+export async function generateMetadata(): Promise<Metadata> {
+  const [profile, xHandle] = await Promise.all([getProfile(), getXHandle()])
+  const ogImage =
+    profile.ogImageUrl ??
+    `/og/simple?title=${encodeURIComponent(profile.displayName)}&description=${encodeURIComponent(profile.bio)}`
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      template: `%s – ${profile.displayName}`,
+      default: [profile.displayName, profile.jobTitle]
+        .filter(Boolean)
+        .join(" – "),
     },
-  ],
-  creator: USER.displayName,
-  openGraph: {
-    siteName: SITE_INFO.name,
-    url: "/",
-    type: "profile",
-    locale: "en_US",
-    firstName: USER.firstName,
-    lastName: USER.lastName,
-    username: USER.username,
-    gender: USER.gender,
-    images: [
-      {
-        url: SITE_INFO.ogImage,
-        width: 1200,
-        height: 630,
-        alt: SITE_INFO.name,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: X_HANDLE,
-    creator: X_HANDLE,
-    images: [SITE_INFO.ogImage],
-  },
+    description: profile.bio,
+    keywords: profile.keywords,
+    authors: [{ name: profile.displayName, url: SITE_URL }],
+    creator: profile.displayName,
+    openGraph: {
+      siteName: profile.displayName,
+      url: "/",
+      type: "profile",
+      locale: "en_US",
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      username: profile.username,
+      images: [
+        { url: ogImage, width: 1200, height: 630, alt: profile.displayName },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: xHandle,
+      creator: xHandle,
+      images: [ogImage],
+    },
+  }
 }
 
 export const viewport: Viewport = {
@@ -103,29 +91,6 @@ export default function RootLayout({
           since we found the regular `<script>` tag to not execute when rendering a not-found page.
          */}
         <Script src={`data:text/javascript;base64,${btoa(darkModeScript)}`} />
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var value = localStorage.getItem('avatarLights');
-                document.documentElement.dataset.avatarLights = JSON.parse(value || '"on"');
-              } catch(_) {}
-            `,
-          }}
-        />
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var value = localStorage.getItem('sidebarOpen');
-                document.documentElement.dataset.sidebarOpen = JSON.parse(value || 'true');
-              } catch(_) {}
-            `,
-          }}
-        />
-        <JsonLdScript data={getWebSiteJsonLd()} />
       </head>
 
       <body>

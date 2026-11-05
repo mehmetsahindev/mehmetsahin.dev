@@ -17,11 +17,18 @@ import { Projects } from "@/features/portfolio/components/projects"
 import { SeparatorHeightDimension } from "@/features/portfolio/components/separator-height-dimension"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
-import { EDUCATION } from "@/features/portfolio/data/education"
-import { EXPERIENCES } from "@/features/portfolio/data/experiences"
-import { PROJECTS } from "@/features/portfolio/data/projects"
-import { TECH_STACK } from "@/features/portfolio/data/tech-stack"
-import { USER } from "@/features/portfolio/data/user"
+import {
+  getEducation,
+  getExperiences,
+  getProfile,
+  getProjects,
+  getSiteSettings,
+  getTechStack,
+} from "@/features/portfolio/data/queries"
+import {
+  HOME_SECTIONS,
+  type HomeSectionId,
+} from "@/features/portfolio/lib/home-sections"
 
 export const metadata: Metadata = {
   alternates: {
@@ -29,46 +36,45 @@ export const metadata: Metadata = {
   },
 }
 
-type HomeSection = {
-  id: string
-  visible: boolean
-  render: () => React.ReactNode
+const SECTION_COMPONENTS: Record<HomeSectionId, () => React.ReactNode> = {
+  hello: () => <Hello />,
+  blog: () => <Blog />,
+  stack: () => <TechStack />,
+  experience: () => <Experiences />,
+  education: () => <Education />,
+  projects: () => <Projects />,
 }
 
-export default function HomePage() {
-  // Sections without content are skipped so separators never stack up.
-  const sections: HomeSection[] = [
-    { id: "hello", visible: Boolean(USER.about), render: () => <Hello /> },
-    {
-      id: "blog",
-      visible: getBlogPosts().length > 0,
-      render: () => <Blog />,
-    },
-    {
-      id: "stack",
-      visible: TECH_STACK.length > 0,
-      render: () => <TechStack />,
-    },
-    {
-      id: "experience",
-      visible: EXPERIENCES.length > 0,
-      render: () => <Experiences />,
-    },
-    {
-      id: "education",
-      visible: EDUCATION.length > 0,
-      render: () => <Education />,
-    },
-    {
-      id: "projects",
-      visible: PROJECTS.length > 0,
-      render: () => <Projects />,
-    },
-  ]
+export default async function HomePage() {
+  const [profile, settings, techStack, experiences, education, projects] =
+    await Promise.all([
+      getProfile(),
+      getSiteSettings(),
+      getTechStack(),
+      getExperiences(),
+      getEducation(),
+      getProjects(),
+    ])
+
+  const hasContent: Record<HomeSectionId, boolean> = {
+    hello: Boolean(profile.about.trim()),
+    blog: getBlogPosts().length > 0,
+    stack: techStack.some((category) => category.items.length > 0),
+    experience: experiences.length > 0,
+    education: education.length > 0,
+    projects: projects.length > 0,
+  }
+
+  // Hidden in settings or empty sections are skipped so separators never
+  // stack up.
+  const visibleSections = HOME_SECTIONS.filter(
+    (section) =>
+      settings.homeSections[section.id] !== false && hasContent[section.id]
+  )
 
   return (
     <>
-      <JsonLdScript data={getProfilePageJsonLd()} />
+      <JsonLdScript data={getProfilePageJsonLd(profile.createdAt)} />
 
       <div className="[--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
         <div className="mx-auto md:max-w-3xl">
@@ -82,26 +88,24 @@ export default function HomePage() {
           <Overview />
           <SocialLinks />
 
-          {sections
-            .filter((section) => section.visible)
-            .map((section) => (
-              <Fragment key={section.id}>
-                <Separator />
-                {section.render()}
-              </Fragment>
-            ))}
+          {visibleSections.map((section) => (
+            <Fragment key={section.id}>
+              <Separator />
+              {SECTION_COMPONENTS[section.id]()}
+            </Fragment>
+          ))}
         </div>
       </div>
     </>
   )
 }
 
-function getProfilePageJsonLd(): WithContext<ProfilePage> {
+function getProfilePageJsonLd(createdAt: string): WithContext<ProfilePage> {
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     "@id": absoluteUrl("/"),
-    dateCreated: new Date(USER.dateCreated).toISOString(),
+    dateCreated: createdAt,
     dateModified: new Date().toISOString(),
     // Reference the Person defined in the WebSite node (rendered globally in
     // the root layout) so both blocks resolve to the same entity.

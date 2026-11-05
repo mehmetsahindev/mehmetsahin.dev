@@ -5,11 +5,13 @@ import {
   PanelContent,
   PanelHeader,
 } from "@/features/portfolio/components/panel"
-import { USER } from "@/features/portfolio/data/user"
+import { getProfile } from "@/features/portfolio/data/queries"
 
 const ID = "hello"
 
-export function Hello() {
+export async function Hello() {
+  const { about } = await getProfile()
+
   return (
     <Panel id={ID} className="screen-line-bottom-none">
       <PanelHeader>
@@ -19,7 +21,7 @@ export function Hello() {
 
       <PanelContent>
         <div className="typeset typeset-description [&_li]:ps-0.5 [&_ul]:ps-3.5">
-          <Markdown>{USER.about}</Markdown>
+          <Markdown>{about}</Markdown>
         </div>
       </PanelContent>
 

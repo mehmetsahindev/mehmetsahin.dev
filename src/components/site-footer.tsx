@@ -1,15 +1,14 @@
 import { cn } from "@/lib/utils"
-import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons"
-import { SOCIAL } from "@/features/portfolio/data/social-links"
-import { USER } from "@/features/portfolio/data/user"
+import { getProfile, getSocialLinks } from "@/features/portfolio/data/queries"
+import { getSocialPlatform } from "@/features/portfolio/lib/social-platforms"
 
-const SOCIAL_ICONS = [
-  { profile: SOCIAL.x, icon: XIcon, label: "X Profile" },
-  { profile: SOCIAL.github, icon: GitHubIcon, label: "GitHub Profile" },
-  { profile: SOCIAL.linkedin, icon: LinkedInIcon, label: "LinkedIn Profile" },
-]
+export async function SiteFooter() {
+  const [profile, socialLinks] = await Promise.all([
+    getProfile(),
+    getSocialLinks(),
+  ])
+  const github = socialLinks.find((link) => link.platform === "github")
 
-export function SiteFooter() {
   return (
     <footer className="max-w-screen overflow-x-clip px-2">
       <div className="mx-auto border-x border-line group-has-data-[slot=layout-wide]/layout:container md:max-w-3xl">
@@ -21,14 +20,18 @@ export function SiteFooter() {
           <Item>
             <dt>Crafted by</dt>
             <dd>
-              <a
-                className="link-underline"
-                href={SOCIAL.github.href}
-                target="_blank"
-                rel="noopener"
-              >
-                {USER.displayName}
-              </a>
+              {github ? (
+                <a
+                  className="link-underline"
+                  href={github.url}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {profile.displayName}
+                </a>
+              ) : (
+                profile.displayName
+              )}
             </dd>
           </Item>
 
@@ -52,24 +55,31 @@ export function SiteFooter() {
           </Item>
         </dl>
 
-        <div className="screen-line-top screen-line-bottom flex w-full before:z-1 after:z-1">
-          <div className="mx-auto flex items-center justify-center gap-3 border-x border-line bg-background px-4">
-            {SOCIAL_ICONS.map(({ profile, icon: Icon, label }, index) => (
-              <div key={label} className="flex items-center gap-3">
-                {index > 0 && <Separator />}
-                <a
-                  className="flex items-center text-muted-foreground transition-[color] hover:text-foreground"
-                  href={profile.href}
-                  target="_blank"
-                  rel="noopener"
-                  aria-label={label}
-                >
-                  <Icon className="size-4" />
-                </a>
-              </div>
-            ))}
+        {socialLinks.length > 0 && (
+          <div className="screen-line-top screen-line-bottom flex w-full before:z-1 after:z-1">
+            <div className="mx-auto flex items-center justify-center gap-3 border-x border-line bg-background px-4">
+              {socialLinks.map((link, index) => {
+                const platform = getSocialPlatform(link.platform)
+                const Icon = platform.icon
+
+                return (
+                  <div key={link.id} className="flex items-center gap-3">
+                    {index > 0 && <Separator />}
+                    <a
+                      className="flex items-center text-muted-foreground transition-[color] hover:text-foreground"
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener"
+                      aria-label={platform.label}
+                    >
+                      <Icon className="size-4" />
+                    </a>
+                  </div>
+                )
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="h-(--fade-bottom-height)" />

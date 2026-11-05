@@ -1,47 +1,42 @@
-import { format } from "date-fns"
+import { SITE_URL } from "@/config/site"
+import { markdownResponse } from "@/lib/markdown-response"
+import {
+  getBookmarkCategories,
+  getBookmarks,
+} from "@/features/portfolio/data/queries"
 
-import { SITE_INFO } from "@/config/site"
-import { BOOKMARKS } from "@/features/bookmark/data"
-import { sortBookmarksNewestFirst } from "@/features/bookmark/lib/sort"
-import { BookmarkCategory } from "@/features/bookmark/types"
+export const dynamic = "force-dynamic"
 
-const categorySections = Object.values(BookmarkCategory)
-  .map((category) => {
-    const items = sortBookmarksNewestFirst(
-      BOOKMARKS.filter((item) => item.category === category)
-    )
+export async function GET() {
+  const [categories, bookmarks] = await Promise.all([
+    getBookmarkCategories(),
+    getBookmarks(),
+  ])
 
-    return { category, items }
-  })
-  .filter(({ items }) => items.length > 0)
+  const sections = categories
+    .map((category) => ({
+      category,
+      items: bookmarks.filter((item) => item.category.id === category.id),
+    }))
+    .filter(({ items }) => items.length > 0)
 
-const content = `# Bookmarks
+  return markdownResponse(`# Bookmarks
 
 > Hand-picked articles, courses, books, references, and tools worth your time.
 
-${BOOKMARKS.length} bookmarks in total, grouped by category and newest first. They are also listed on ${SITE_INFO.url}/bookmarks, filterable by category.
+${bookmarks.length} bookmarks in total, grouped by category. They are also listed on ${SITE_URL}/bookmarks, filterable by category.
 
-${categorySections
+${sections
   .map(
-    ({ category, items }) => `## ${category} (${items.length})
+    ({ category, items }) => `## ${category.name} (${items.length})
 
 ${items
   .map(
     (item) =>
-      `- [${item.title}](${item.url})${item.author ? ` by ${item.author}` : ""} (${format(new Date(item.bookmarkedAt), "yyyy-MM-dd")})${item.why ? `\n  ${item.why}` : ""}`
+      `- [${item.title}](${item.url})${item.author ? ` by ${item.author}` : ""} (${item.bookmarkedAt})${item.note ? `\n  ${item.note}` : ""}`
   )
   .join("\n")}`
   )
   .join("\n\n")}
-`
-
-export const revalidate = false
-export const dynamic = "force-static"
-
-export async function GET() {
-  return new Response(content, {
-    headers: {
-      "Content-Type": "text/markdown;charset=utf-8",
-    },
-  })
+`)
 }

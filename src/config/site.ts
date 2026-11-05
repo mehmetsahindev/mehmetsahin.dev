@@ -1,16 +1,11 @@
 import type { Route } from "next"
 
 import type { NavItem } from "@/types/nav"
-import { SOCIAL } from "@/features/portfolio/data/social-links"
-import { USER } from "@/features/portfolio/data/user"
 
-export const SITE_INFO = {
-  name: USER.displayName,
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://mehmetsahin.dev",
-  ogImage: USER.ogImage,
-  description: USER.bio,
-  keywords: USER.keywords,
-}
+/** Public origin of the site, without a trailing slash. */
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_APP_URL || "https://mehmetsahin.dev"
+).replace(/\/$/, "")
 
 export const META_THEME_COLORS = {
   light: "#ffffff",
@@ -36,9 +31,6 @@ export const MOBILE_NAV: NavItem<Route>[] = [
   ...MAIN_NAV,
 ]
 
-export const X_HANDLE = SOCIAL.x.handle
-export const GITHUB_USERNAME = SOCIAL.github.handle
-
 export const UTM_PARAMS = {
-  utm_source: "mehmetsahin.dev",
+  utm_source: new URL(SITE_URL).hostname,
 }

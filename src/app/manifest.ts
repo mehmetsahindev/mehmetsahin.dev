@@ -1,12 +1,16 @@
 import type { MetadataRoute } from "next"
 
-import { SITE_INFO } from "@/config/site"
+import { getProfile } from "@/features/portfolio/data/queries"
 
-export default function manifest(): MetadataRoute.Manifest {
+export const dynamic = "force-dynamic"
+
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const profile = await getProfile()
+
   return {
-    short_name: SITE_INFO.name,
-    name: SITE_INFO.name,
-    description: SITE_INFO.description,
+    short_name: profile.displayName,
+    name: profile.displayName,
+    description: profile.bio,
     icons: [
       { src: "/icon.svg", type: "image/svg+xml", sizes: "any" },
       { src: "/apple-icon", type: "image/png", sizes: "180x180" },

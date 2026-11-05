@@ -1,21 +1,22 @@
-import { PROJECTS } from "@/features/portfolio/data/projects"
+import { markdownResponse } from "@/lib/markdown-response"
+import { getProjects } from "@/features/portfolio/data/queries"
 
-const content = `# Projects
-
-${PROJECTS.map((item) => {
-  const skills = `\n\nSkills: ${item.skills.join(", ")}`
-  const description = item.description ? `\n\n${item.description.trim()}` : ""
-  return `## ${item.title}\n\nProject URL: ${item.link}${skills}${description}`
-}).join("\n\n")}
-`
-
-export const revalidate = false
-export const dynamic = "force-static"
+export const dynamic = "force-dynamic"
 
 export async function GET() {
-  return new Response(content, {
-    headers: {
-      "Content-Type": "text/markdown;charset=utf-8",
-    },
+  const projects = await getProjects()
+
+  return markdownResponse(`# Projects
+
+${projects
+  .map((item) => {
+    const url = item.url ? `\n\nProject URL: ${item.url}` : ""
+    const skills = item.skills.length
+      ? `\n\nSkills: ${item.skills.join(", ")}`
+      : ""
+    const description = item.description ? `\n\n${item.description.trim()}` : ""
+    return `## ${item.title}${url}${skills}${description}`
   })
+  .join("\n\n")}
+`)
 }

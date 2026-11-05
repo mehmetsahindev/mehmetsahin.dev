@@ -1,6 +1,6 @@
 import { format } from "date-fns"
 
-import { SITE_INFO } from "@/config/site"
+import { SITE_URL } from "@/config/site"
 import { getBlogPosts } from "@/features/doc/data/documents"
 
 const allPosts = getBlogPosts()
@@ -19,7 +19,7 @@ Each link below returns the full post as Markdown. Drop the \`.md\` extension fo
 
 ## All posts (${allPosts.length})
 
-${allPosts.map((item) => `- [${item.metadata.title}](${SITE_INFO.url}/blog/${item.slug}.md) (${format(new Date(item.metadata.createdAt), "yyyy-MM-dd")}): ${item.metadata.description}`).join("\n")}
+${allPosts.map((item) => `- [${item.metadata.title}](${SITE_URL}/blog/${item.slug}.md) (${format(new Date(item.metadata.createdAt), "yyyy-MM-dd")}): ${item.metadata.description}`).join("\n")}
 `
 
 export const revalidate = false

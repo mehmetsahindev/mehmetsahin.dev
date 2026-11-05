@@ -1,24 +1,22 @@
-import { EXPERIENCES } from "@/features/portfolio/data/experiences"
+import { markdownResponse } from "@/lib/markdown-response"
+import { getExperiences } from "@/features/portfolio/data/queries"
+import { formatMonth } from "@/features/portfolio/lib/dates"
 
-const content = `# Experience
-
-${EXPERIENCES.map((item) =>
-  item.positions
-    .map((position) => {
-      const skills = position.skills?.map((skill) => skill).join(", ") || "N/A"
-      return `## ${position.title} | ${item.companyName}\n\nDuration: ${position.employmentPeriod.start} - ${position.employmentPeriod.end || "Present"}\n\nSkills: ${skills}\n\n${position.description?.trim()}`
-    })
-    .join("\n\n")
-).join("\n\n")}
-`
-
-export const revalidate = false
-export const dynamic = "force-static"
+export const dynamic = "force-dynamic"
 
 export async function GET() {
-  return new Response(content, {
-    headers: {
-      "Content-Type": "text/markdown;charset=utf-8",
-    },
-  })
+  const experiences = await getExperiences()
+
+  return markdownResponse(`# Experience
+
+${experiences
+  .flatMap((item) =>
+    item.positions.map((position) => {
+      const skills = position.skills.join(", ") || "N/A"
+      const end = position.endDate ? formatMonth(position.endDate) : "Present"
+      return `## ${position.title} | ${item.companyName}\n\nDuration: ${formatMonth(position.startDate)} - ${end}\n\nSkills: ${skills}\n\n${position.description.trim()}`
+    })
+  )
+  .join("\n\n")}
+`)
 }

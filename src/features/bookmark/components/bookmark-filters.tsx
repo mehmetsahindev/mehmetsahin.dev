@@ -1,20 +1,7 @@
 "use client"
 
-import {
-  BOOKMARK_CATEGORY_PARAMS,
-  useBookmarkFilters,
-  type BookmarkCategoryParam,
-} from "../lib/search-params"
-
-const CATEGORY_LABELS: Record<BookmarkCategoryParam, string> = {
-  article: "Article",
-  course: "Course",
-  book: "Book",
-  reference: "Reference",
-  "ui-library": "UI Library",
-  software: "Software",
-  inspiration: "Inspiration",
-}
+import { useBookmarkFilters } from "../lib/search-params"
+import type { BookmarkFilterCategory } from "../types"
 
 function FilterTab({
   active,
@@ -37,7 +24,11 @@ function FilterTab({
   )
 }
 
-export function BookmarkFilters() {
+export function BookmarkFilters({
+  categories,
+}: {
+  categories: BookmarkFilterCategory[]
+}) {
   const [filters, setFilters] = useBookmarkFilters()
 
   return (
@@ -58,13 +49,13 @@ export function BookmarkFilters() {
           All
         </FilterTab>
 
-        {BOOKMARK_CATEGORY_PARAMS.map((category) => (
+        {categories.map((category) => (
           <FilterTab
-            key={category}
-            active={filters.category === category}
-            onClick={() => setFilters({ category })}
+            key={category.slug}
+            active={filters.category === category.slug}
+            onClick={() => setFilters({ category: category.slug })}
           >
-            {CATEGORY_LABELS[category]}
+            {category.name}
           </FilterTab>
         ))}
       </div>

@@ -1,21 +1,10 @@
 import type { Options } from "nuqs"
 import { useQueryStates } from "nuqs"
-import { parseAsStringLiteral } from "nuqs/server"
-
-export const BOOKMARK_CATEGORY_PARAMS = [
-  "article",
-  "course",
-  "book",
-  "reference",
-  "ui-library",
-  "software",
-  "inspiration",
-] as const
-
-export type BookmarkCategoryParam = (typeof BOOKMARK_CATEGORY_PARAMS)[number]
+import { parseAsString } from "nuqs/server"
 
 const bookmarkSearchParams = {
-  category: parseAsStringLiteral(BOOKMARK_CATEGORY_PARAMS),
+  /** Slug of a bookmark category managed in the admin. */
+  category: parseAsString,
 }
 
 export function useBookmarkFilters(options: Options = {}) {

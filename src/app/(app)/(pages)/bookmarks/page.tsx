@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import type { CollectionPage, WithContext } from "schema-dts"
 
 import { JSON_LD_ID } from "@/config/json-ld"
-import { X_HANDLE } from "@/config/site"
 import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl } from "@/lib/utils"
 import {
@@ -16,12 +15,11 @@ import { BookmarkFilters } from "@/features/bookmark/components/bookmark-filters
 import { BookmarkItem } from "@/features/bookmark/components/bookmark-item"
 import { BookmarkList } from "@/features/bookmark/components/bookmark-list"
 import { BookmarkListFiltered } from "@/features/bookmark/components/bookmark-list-filtered"
-import { BOOKMARKS } from "@/features/bookmark/data"
-import { sortBookmarksNewestFirst } from "@/features/bookmark/lib/sort"
+import type { BookmarkListEntry } from "@/features/bookmark/types"
 import {
-  BOOKMARK_CATEGORY_TO_PARAM,
-  type BookmarkListEntry,
-} from "@/features/bookmark/types"
+  getBookmarkCategories,
+  getBookmarks,
+} from "@/features/portfolio/data/queries"
 
 const title = "Bookmarks"
 const description =
@@ -47,13 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: X_HANDLE,
-    creator: X_HANDLE,
     images: [ogImage],
   },
 }
-
-const SORTED_BOOKMARKS = sortBookmarksNewestFirst(BOOKMARKS)
 
 function getCollectionPageJsonLd(
   items: { url: string }[]
@@ -78,16 +72,26 @@ function getCollectionPageJsonLd(
   }
 }
 
-export default function Page() {
-  const entries = SORTED_BOOKMARKS.map<BookmarkListEntry>((bookmark) => ({
-    url: bookmark.url,
-    category: BOOKMARK_CATEGORY_TO_PARAM[bookmark.category],
+export default async function Page() {
+  const [bookmarks, categories] = await Promise.all([
+    getBookmarks(),
+    getBookmarkCategories(),
+  ])
+
+  const entries = bookmarks.map<BookmarkListEntry>((bookmark) => ({
+    id: bookmark.id,
+    category: bookmark.category.slug,
     card: <BookmarkItem bookmark={bookmark} surface="list" />,
   }))
 
+  // Only offer filters that match something.
+  const usedCategories = categories.filter((category) =>
+    bookmarks.some((bookmark) => bookmark.category.id === category.id)
+  )
+
   return (
     <>
-      <JsonLdScript data={getCollectionPageJsonLd(SORTED_BOOKMARKS)} />
+      <JsonLdScript data={getCollectionPageJsonLd(bookmarks)} />
 
       <JsonLdScript
         data={jsonLdBreadcrumbList([
@@ -116,7 +120,7 @@ export default function Page() {
         <div className="screen-line-bottom flex h-px" />
 
         <Suspense fallback={<div className="h-12" />}>
-          <BookmarkFilters />
+          <BookmarkFilters categories={usedCategories} />
         </Suspense>
 
         <div className="screen-line-top screen-line-bottom before:z-1">

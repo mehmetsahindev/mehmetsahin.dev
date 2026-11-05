@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button"
 import { GitHubIcon } from "@/components/icons"
-import { SOCIAL } from "@/features/portfolio/data/social-links"
+import { getSocialLinks } from "@/features/portfolio/data/queries"
 
-export function NavItemGitHub() {
+export async function NavItemGitHub() {
+  const github = (await getSocialLinks()).find(
+    (link) => link.platform === "github"
+  )
+
+  if (!github) return null
+
   return (
     <Button
       className="border-none"
@@ -10,7 +16,7 @@ export function NavItemGitHub() {
       size="icon-sm"
       nativeButton={false}
       render={
-        <a href={SOCIAL.github.href} target="_blank" rel="noopener">
+        <a href={github.url} target="_blank" rel="noopener">
           <GitHubIcon />
           <span className="sr-only">GitHub</span>
         </a>

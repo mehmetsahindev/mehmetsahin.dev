@@ -1,34 +1,41 @@
-import { SOCIAL_LINKS } from "@/features/portfolio/data/social-links"
-import { TECH_STACK } from "@/features/portfolio/data/tech-stack"
-import { USER } from "@/features/portfolio/data/user"
+import { SITE_URL } from "@/config/site"
+import { markdownResponse } from "@/lib/markdown-response"
+import {
+  getProfile,
+  getSocialLinks,
+  getTechStack,
+} from "@/features/portfolio/data/queries"
+import { getSocialPlatform } from "@/features/portfolio/lib/social-platforms"
 
-const content = `# About
+export const dynamic = "force-dynamic"
 
-${USER.about.trim()}
+export async function GET() {
+  const [profile, socialLinks, techStack] = await Promise.all([
+    getProfile(),
+    getSocialLinks(),
+    getTechStack(),
+  ])
+
+  const techItems = techStack.flatMap((category) => category.items)
+
+  return markdownResponse(`# About
+
+${profile.about.trim()}
 
 ## Personal Information
 
-- First Name: ${USER.firstName}
-- Last Name: ${USER.lastName}
-- Display Name: ${USER.displayName}
-- Location: ${USER.address}
-- Website: ${USER.website}
+- First Name: ${profile.firstName}
+- Last Name: ${profile.lastName}
+- Display Name: ${profile.displayName}
+- Location: ${profile.location}
+- Website: ${SITE_URL}
 
 ## Social Links
 
-${SOCIAL_LINKS.map((item) => `- [${item.title}](${item.href})`).join("\n")}
+${socialLinks.map((item) => `- [${getSocialPlatform(item.platform).label}](${item.url})`).join("\n")}
 
 ## Tech Stack
 
-${TECH_STACK.map((item) => `- [${item.title}](${item.href})`).join("\n")}\n`
-
-export const revalidate = false
-export const dynamic = "force-static"
-
-export async function GET() {
-  return new Response(content, {
-    headers: {
-      "Content-Type": "text/markdown;charset=utf-8",
-    },
-  })
+${techItems.map((item) => (item.url ? `- [${item.name}](${item.url})` : `- ${item.name}`)).join("\n")}
+`)
 }

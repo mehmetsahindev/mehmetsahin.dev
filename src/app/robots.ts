@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-import { SITE_INFO } from "@/config/site"
+import { SITE_URL } from "@/config/site"
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin", "/api"],
       },
     ],
-    sitemap: `${SITE_INFO.url}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   }
 }

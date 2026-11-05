@@ -12,7 +12,8 @@ import {
   PanelTitle,
 } from "@/features/portfolio/components/panel"
 import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
-import { EXPERIENCES } from "@/features/portfolio/data/experiences"
+import { getExperiences } from "@/features/portfolio/data/queries"
+import { toExperience } from "@/features/portfolio/lib/mappers"
 import type { Experience } from "@/features/portfolio/types/experiences"
 
 import { ExperienceItem } from "./experience-item"
@@ -20,7 +21,9 @@ import { ExperienceItem } from "./experience-item"
 const ID = "experience"
 const MAX = 3
 
-export function Experiences() {
+export async function Experiences() {
+  const experiences = (await getExperiences()).map(toExperience)
+
   return (
     <Panel id={ID}>
       <PanelHeader>
@@ -31,13 +34,13 @@ export function Experiences() {
       </PanelHeader>
 
       <div className="px-4">
-        <ExperienceList experiences={EXPERIENCES.slice(0, MAX)} />
+        <ExperienceList experiences={experiences.slice(0, MAX)} />
       </div>
 
-      {EXPERIENCES.length > MAX && (
+      {experiences.length > MAX && (
         <Collapsible className="group/collapsible">
           <CollapsibleContent render={<div className="px-4" />}>
-            <ExperienceList experiences={EXPERIENCES.slice(MAX)} />
+            <ExperienceList experiences={experiences.slice(MAX)} />
           </CollapsibleContent>
 
           <div className="-mt-px flex items-center justify-center py-4">

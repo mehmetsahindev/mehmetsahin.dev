@@ -5,7 +5,7 @@ export function BookmarkList({ entries }: { entries: BookmarkListEntry[] }) {
 }
 
 const renderEntry = (entry: BookmarkListEntry) => (
-  <li key={entry.url} className="border-b border-line">
+  <li key={entry.id} className="border-b border-line">
     {entry.card}
   </li>
 )

@@ -4,14 +4,16 @@ import {
   PanelTitle,
 } from "@/features/portfolio/components/panel"
 import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
-import { EDUCATION } from "@/features/portfolio/data/education"
-import type { Education } from "@/features/portfolio/types/education"
+import { getEducation } from "@/features/portfolio/data/queries"
+import { toEducation } from "@/features/portfolio/lib/mappers"
 
 import { EducationItem } from "./education-item"
 
 const ID = "education"
 
-export function Education() {
+export async function Education() {
+  const education = (await getEducation()).map(toEducation)
+
   return (
     <Panel id={ID}>
       <PanelHeader>
@@ -21,7 +23,7 @@ export function Education() {
         </PanelTitle>
       </PanelHeader>
 
-      {EDUCATION.map((item) => (
+      {education.map((item) => (
         <div
           key={item.id}
           id={`education-${item.id}`}

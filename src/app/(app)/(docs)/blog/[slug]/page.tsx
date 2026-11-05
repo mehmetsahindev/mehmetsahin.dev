@@ -6,7 +6,6 @@ import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 import type { BlogPosting as PageSchema, WithContext } from "schema-dts"
 
 import { JSON_LD_ID } from "@/config/json-ld"
-import { X_HANDLE } from "@/config/site"
 import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -37,15 +36,6 @@ import {
   getDocBySlug,
 } from "@/features/doc/data/documents"
 import type { Doc } from "@/features/doc/types/document"
-
-export const revalidate = false
-export const dynamic = "force-static"
-export const dynamicParams = false
-
-export async function generateStaticParams() {
-  const docs = getBlogPosts()
-  return docs.map((doc) => ({ slug: doc.slug }))
-}
 
 export async function generateMetadata({
   params,
@@ -84,8 +74,6 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      site: X_HANDLE,
-      creator: X_HANDLE,
       images: [ogImage],
     },
   }

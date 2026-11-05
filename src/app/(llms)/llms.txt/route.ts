@@ -1,31 +1,27 @@
-import { SITE_INFO } from "@/config/site"
+import { SITE_URL } from "@/config/site"
+import { markdownResponse } from "@/lib/markdown-response"
 import { getBlogPosts } from "@/features/doc/data/documents"
+import { getProfile } from "@/features/portfolio/data/queries"
 
-const allPosts = getBlogPosts()
+export const dynamic = "force-dynamic"
 
-const content = `# ${SITE_INFO.name}
+export async function GET() {
+  const profile = await getProfile()
+  const allPosts = getBlogPosts()
 
-> ${SITE_INFO.description}
+  return markdownResponse(`# ${profile.displayName}
 
-- [About](${SITE_INFO.url}/about.md): A quick intro to me, my tech stack, and how to connect.
-- [Experience](${SITE_INFO.url}/experience.md): Highlights from my career and key roles I've taken on.
-- [Education](${SITE_INFO.url}/education.md): Where I studied and what I focused on.
-- [Projects](${SITE_INFO.url}/projects.md): Selected projects.
-- [Blog](${SITE_INFO.url}/blog.md): Every blog post, newest first, with publish dates.
-- [Bookmarks](${SITE_INFO.url}/bookmarks.md): Articles, courses, books, references, and tools I recommend.
+> ${profile.bio}
+
+- [About](${SITE_URL}/about.md): A quick intro to me, my tech stack, and how to connect.
+- [Experience](${SITE_URL}/experience.md): Highlights from my career and key roles I've taken on.
+- [Education](${SITE_URL}/education.md): Where I studied and what I focused on.
+- [Projects](${SITE_URL}/projects.md): Selected projects.
+- [Blog](${SITE_URL}/blog.md): Every blog post, newest first, with publish dates.
+- [Bookmarks](${SITE_URL}/bookmarks.md): Articles, courses, books, references, and tools I recommend.
 
 ## Blog
 
-${allPosts.map((item) => `- [${item.metadata.title}](${SITE_INFO.url}/blog/${item.slug}.md): ${item.metadata.description}`).join("\n")}
-`
-
-export const revalidate = false
-export const dynamic = "force-static"
-
-export async function GET() {
-  return new Response(content, {
-    headers: {
-      "Content-Type": "text/markdown;charset=utf-8",
-    },
-  })
+${allPosts.map((item) => `- [${item.metadata.title}](${SITE_URL}/blog/${item.slug}.md): ${item.metadata.description}`).join("\n")}
+`)
 }

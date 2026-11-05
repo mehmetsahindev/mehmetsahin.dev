@@ -6,25 +6,28 @@ import {
   PanelTitleSup,
 } from "@/features/portfolio/components/panel"
 import { PanelTitleCopy } from "@/features/portfolio/components/panel-title-copy"
-import { PROJECTS } from "@/features/portfolio/data/projects"
+import { getProjects } from "@/features/portfolio/data/queries"
+import { toProject } from "@/features/portfolio/lib/mappers"
 
 import { ProjectItem } from "./project-item"
 
 const ID = "projects"
 
-export function Projects() {
+export async function Projects() {
+  const projects = (await getProjects()).map(toProject)
+
   return (
     <Panel id={ID}>
       <PanelHeader>
         <PanelTitle>
           <a href={`#${ID}`}>Projects</a>
-          <PanelTitleSup>({PROJECTS.length})</PanelTitleSup>
+          <PanelTitleSup>({projects.length})</PanelTitleSup>
           <PanelTitleCopy id={ID} />
         </PanelTitle>
       </PanelHeader>
 
       <CollapsibleList
-        items={PROJECTS}
+        items={projects}
         max={4}
         renderItem={(item) => <ProjectItem project={item} />}
       />
