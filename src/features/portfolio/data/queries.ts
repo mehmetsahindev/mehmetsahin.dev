@@ -156,6 +156,7 @@ export const getExperiences = cached(
             skills: position.skills,
             icon: position.icon,
             isExpanded: position.isExpanded,
+            showInOverview: position.showInOverview,
           })),
       }
     })

@@ -3,7 +3,6 @@ import { MapPinIcon } from "lucide-react"
 import { getExperiences, getProfile } from "@/features/portfolio/data/queries"
 
 import { Panel, PanelContent } from "../panel"
-import { CurrentLocalTimeItem } from "./current-local-time-item"
 import { EmailItem } from "./email-item"
 import {
   IntroItem,
@@ -20,10 +19,10 @@ export async function Overview() {
     getExperiences(),
   ])
 
-  // Current roles come from experience positions without an end date.
+  // Current roles: positions without an end date that are marked to show.
   const jobs = experiences.flatMap((experience) =>
     experience.positions
-      .filter((position) => !position.endDate)
+      .filter((position) => !position.endDate && position.showInOverview)
       .map((position) => ({
         title: position.title,
         company: experience.companyName,
@@ -40,11 +39,23 @@ export async function Overview() {
     ? Buffer.from(profile.phone).toString("base64")
     : ""
 
+  const itemCount =
+    jobs.length +
+    [profile.location, emailB64, phoneNumberB64].filter(Boolean).length
+
   return (
     <Panel>
       <h2 className="sr-only">Overview</h2>
 
-      <PanelContent className="grid gap-x-4 gap-y-2.5 sm:grid-cols-2">
+      {/* Filled column by column, so both columns get an even share. */}
+      <PanelContent
+        className="grid gap-x-4 gap-y-2.5 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-(--overview-rows)"
+        style={
+          {
+            "--overview-rows": `repeat(${Math.ceil(itemCount / 2)}, auto)`,
+          } as React.CSSProperties
+        }
+      >
         {jobs.map((job, index) => {
           return (
             <JobItem
@@ -72,8 +83,6 @@ export async function Overview() {
             </IntroItemContent>
           </IntroItem>
         )}
-
-        <CurrentLocalTimeItem timeZone={profile.timeZone} />
 
         {emailB64 && <EmailItem emailB64={emailB64} />}
 

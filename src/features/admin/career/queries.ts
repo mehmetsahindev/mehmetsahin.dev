@@ -68,6 +68,7 @@ export async function getExperienceForAdmin(
         skills: position.skills,
         icon: position.icon,
         isExpanded: position.isExpanded,
+        showInOverview: position.showInOverview,
       })),
     },
     logo: row.logoId ? (media.get(row.logoId) ?? null) : null,

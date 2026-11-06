@@ -78,6 +78,7 @@ function emptyPosition(): PositionInput {
     skills: [],
     icon: "code",
     isExpanded: false,
+    showInOverview: true,
   }
 }
 
@@ -475,6 +476,29 @@ function PositionFields({
               render={({ field }) => (
                 <Switch
                   id={`${prefix}.isExpanded`}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              )}
+            />
+          </Field>
+
+          <Field orientation="horizontal">
+            <FieldContent>
+              <FieldLabel htmlFor={`${prefix}.showInOverview`}>
+                Show in overview
+              </FieldLabel>
+              <FieldDescription>
+                List this role at the top of the home page while it has no end
+                date.
+              </FieldDescription>
+            </FieldContent>
+            <Controller
+              control={control}
+              name={`${prefix}.showInOverview`}
+              render={({ field }) => (
+                <Switch
+                  id={`${prefix}.showInOverview`}
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />

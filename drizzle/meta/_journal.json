@@ -43,6 +43,13 @@
       "when": 1793947124058,
       "tag": "0005_seed_marker",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793966228264,
+      "tag": "0006_position_show_in_overview",
+      "breakpoints": true
     }
   ]
 }

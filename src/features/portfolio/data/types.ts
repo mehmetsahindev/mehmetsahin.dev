@@ -42,6 +42,7 @@ export type PositionData = {
   skills: string[]
   icon: string
   isExpanded: boolean
+  showInOverview: boolean
 }
 
 export type ExperienceData = {

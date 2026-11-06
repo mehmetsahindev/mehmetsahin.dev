@@ -135,6 +135,8 @@ export const experiencePosition = pgTable(
     /** Key of a POSITION_ICONS entry. */
     icon: text("icon").notNull().default("code"),
     isExpanded: boolean("is_expanded").notNull().default(false),
+    /** Listed in the home page overview while the position is current. */
+    showInOverview: boolean("show_in_overview").notNull().default(true),
     sortOrder,
     ...timestamps,
   },

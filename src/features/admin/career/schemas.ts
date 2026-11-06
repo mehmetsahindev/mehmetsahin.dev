@@ -47,6 +47,7 @@ export const positionSchema = withPeriodCheck(
     skills,
     icon: z.enum(Object.keys(POSITION_ICONS) as [string, ...string[]]),
     isExpanded: z.boolean(),
+    showInOverview: z.boolean(),
   })
 )
 
