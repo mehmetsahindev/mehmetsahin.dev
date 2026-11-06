@@ -17,7 +17,7 @@ export async function SocialLinks() {
   if (links.length === 0) return null
 
   return (
-    <Panel className="screen-line-bottom-none screen-line-top-none">
+    <Panel className="screen-line-top-none">
       <h2 className="sr-only">Social links</h2>
 
       <PanelContent>
