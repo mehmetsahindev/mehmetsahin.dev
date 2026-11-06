@@ -13,6 +13,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app"
 
 import { META_THEME_COLORS, SITE_URL } from "@/config/site"
 import { fontVariables } from "@/lib/fonts"
+import { isNoindex } from "@/lib/indexing"
 import { Providers } from "@/components/providers"
 import { getProfile, getXHandle } from "@/features/portfolio/data/queries"
 
@@ -53,6 +54,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: profile.keywords,
     authors: [{ name: profile.displayName, url: SITE_URL }],
     creator: profile.displayName,
+    robots: isNoindex() ? { index: false, follow: false } : undefined,
     openGraph: {
       siteName: profile.displayName,
       url: "/",

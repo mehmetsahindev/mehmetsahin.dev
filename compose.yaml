@@ -19,6 +19,7 @@ services:
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
       ADMIN_GITHUB_USERNAME: ${ADMIN_GITHUB_USERNAME}
+      SITE_NOINDEX: ${SITE_NOINDEX:-false}
     expose:
       - "3000"
     volumes:

@@ -33,6 +33,7 @@ The whole stack (app + Postgres + uploads volume) is defined in `compose.yaml`.
    - `BETTER_AUTH_SECRET` (`openssl rand -base64 32`)
    - `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`
    - `ADMIN_GITHUB_USERNAME`
+   - `SITE_NOINDEX=true` on non-production deployments (e.g. `dev.mehmetsahin.dev`): robots.txt blocks all crawlers and pages get `noindex`
 4. Add a domain pointing to service `app`, port `3000`, and deploy.
 
 ## License
