@@ -1,13 +1,9 @@
 import { cn } from "@/lib/utils"
-import { getProfile, getSocialLinks } from "@/features/portfolio/data/queries"
+import { getSocialLinks } from "@/features/portfolio/data/queries"
 import { getSocialPlatform } from "@/features/portfolio/lib/social-platforms"
 
 export async function SiteFooter() {
-  const [profile, socialLinks] = await Promise.all([
-    getProfile(),
-    getSocialLinks(),
-  ])
-  const github = socialLinks.find((link) => link.platform === "github")
+  const socialLinks = await getSocialLinks()
 
   return (
     <footer className="max-w-screen overflow-x-clip px-2">
@@ -17,38 +13,6 @@ export async function SiteFooter() {
         </div>
 
         <dl className="flex flex-col gap-4 py-8 font-mono [&_dd]:text-sm [&_dt]:text-right [&_dt]:text-sm [&_dt]:text-muted-foreground">
-          <Item>
-            <dt>Crafted by</dt>
-            <dd>
-              {github ? (
-                <a
-                  className="link-underline"
-                  href={github.url}
-                  target="_blank"
-                  rel="noopener"
-                >
-                  {profile.displayName}
-                </a>
-              ) : (
-                profile.displayName
-              )}
-            </dd>
-          </Item>
-
-          <Item>
-            <dt>Based on</dt>
-            <dd>
-              <a
-                className="link-underline"
-                href="https://github.com/ncdai/chanhdai.com"
-                target="_blank"
-                rel="noopener"
-              >
-                chanhdai.com
-              </a>
-            </dd>
-          </Item>
-
           <Item>
             <dt>Copyright</dt>
             <dd>&copy; {new Date().getFullYear()}</dd>
