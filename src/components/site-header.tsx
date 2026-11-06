@@ -3,7 +3,6 @@ import Link from "next/link"
 import { MAIN_NAV } from "@/config/site"
 import { Separator } from "@/components/ui/separator"
 import { NavDesktop } from "@/components/nav-desktop"
-import { NavItemGitHub } from "@/components/nav-item-github"
 import { SiteMark } from "@/components/site-mark"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -23,11 +22,6 @@ export function SiteHeader() {
           <Separator
             orientation="vertical"
             className="mr-2 max-sm:hidden data-vertical:h-5 data-vertical:self-center"
-          />
-          <NavItemGitHub />
-          <Separator
-            orientation="vertical"
-            className="mx-2 data-vertical:h-5 data-vertical:self-center"
           />
           <ThemeToggle />
         </div>
