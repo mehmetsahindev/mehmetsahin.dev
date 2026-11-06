@@ -26,7 +26,7 @@ The whole stack (app + Postgres + uploads volume) is defined in `docker-compose.
 1. Create a GitHub OAuth App at https://github.com/settings/developers
    - Homepage URL: `https://mehmetsahin.dev`
    - Callback URL: `https://mehmetsahin.dev/api/auth/callback/github`
-2. In Dokploy, create a Compose service from this repository using `docker-compose.yml` (Compose Path `./docker-compose.yml`, the Dokploy default).
+2. In Dokploy, create a Compose service from this repository using `docker-compose.yml` (set Compose Path to `./docker-compose.yml`).
 3. Set these environment variables:
    - `NEXT_PUBLIC_APP_URL` (e.g. `https://mehmetsahin.dev`)
    - `POSTGRES_PASSWORD`
