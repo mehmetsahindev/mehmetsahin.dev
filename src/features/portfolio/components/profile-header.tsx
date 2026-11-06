@@ -1,6 +1,5 @@
 import { getProfile } from "@/features/portfolio/data/queries"
 
-import { DiameterDimension } from "./diameter-dimension"
 import { ProfileMark } from "./profile-mark"
 import { ProfileTaglines } from "./profile-taglines"
 import { VerifiedIcon } from "./verified-icon"
@@ -33,12 +32,6 @@ export async function ProfileHeader() {
                 </div>
               )}
               <div className="pointer-events-none absolute inset-0 rounded-[inherit] inset-ring-1 inset-ring-foreground dark:inset-ring-foreground/20" />
-
-              {/* The label assumes size-40 (sm+); the gutter fits it from lg. */}
-              <DiameterDimension
-                className="-z-1 hidden lg:block"
-                diameter={160}
-              />
             </div>
           </div>
         </div>

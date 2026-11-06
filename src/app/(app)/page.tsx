@@ -10,12 +10,10 @@ import { getPublishedPosts } from "@/features/blog/data/queries"
 import { Blog } from "@/features/portfolio/components/blog"
 import { Education } from "@/features/portfolio/components/education"
 import { Experiences } from "@/features/portfolio/components/experiences"
-import { FrameWidthDimension } from "@/features/portfolio/components/frame-width-dimension"
 import { Hello } from "@/features/portfolio/components/hello"
 import { Overview } from "@/features/portfolio/components/overview"
 import { ProfileHeader } from "@/features/portfolio/components/profile-header"
 import { Projects } from "@/features/portfolio/components/projects"
-import { SeparatorHeightDimension } from "@/features/portfolio/components/separator-height-dimension"
 import { SocialLinks } from "@/features/portfolio/components/social-links"
 import { TechStack } from "@/features/portfolio/components/tech-stack"
 import {
@@ -87,12 +85,9 @@ export default async function HomePage() {
 
       <div className="[--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
         <div className="mx-auto md:max-w-3xl">
-          <FrameWidthDimension />
+          <div className="hidden h-8 border-x border-x-line min-[49rem]:block" />
           <ProfileHeader />
-          <Separator>
-            {/* Mirrors the avatar's diameter, so same breakpoint. */}
-            <SeparatorHeightDimension className="hidden lg:block" height={32} />
-          </Separator>
+          <Separator />
 
           <Overview />
           <SocialLinks />

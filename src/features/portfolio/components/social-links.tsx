@@ -7,10 +7,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import {
-  HandwrittenArrow,
-  HandwrittenNote,
-} from "@/features/portfolio/components/handwritten-note"
 import { Panel, PanelContent } from "@/features/portfolio/components/panel"
 import { getSocialLinks } from "@/features/portfolio/data/queries"
 import { getSocialPlatform } from "@/features/portfolio/lib/social-platforms"
@@ -67,11 +63,6 @@ export async function SocialLinks() {
           })}
         </ul>
       </PanelContent>
-
-      <HandwrittenNote className="-top-7 right-full mr-4 hidden w-20 flex-col items-end lg:flex">
-        <span className="-rotate-6">follow me</span>
-        <HandwrittenArrow className="size-7 translate-x-3 -scale-x-100 -rotate-6" />
-      </HandwrittenNote>
     </Panel>
   )
 }
