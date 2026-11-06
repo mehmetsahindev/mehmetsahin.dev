@@ -1,0 +1,558 @@
+{
+  "version": 1,
+  "tables": {
+    "media": [
+      {
+        "id": "c1493b9b-a8e8-4d96-ae96-e41252aa1bd8",
+        "key": "avatar-4e67927d.webp",
+        "file_name": "avatar.webp",
+        "mime_type": "image/webp",
+        "size": 5564,
+        "width": 200,
+        "height": 200,
+        "alt": "Mehmet Şahin",
+        "created_at": "2026-11-05T11:57:41.92607+00:00",
+        "updated_at": "2026-11-05T11:57:41.92607+00:00"
+      },
+      {
+        "id": "859a7a24-bc47-4ab4-8f56-157630e10047",
+        "key": "akinrobotics-400cd458.svg",
+        "file_name": "akinrobotics.svg",
+        "mime_type": "image/svg+xml",
+        "size": 12789,
+        "width": 800,
+        "height": 364,
+        "alt": "AKINROBOTICS logo",
+        "created_at": "2026-11-05T11:57:41.952473+00:00",
+        "updated_at": "2026-11-05T11:57:41.952473+00:00"
+      },
+      {
+        "id": "5e183068-6833-4d79-a65c-771f651c9616",
+        "key": "sofft-9a1e7989.jpg",
+        "file_name": "sofft.jpg",
+        "mime_type": "image/jpeg",
+        "size": 6278,
+        "width": 200,
+        "height": 200,
+        "alt": "Sofft IT Inc. logo",
+        "created_at": "2026-11-05T11:57:41.958869+00:00",
+        "updated_at": "2026-11-05T11:57:41.958869+00:00"
+      },
+      {
+        "id": "43d78647-a51a-4130-9dd9-0f523ff4cf38",
+        "key": "react-useimperativehandle-nedir-843a55f9.webp",
+        "file_name": "react-useimperativehandle-nedir.webp",
+        "mime_type": "image/webp",
+        "size": 23554,
+        "width": 750,
+        "height": 419,
+        "alt": "React useImperativeHandle Nedir? kapak görseli",
+        "created_at": "2026-11-05T11:57:41.965266+00:00",
+        "updated_at": "2026-11-05T11:57:41.965266+00:00"
+      },
+      {
+        "id": "0d977459-8481-4124-b2b4-b98950981888",
+        "key": "gitlab-todo-checker-21d606de.webp",
+        "file_name": "gitlab-todo-checker.webp",
+        "mime_type": "image/webp",
+        "size": 1764,
+        "width": 200,
+        "height": 200,
+        "alt": "Gitlab Todo Checker",
+        "created_at": "2026-11-05T11:57:41.970336+00:00",
+        "updated_at": "2026-11-05T11:57:41.970336+00:00"
+      }
+    ],
+    "profile": [
+      {
+        "id": 1,
+        "first_name": "Mehmet",
+        "last_name": "Şahin",
+        "display_name": "Mehmet Şahin",
+        "username": "mehmetsahindev",
+        "job_title": "Software Developer",
+        "bio": "Software Developer.",
+        "taglines": [
+          "Computer Engineer"
+        ],
+        "about": "- 5 yılı aşkın deneyime sahip bir **Yazılım Geliştiriciyim**.\n- **React**, **React Native**, **TypeScript** ve **Node.js** teknolojilerinde uzmanlığa sahibim.\n- Pixel-perfect ve kullanıcı odaklı **web/mobil** uygulamalar geliştirme konusunda yetkinim.\n- Temiz kod prensiplerine, performans optimizasyonuna ve karmaşık fikirleri kusursuz dijital ürünlere dönüştürmeye odaklanıyorum.",
+        "location": "Konya / Türkiye",
+        "email": "hello@mehmetsahin.dev",
+        "phone": "",
+        "time_zone": "Europe/Istanbul",
+        "avatar_id": "c1493b9b-a8e8-4d96-ae96-e41252aa1bd8",
+        "og_image_id": null,
+        "keywords": [
+          "mehmetsahin",
+          "mehmetsahindev",
+          "mehmet şahin"
+        ],
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T11:58:46.389+00:00"
+      }
+    ],
+    "site_settings": [
+      {
+        "id": 1,
+        "home_sections": {},
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T10:36:45.69486+00:00"
+      }
+    ],
+    "social_link": [
+      {
+        "id": "10bbc2c3-4d79-46f8-9a8e-9ed712009619",
+        "platform": "github",
+        "handle": "mehmetsahindev",
+        "url": "https://github.com/mehmetsahindev",
+        "same_as": true,
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "353e5c05-5ad5-4df9-a977-d3710ba52347",
+        "platform": "linkedin",
+        "handle": "mehmetsahindev",
+        "url": "https://linkedin.com/in/mehmetsahindev",
+        "same_as": true,
+        "sort_order": 1,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "df966062-5600-4448-b478-9484be1db9c9",
+        "platform": "x",
+        "handle": "@mehmetsahindev",
+        "url": "https://x.com/mehmetsahindev",
+        "same_as": true,
+        "sort_order": 2,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      }
+    ],
+    "experience": [
+      {
+        "id": "d6e286cc-ecc0-4945-8961-5fbb867b48cf",
+        "company_name": "AKINROBOTICS",
+        "company_website": "https://akinrobotics.com/",
+        "logo_id": "859a7a24-bc47-4ab4-8f56-157630e10047",
+        "location": "",
+        "location_type": "",
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "34967e40-ea2f-4eb2-b2f9-85171b358d8e",
+        "company_name": "Freelance",
+        "company_website": "https://mehmetsahin.dev/",
+        "logo_id": null,
+        "location": "",
+        "location_type": "",
+        "sort_order": 1,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "adf2f216-cce9-44eb-ba7d-2269c80fdc2d",
+        "company_name": "Sofft IT Inc.",
+        "company_website": "https://sofft.com.tr/",
+        "logo_id": "5e183068-6833-4d79-a65c-771f651c9616",
+        "location": "",
+        "location_type": "",
+        "sort_order": 2,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      }
+    ],
+    "experience_position": [
+      {
+        "id": "93d9f8ee-3766-4766-b02e-f4ae0313ba0c",
+        "experience_id": "d6e286cc-ecc0-4945-8961-5fbb867b48cf",
+        "title": "Software Developer",
+        "employment_type": "Full-time",
+        "start_date": "2024-02",
+        "end_date": null,
+        "description": "- Robotik sistemler için kullanıcı odaklı dijital çözümler geliştiriyorum. Web ve mobil uygulamalar geliştirmenin yanı sıra kullanıcı deneyimi ve arayüz tasarımı üzerinde de çalışıyorum.",
+        "skills": [
+          "TypeScript",
+          "React",
+          "React Native",
+          "Node.js",
+          "Linux",
+          "Git"
+        ],
+        "icon": "code",
+        "is_expanded": true,
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "1d0e383c-24a0-4006-b19e-ea939d5b7347",
+        "experience_id": "34967e40-ea2f-4eb2-b2f9-85171b358d8e",
+        "title": "Software Developer",
+        "employment_type": "Full-time",
+        "start_date": "2021-01",
+        "end_date": null,
+        "description": "- Freelance geliştirici olarak kişisel projeler geliştiriyor ve açık kaynağa aktif olarak katkıda bulunuyorum. Fikirleri tamamen çalışan, yayına hazır ürünlere dönüştürerek uçtan uca web ve mobil uygulama çözümleri sunuyorum.",
+        "skills": [
+          "TypeScript",
+          "React",
+          "React Native",
+          "Node.js"
+        ],
+        "icon": "code",
+        "is_expanded": false,
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "5adb045a-bdd8-4724-9242-107d9614acf6",
+        "experience_id": "adf2f216-cce9-44eb-ba7d-2269c80fdc2d",
+        "title": "Software Team Lead",
+        "employment_type": "Full-time",
+        "start_date": "2022-04",
+        "end_date": "2023-06",
+        "description": "- Proje yönetim süreçlerine aktif olarak katıldım ve ekip içi koordinasyonun etkin şekilde sağlanmasına katkıda bulundum. Ayrıca sunucu yönetimi, bakım ve yedekleme süreçleri dahil olmak üzere sistem yönetimi görevlerinden sorumluydum.",
+        "skills": [
+          "Linux",
+          "Server Management",
+          "DevOps"
+        ],
+        "icon": "team",
+        "is_expanded": false,
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "15ef06e3-6063-4354-9db8-4efec5f738dd",
+        "experience_id": "adf2f216-cce9-44eb-ba7d-2269c80fdc2d",
+        "title": "Software Developer",
+        "employment_type": "Full-time",
+        "start_date": "2021-03",
+        "end_date": "2022-04",
+        "description": "- Yeni startup girişimleri için web ve mobil uygulamaların geliştirilmesinde aktif rol aldım. Ayrıca farklı şirketler için kurumsal web siteleri ve mobil uygulama çözümleri sunarak çeşitli dijital projelere katkıda bulundum.",
+        "skills": [
+          "React",
+          "Flutter",
+          "PHP",
+          "MySQL",
+          "Git"
+        ],
+        "icon": "code",
+        "is_expanded": false,
+        "sort_order": 1,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      }
+    ],
+    "education": [],
+    "project": [
+      {
+        "id": "72ab1682-b65d-4f30-94d8-b03c7cd2b21d",
+        "title": "Senam UI",
+        "url": "https://senamui.mehmetsahin.dev",
+        "start_date": "2026-04",
+        "end_date": null,
+        "description": "Senam UI, React için geliştirdiğim, shadcn uyumlu modern bir UI kütüphanesidir. Esnek, yeniden kullanılabilir komponentler sunar ve aktif olarak geliştirilmektedir.",
+        "skills": [
+          "Open Source",
+          "React",
+          "TypeScript",
+          "Shadcn",
+          "Component Library"
+        ],
+        "icon_slug": null,
+        "icon_media_id": null,
+        "is_expanded": false,
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "88cff238-0e44-47d1-b6b5-c13fa9b44687",
+        "title": "Gitlab Todo Checker",
+        "url": "https://github.com/mehmetsahindev/gitlab-todo-checker",
+        "start_date": "2025-12",
+        "end_date": null,
+        "description": "Sistem tepsisinde çalışan ve GitLab To-Do'larınızı gerçek zamanlı takip eden hafif bir Electron masaüstü uygulaması. Belirli aralıklarla GitLab'ı kontrol eder, yeni görevler geldiğinde masaüstü bildirimi gönderir ve tarayıcıya geçmeden doğrudan uygulama üzerinden görevleri tamamlamanızı sağlar. Koyu/açık tema, özelleştirilebilir kontrol aralığı ve self-signed SSL desteği sunar.",
+        "skills": [
+          "Open Source",
+          "React",
+          "TypeScript",
+          "Electron"
+        ],
+        "icon_slug": null,
+        "icon_media_id": "0d977459-8481-4124-b2b4-b98950981888",
+        "is_expanded": false,
+        "sort_order": 1,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      }
+    ],
+    "tech_category": [
+      {
+        "id": "c4ec268f-4f9a-4fe9-b78b-816cb29a243b",
+        "name": "Languages",
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "0d412661-cca7-44c8-aed4-98af6ce74c6b",
+        "name": "Frameworks & runtime",
+        "sort_order": 1,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "a1c28e6f-0953-4513-b77b-7475c6eca033",
+        "name": "Tools",
+        "sort_order": 2,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      }
+    ],
+    "tech_item": [
+      {
+        "id": "668d6032-7137-4a30-b9a6-fb58d0690b8f",
+        "category_id": "c4ec268f-4f9a-4fe9-b78b-816cb29a243b",
+        "name": "TypeScript",
+        "url": "https://www.typescriptlang.org/",
+        "icon_slug": "typescript",
+        "icon_media_id": null,
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "8887ecb6-8b8b-4393-ac57-0234e1e6651a",
+        "category_id": "c4ec268f-4f9a-4fe9-b78b-816cb29a243b",
+        "name": "JavaScript",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        "icon_slug": "javascript",
+        "icon_media_id": null,
+        "sort_order": 1,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "562f0873-e072-478e-b612-6c403589d724",
+        "category_id": "c4ec268f-4f9a-4fe9-b78b-816cb29a243b",
+        "name": "PHP",
+        "url": "https://www.php.net/",
+        "icon_slug": "php",
+        "icon_media_id": null,
+        "sort_order": 2,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "7918e2a5-30d8-4ef2-b983-25ed1c0defc9",
+        "category_id": "0d412661-cca7-44c8-aed4-98af6ce74c6b",
+        "name": "Node.js",
+        "url": "https://nodejs.org/",
+        "icon_slug": "nodedotjs",
+        "icon_media_id": null,
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "1260f388-f4a4-4a12-9877-5f70ffc96247",
+        "category_id": "0d412661-cca7-44c8-aed4-98af6ce74c6b",
+        "name": "React",
+        "url": "https://react.dev/",
+        "icon_slug": "react",
+        "icon_media_id": null,
+        "sort_order": 1,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "05862385-0fa6-4fbc-9926-7d542e3e85b4",
+        "category_id": "0d412661-cca7-44c8-aed4-98af6ce74c6b",
+        "name": "Next.js",
+        "url": "https://nextjs.org/",
+        "icon_slug": "nextdotjs",
+        "icon_media_id": null,
+        "sort_order": 2,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "b6ecaccc-cafa-463e-a681-2b8d48cf6ca5",
+        "category_id": "0d412661-cca7-44c8-aed4-98af6ce74c6b",
+        "name": "Tailwind CSS",
+        "url": "https://tailwindcss.com/",
+        "icon_slug": "tailwindcss",
+        "icon_media_id": null,
+        "sort_order": 3,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "ecacfb1e-08cb-4d61-87b1-54bee13136bc",
+        "category_id": "a1c28e6f-0953-4513-b77b-7475c6eca033",
+        "name": "Git",
+        "url": "https://git-scm.com/",
+        "icon_slug": "git",
+        "icon_media_id": null,
+        "sort_order": 0,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T11:58:25.032995+00:00"
+      }
+    ],
+    "bookmark_category": [
+      {
+        "id": "a670ef47-4fcb-419f-9d5f-d296e89c4d48",
+        "name": "Article",
+        "slug": "article",
+        "sort_order": 0,
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T10:36:45.69486+00:00"
+      },
+      {
+        "id": "b99f76e7-fa3e-4965-bade-fae4819a240b",
+        "name": "Course",
+        "slug": "course",
+        "sort_order": 1,
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T10:36:45.69486+00:00"
+      },
+      {
+        "id": "e7e8a7c7-8aca-4af2-8f64-d1ff9f18e50d",
+        "name": "Book",
+        "slug": "book",
+        "sort_order": 2,
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T10:36:45.69486+00:00"
+      },
+      {
+        "id": "7a3adb41-aba3-461c-af7a-fca08af78a44",
+        "name": "Reference",
+        "slug": "reference",
+        "sort_order": 3,
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T10:36:45.69486+00:00"
+      },
+      {
+        "id": "70f788bd-96c5-445b-9fcc-d9d30c11148a",
+        "name": "UI Library",
+        "slug": "ui-library",
+        "sort_order": 4,
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T10:36:45.69486+00:00"
+      },
+      {
+        "id": "6f0d155e-b23b-438e-a2d7-9f07b42d44d6",
+        "name": "Software",
+        "slug": "software",
+        "sort_order": 5,
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T10:36:45.69486+00:00"
+      },
+      {
+        "id": "ec3351a6-4729-4171-b07b-e0b7a351f572",
+        "name": "Inspiration",
+        "slug": "inspiration",
+        "sort_order": 6,
+        "created_at": "2026-11-05T10:36:45.69486+00:00",
+        "updated_at": "2026-11-05T10:36:45.69486+00:00"
+      }
+    ],
+    "bookmark": [],
+    "post": [
+      {
+        "id": "62beaefc-2e3e-47b8-ab50-7f3922b0a972",
+        "cover_id": "43d78647-a51a-4130-9dd9-0f523ff4cf38",
+        "published_at": "2026-04-26",
+        "pinned": false,
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T12:33:29.802+00:00"
+      }
+    ],
+    "post_translation": [
+      {
+        "id": "cb3d9a52-473d-4ace-bcbb-1d96bf52bbaf",
+        "post_id": "62beaefc-2e3e-47b8-ab50-7f3922b0a972",
+        "locale": "en",
+        "slug": "what-is-react-useimperativehandle",
+        "title": "What Is React useImperativeHandle? A Guide with Examples",
+        "description": "Learn React's useImperativeHandle hook with examples: using it with forwardRef, type safety with TypeScript, and when to reach for it.",
+        "content": "## What is useImperativeHandle?\n\n`useImperativeHandle` is a React hook that lets you control which methods a child component exposes to the outside. It is meant for direct behavior commands such as focusing, scrolling or triggering an animation.\n\nIn React, things usually work like this: state or props change, and the component redraws itself. You say \"this is how it should look\", and React takes care of the rest. This is called the \"declarative\" approach: you describe what you want, and React figures out how to do it.\n\nMost of the time this works great. But sometimes things are different.\n\nFor example, there are moments when you need to give a **direct command**, like \"focus this input when that button is clicked\" or \"pause the video\". This is called the **imperative approach**: instead of telling React \"what to show\", you tell it \"do this\".\n\nLet's see the difference in code. Say the parent component wants to focus an input inside its child:\n\n**❌ Forcing it with props**\n\n```jsx\n// Parent\nconst [shouldFocus, setShouldFocus] = useState(false);\n\n<CustomInput shouldFocus={shouldFocus} />\n<button onClick={() => setShouldFocus(true)}>\n  Focus\n</button>\n\n// Child\nuseEffect(() => {\n  if (shouldFocus) {\n    inputRef.current?.focus();\n    // How do we set the state back\n    // to false after focusing? It gets messy.\n  }\n}, [shouldFocus]);\n```\n\nState, `useEffect` and resetting, all for a single \"focus\" command. It quickly gets out of hand.\n\n**✅ With useImperativeHandle**\n\n```jsx\n// Parent — says \"focus\" directly\nconst ref = useRef();\n\n<CustomInput ref={ref} />\n\n<button onClick={() => ref.current?.focus()}>\n  Focus\n</button>\n\n// Child — exposes only the focus method\nuseImperativeHandle(ref, () => ({\n  focus: () => inputRef.current?.focus()\n}));\n```\n\nMuch cleaner, right? The parent tells the child \"focus\" directly. No extra state, no `useEffect`.\n\nThat is exactly what `useImperativeHandle` is for: you decide what the child exposes, and everything else stays hidden. This is called **encapsulation**.\n\n> **useRef vs useImperativeHandle:** `useRef` holds a reference to a DOM element or a value. `useImperativeHandle` decides **what that reference exposes** to the outside.\n\n> **Encapsulation**: You are saying \"I only give you these methods; everything else inside this component is private\". This keeps your components safe and independent.\n\n`useImperativeHandle` takes three parameters:\n\n```jsx\nuseImperativeHandle(ref, createHandle, deps?)\n```\n\n1. **ref** — The ref passed down from the parent.\n2. **createHandle** — A function that returns the methods you want to expose.\n3. **deps** (optional) — A dependency array, like the one in `useEffect`. When it changes, the exposed object is recreated. Leave it out and it is recreated on every render; pass an empty array (`[]`) and it is created only on the first render.\n\n***\n\n## How it relates to forwardRef\n\n`useImperativeHandle` does not work on its own; it is always used together with `forwardRef`. But why?\n\nIn React, `ref` is a special keyword — it does not behave like a regular prop. React does this on purpose: it keeps refs out of the normal prop flow to prevent components from becoming tightly coupled. Let's try it:\n\n```jsx\n// This does not work!\nfunction MyInput({ ref }) {\n  return <input ref={ref} />\n}\n\n// In the parent:\n;<MyInput ref={myRef} /> // ref does not arrive as a prop, it is undefined\n```\n\nTo pass a ref into a child component from the outside, you need `forwardRef`. Think of it as a bridge — it catches the ref coming from outside and passes it into the component:\n\n```jsx\n// With forwardRef, the ref now reaches the component\nconst CustomInput = forwardRef((props, ref) => {\n  useImperativeHandle(ref, () => ({\n    focus: () => inputRef.current?.focus(),\n  }))\n  return <input ref={inputRef} />\n})\n```\n\n> **React 19 note:** Since React 19, `ref` can be passed as a regular prop, so the `forwardRef` wrapper is no longer needed. If you are on React 18 or earlier, you still need `forwardRef`. See the [React documentation](https://react.dev/reference/react/useImperativeHandle) for more.\n\n***\n\n## Type safety with TypeScript\n\nIf your project uses TypeScript, I strongly recommend defining the API you expose with an `interface`. You will catch mistakes early, and you get autocomplete in your IDE as a bonus.\n\nThink about it: the moment you type `ref.current.` in the parent, your IDE shows only the methods you allowed. In a project with 50+ components, remembering which ref exposes what is impossible — this is where the type definition helps.\n\n```tsx\n// 1. Define the methods you will expose\ninterface CustomInputHandle {\n  focus: () => void\n  clear: () => void\n}\n\n// 2. Pass this type to forwardRef\nconst CustomInput = forwardRef<\n  CustomInputHandle,\n  InputHTMLAttributes<HTMLInputElement>\n>((props, ref) => {\n  const inputRef = useRef<HTMLInputElement>(null)\n\n  // 3. Expose only the methods you defined\n  useImperativeHandle(ref, () => ({\n    focus: () => inputRef.current?.focus(),\n    clear: () => {\n      if (inputRef.current) inputRef.current.value = \"\"\n    },\n  }))\n\n  return <input ref={inputRef} {...props} />\n})\n\n// Usage in the parent:\nconst ref = useRef<CustomInputHandle>(null)\nref.current?.reset() // TS error! 'reset' is not defined in the interface\n```\n\nWe never defined a `reset` method, and TypeScript caught it immediately. Safe and clear.\n\n***\n\n## Basic examples\n\nNow let's put what we learned together.\n\n### Input: focus and clear\n\nWhen a button in the parent is clicked, it focuses the input in the child or clears its content:\n\n```tsx\n// ---------- CustomInput.tsx ----------\n\ninterface CustomInputHandle {\n  focus: () => void\n  clear: () => void\n}\n\nconst CustomInput = forwardRef<CustomInputHandle>((props, ref) => {\n  const inputRef = useRef<HTMLInputElement>(null)\n\n  useImperativeHandle(ref, () => ({\n    focus: () => inputRef.current?.focus(),\n    clear: () => {\n      if (inputRef.current) inputRef.current.value = \"\"\n    },\n  }))\n\n  return <input ref={inputRef} placeholder=\"Type something...\" />\n})\n\n// ---------- Parent.tsx ----------\n\nfunction Parent() {\n  const inputRef = useRef<CustomInputHandle>(null)\n\n  return (\n    <>\n      <CustomInput ref={inputRef} />\n      <button onClick={() => inputRef.current?.focus()}>Focus</button>\n      <button onClick={() => inputRef.current?.clear()}>Clear</button>\n    </>\n  )\n}\n```\n\n> **Note:** The parent does not know which HTML element lives inside `CustomInput`. It only knows the `focus` and `clear` methods. That is exactly the isolated architecture we want.\n\n### Video: play and pause\n\nThe same idea applies to other scenarios. Here is an example that controls a video component from its parent:\n\n```tsx\ninterface VideoPlayerHandle {\n  play: () => void\n  pause: () => void\n}\n\nconst VideoPlayer = forwardRef<VideoPlayerHandle>((props, ref) => {\n  const videoRef = useRef<HTMLVideoElement>(null)\n\n  useImperativeHandle(ref, () => ({\n    play: () => videoRef.current?.play(),\n    pause: () => videoRef.current?.pause(),\n  }))\n\n  return <video ref={videoRef} src=\"/demo.mp4\" />\n})\n\n// Parent\nfunction Parent() {\n  const playerRef = useRef<VideoPlayerHandle>(null)\n\n  return (\n    <>\n      <VideoPlayer ref={playerRef} />\n      <button onClick={() => playerRef.current?.play()}>Play</button>\n      <button onClick={() => playerRef.current?.pause()}>Pause</button>\n    </>\n  )\n}\n```\n\nSame logic: the parent cannot reach the `<video>` element directly; it only knows the `play` and `pause` methods.\n\n***\n\n## Performance impact\n\nYou might wonder: \"Does this hook trigger a render?\"\n\nShort answer: **No.** Calling `useImperativeHandle` does not re-render the component. The hook only defines the methods assigned to the ref object — it has no effect on the render cycle.\n\nOne thing to know, though: if you leave out the dependency array, the exposed object is recreated on every render. This is rarely a performance problem, but if you want to avoid creating objects needlessly, you can pass an empty array (`[]`).\n\n***\n\n## When not to use it\n\nThis hook is a powerful tool, but use it everywhere and you bypass React's prop/state flow. If you can solve something with props or state, prefer that.\n\nFor example, if you want to change a component's theme, title or content, the way to do it is always props. `useImperativeHandle` is not for data flow; it is for **triggering behavior** (like focus, scroll or animation).\n\n**❌ Wrong**\n\n```jsx\nuseImperativeHandle(ref, () => ({\n  setTitle: (t) => setTitle(t),\n  setTheme: (t) => setTheme(t),\n}))\n```\n\n**✅ Right**\n\n```jsx\n<MyCard title=\"New Title\" theme=\"dark\" />\n```\n\n***\n\n## Summary\n\n`useImperativeHandle` is a hook for the moments when React's normal data flow (props and state) is not enough. It is designed for **direct behavior commands** such as focusing, scrolling or triggering animations.\n\nAs long as props or state can solve it, don't reach for this hook. But when you really need it, it is the cleanest way to control how much of your component you expose.\n\n**Things to remember:**\n\n* Always use it with `forwardRef` (before React 19).\n* Always type the API you expose with TypeScript.\n* Use it only to trigger behavior (focus, scroll, etc.), not to change state.\n* Keep your component's internals private — expose only what the parent needs.",
+        "status": "published",
+        "created_at": "2026-11-05T12:32:08.76779+00:00",
+        "updated_at": "2026-11-05T12:33:29.806+00:00"
+      },
+      {
+        "id": "1cddd377-beea-4271-9178-3c50e5907568",
+        "post_id": "62beaefc-2e3e-47b8-ab50-7f3922b0a972",
+        "locale": "tr",
+        "slug": "react-useimperativehandle-nedir",
+        "title": "React useImperativeHandle Nedir? Örneklerle Rehber",
+        "description": "React'in useImperativeHandle hook'unu örneklerle öğren. forwardRef ile kullanımı, TypeScript tip güvenliği ve ne zaman tercih edilmeli?",
+        "content": "## useImperativeHandle nedir?\n\n`useImperativeHandle`, bir child bileşenin dışarıya hangi metodları açacağını kontrol etmeni sağlayan bir React hook'udur. Focus atma, scroll ettirme, animasyon tetikleme gibi doğrudan davranış komutları için kullanılır.\n\nReact'te genellikle işler şöyle yürür: state veya prop değişir, bileşen kendini yeniden çizer. Yani sen \"şöyle görünsün\" dersin, React da bunu halleder. Buna \"declarative\" yaklaşım deniyor — yani sen ne istediğini söylüyorsun, React da nasıl yapacağını kendi hallediyor.\n\nBu çoğu zaman harika çalışır. Ama bazen işler farklılaşıyor.\n\nÖrneğin, \"şu butona tıklanınca şu input'a focus at\" ya da \"videoyu durdur\" gibi **doğrudan komut** vermen gereken anlar olabiliyor. Buna da **emirsel (imperative) yaklaşım** deniyor — yani React'e \"ne göster\" demek yerine, \"şu işi yap\" diyorsun.\n\nŞimdi bu farkı kodda görelim. Diyelim ki parent bileşen, child'daki bir input'a focus atmak istiyor:\n\n**❌ Prop ile zorlama yönetim**\n\n```jsx\n// Parent\nconst [shouldFocus, setShouldFocus] = useState(false);\n\n<CustomInput shouldFocus={shouldFocus} />\n<button onClick={() => setShouldFocus(true)}>\n  Focus\n</button>\n\n// Child\nuseEffect(() => {\n  if (shouldFocus) {\n    inputRef.current?.focus();\n    // Focus sonrası state'i nasıl\n    // false yapacağız? İşler karışır.\n  }\n}, [shouldFocus]);\n```\n\nBir \"focus at\" komutu için state, `useEffect`, resetleme derken işin içinden çıkamıyorsun.\n\n**✅ useImperativeHandle ile**\n\n```jsx\n// Parent — doğrudan \"focus at\" diyor\nconst ref = useRef();\n\n<CustomInput ref={ref} />\n\n<button onClick={() => ref.current?.focus()}>\n  Focus\n</button>\n\n// Child — dışarıya sadece focus metodunu açıyor\nuseImperativeHandle(ref, () => ({\n  focus: () => inputRef.current?.focus()\n}));\n```\n\nÇok daha temiz, değil mi? Parent bileşen, child'a doğrudan \"focus at\" diyor. Ekstra state yok, `useEffect` yok.\n\nİşte `useImperativeHandle` bunun için var: Child'ın dışarıya ne vereceğine sen karar veriyorsun, gerisi gizli kalıyor. Buna **kapsülleme** (encapsulation) deniyor.\n\n> **useRef vs useImperativeHandle:** `useRef` bir DOM elementine veya değere referans tutar. `useImperativeHandle` ise bu referansın dışarıya **ne göstereceğini** belirler.\n\n> **Kapsülleme**: Dışarıya \"sana sadece şu metodları veriyorum, bileşenin içindeki diğer her şey benim özelimdir\" demiş oluyorsun. Bu, bileşenlerini güvenli ve bağımsız tutar.\n\n`useImperativeHandle` üç parametre alır:\n\n```jsx\nuseImperativeHandle(ref, createHandle, deps?)\n```\n\n1. **ref** — Parent'tan gelen ref.\n2. **createHandle** — Dışarıya açmak istediğin metodları döndüren fonksiyon.\n3. **deps** (opsiyonel) — `useEffect`'teki gibi bir dependency array. Bu array değiştiğinde dışarıya açılan nesne yeniden oluşturulur. Vermezsen her render'da yeniden yaratılır, boş array (`[]`) verirsen sadece ilk render'da oluşturulur.\n\n***\n\n## forwardRef ile ilişkisi\n\n`useImperativeHandle` tek başına çalışmaz; her zaman `forwardRef` ile birlikte kullanılır. Peki neden?\n\nReact'te `ref` özel bir kelimedir — normal bir prop gibi davranmaz. React bunu bilerek yapar: Bileşenlerinin birbirine sıkıca bağlanmasını (tight coupling) engellemek için ref'leri normal prop akışından ayrı tutar. Deneyelim:\n\n```jsx\n// Bu çalışmaz!\nfunction MyInput({ ref }) {\n  return <input ref={ref} />\n}\n\n// Parent'ta:\n;<MyInput ref={myRef} /> // ref prop olarak gelmez, undefined olur\n```\n\nBir alt bileşene dışarıdan ref gönderebilmek için `forwardRef` kullanman gerekiyor. Onu bir köprü gibi düşünebilirsin — dışarıdan gelen ref'i yakalayıp bileşenin içine aktarır:\n\n```jsx\n// forwardRef ile ref artık bileşene ulaşır\nconst CustomInput = forwardRef((props, ref) => {\n  useImperativeHandle(ref, () => ({\n    focus: () => inputRef.current?.focus(),\n  }))\n  return <input ref={inputRef} />\n})\n```\n\n> **React 19 notu:** React 19 ile birlikte `ref` artık normal bir prop olarak geçilebiliyor. Yani `forwardRef` sarmalına gerek kalmıyor. Ancak React 18 ve altı kullanıyorsan `forwardRef` hâlâ gerekli. Daha fazla bilgi için [React dokümantasyonuna](https://react.dev/reference/react/useImperativeHandle) göz atabilirsin.\n\n***\n\n## TypeScript ile tip güvenliği\n\nEğer projende TypeScript kullanıyorsan, dışarıya açtığın API'yi mutlaka bir `interface` ile tanımlamanı öneririm. Sadece hataları erken yakalamazsın, IDE'den gelen autocomplete desteği de cabası.\n\nDüşün: Parent bileşeninde `ref.current.` yazdığın an IDE sana sadece senin izin verdiğin metodları gösteriyor. 50+ bileşenli bir projede hangi ref'in ne açtığını hatırlamak imkansız — tip tanımı burada devreye giriyor.\n\n```tsx\n// 1. Dışarıya açacağın metodları tanımla\ninterface CustomInputHandle {\n  focus: () => void\n  clear: () => void\n}\n\n// 2. forwardRef'e bu tipi ver\nconst CustomInput = forwardRef<\n  CustomInputHandle,\n  InputHTMLAttributes<HTMLInputElement>\n>((props, ref) => {\n  const inputRef = useRef<HTMLInputElement>(null)\n\n  // 3. Sadece tanımladığın metodları aç\n  useImperativeHandle(ref, () => ({\n    focus: () => inputRef.current?.focus(),\n    clear: () => {\n      if (inputRef.current) inputRef.current.value = \"\"\n    },\n  }))\n\n  return <input ref={inputRef} {...props} />\n})\n\n// Parent'ta kullanımı:\nconst ref = useRef<CustomInputHandle>(null)\nref.current?.reset() // TS Hata! 'reset' interface içinde tanımlı değil\n```\n\n`reset` diye bir metod tanımlamadık, TypeScript bunu anında yakaladı. Güvenli ve net.\n\n***\n\n## Temel kullanım örnekleri\n\nŞimdi öğrendiklerimizi bir araya getirelim.\n\n### Input: focus ve temizleme\n\nParent bileşen bir butona tıkladığında, child'daki input'a focus atıyor veya içeriğini temizliyor:\n\n```tsx\n// ---------- CustomInput.tsx ----------\n\ninterface CustomInputHandle {\n  focus: () => void\n  clear: () => void\n}\n\nconst CustomInput = forwardRef<CustomInputHandle>((props, ref) => {\n  const inputRef = useRef<HTMLInputElement>(null)\n\n  useImperativeHandle(ref, () => ({\n    focus: () => inputRef.current?.focus(),\n    clear: () => {\n      if (inputRef.current) inputRef.current.value = \"\"\n    },\n  }))\n\n  return <input ref={inputRef} placeholder=\"Bir şeyler yaz...\" />\n})\n\n// ---------- Parent.tsx ----------\n\nfunction Parent() {\n  const inputRef = useRef<CustomInputHandle>(null)\n\n  return (\n    <>\n      <CustomInput ref={inputRef} />\n      <button onClick={() => inputRef.current?.focus()}>Focus</button>\n      <button onClick={() => inputRef.current?.clear()}>Temizle</button>\n    </>\n  )\n}\n```\n\n> **Dikkat et:** Parent, `CustomInput`'un içinde hangi HTML elementinin olduğunu bilmiyor. Sadece `focus` ve `clear` metodlarını biliyor. Bu tam olarak istediğimiz izole mimari.\n\n### Video: oynat ve durdur\n\nAynı mantık farklı senaryolara da uygulanabilir. Aşağıda bir video bileşenini parent'tan kontrol eden örnek:\n\n```tsx\ninterface VideoPlayerHandle {\n  play: () => void\n  pause: () => void\n}\n\nconst VideoPlayer = forwardRef<VideoPlayerHandle>((props, ref) => {\n  const videoRef = useRef<HTMLVideoElement>(null)\n\n  useImperativeHandle(ref, () => ({\n    play: () => videoRef.current?.play(),\n    pause: () => videoRef.current?.pause(),\n  }))\n\n  return <video ref={videoRef} src=\"/demo.mp4\" />\n})\n\n// Parent\nfunction Parent() {\n  const playerRef = useRef<VideoPlayerHandle>(null)\n\n  return (\n    <>\n      <VideoPlayer ref={playerRef} />\n      <button onClick={() => playerRef.current?.play()}>Oynat</button>\n      <button onClick={() => playerRef.current?.pause()}>Durdur</button>\n    </>\n  )\n}\n```\n\nMantık aynı: Parent bileşen `<video>` elementine doğrudan erişemiyor, sadece `play` ve `pause` metodlarını biliyor.\n\n***\n\n## Performans etkisi\n\nMerak edebilirsin: \"Bu hook render'ı tetikler mi?\"\n\nKısa cevap: **Hayır.** `useImperativeHandle` çağrıldığında bileşen yeniden render olmaz. Hook sadece ref nesnesine atanan metodları tanımlar — render döngüsüne bir etkisi yok.\n\nAncak şunu bil: Eğer dependency array vermezsen, her render'da dışarıya açılan nesne yeniden oluşturulur. Bu genelde bir performans sorunu yaratmaz ama gereksiz nesne oluşturmaktan kaçınmak istersen boş bir array (`[]`) geçebilirsin.\n\n***\n\n## Ne zaman kullanmamalısın?\n\nBu hook güçlü bir araç, ama her yerde kullanırsan React'in prop/state akışını devre dışı bırakmış olursun. Eğer bir işi prop veya state ile çözebiliyorsan, o yolu tercih et.\n\nÖrneğin bileşenin temasını, başlığını ya da içeriğini değiştirmek istiyorsan, bunun yolu her zaman prop'lardır. `useImperativeHandle` veri akışı için değil, **davranış tetiklemek** için var (focus, scroll, animasyon gibi).\n\n**❌ Yanlış**\n\n```jsx\nuseImperativeHandle(ref, () => ({\n  setTitle: (t) => setTitle(t),\n  setTheme: (t) => setTheme(t),\n}))\n```\n\n**✅ Doğru**\n\n```jsx\n<MyCard title=\"Yeni Başlık\" theme=\"dark\" />\n```\n\n***\n\n## Özet\n\n`useImperativeHandle`, React'in normal veri akışının (prop ve state) yeterli olmadığı anlarda devreye giren bir hook. Focus atma, scroll ettirme, animasyon tetikleme gibi **doğrudan davranış komutları** için tasarlanmış.\n\nProp veya state ile çözülebildiği sürece bu hook'a dönme. Ama gerçekten lazım olduğunda, bileşenini dışarıya ne kadar açacağını kontrol etmenin en temiz yolu bu.\n\n**Aklında tutman gerekenler:**\n\n* Her zaman `forwardRef` ile birlikte kullan (React 19 öncesi).\n* Dışarıya açtığın API'yi TypeScript ile mutlaka tiplendir.\n* Sadece davranış tetiklemek için kullan (focus, scroll vb.), state değiştirmek için değil.\n* Bileşenin iç detaylarını gizli tut — sadece parent'ın ihtiyacı olanı dışarıya ver.",
+        "status": "published",
+        "created_at": "2026-11-05T11:58:25.032995+00:00",
+        "updated_at": "2026-11-05T12:33:29.808+00:00"
+      }
+    ],
+    "media_usage": [
+      {
+        "id": "0a145158-f921-4a7c-a1bb-64d544300431",
+        "media_id": "859a7a24-bc47-4ab4-8f56-157630e10047",
+        "entity_type": "experience",
+        "entity_id": "d6e286cc-ecc0-4945-8961-5fbb867b48cf",
+        "field": "logo",
+        "label": "AKINROBOTICS",
+        "href": "/admin/experience/d6e286cc-ecc0-4945-8961-5fbb867b48cf",
+        "created_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "42f1b494-a932-48b2-aa32-247b7b504596",
+        "media_id": "5e183068-6833-4d79-a65c-771f651c9616",
+        "entity_type": "experience",
+        "entity_id": "adf2f216-cce9-44eb-ba7d-2269c80fdc2d",
+        "field": "logo",
+        "label": "Sofft IT Inc.",
+        "href": "/admin/experience/adf2f216-cce9-44eb-ba7d-2269c80fdc2d",
+        "created_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "df62149b-806a-41cd-839e-778eff3790ab",
+        "media_id": "0d977459-8481-4124-b2b4-b98950981888",
+        "entity_type": "project",
+        "entity_id": "88cff238-0e44-47d1-b6b5-c13fa9b44687",
+        "field": "icon",
+        "label": "Gitlab Todo Checker",
+        "href": "/admin/projects/88cff238-0e44-47d1-b6b5-c13fa9b44687",
+        "created_at": "2026-11-05T11:58:25.032995+00:00"
+      },
+      {
+        "id": "8abe8020-cc65-469a-a83b-7e960a9097a5",
+        "media_id": "c1493b9b-a8e8-4d96-ae96-e41252aa1bd8",
+        "entity_type": "profile",
+        "entity_id": "profile",
+        "field": "avatar",
+        "label": "Profile",
+        "href": "/admin/profile",
+        "created_at": "2026-11-05T11:58:46.393579+00:00"
+      },
+      {
+        "id": "eef1cac9-14ba-445d-a0e8-db483d9cfbdc",
+        "media_id": "43d78647-a51a-4130-9dd9-0f523ff4cf38",
+        "entity_type": "post",
+        "entity_id": "62beaefc-2e3e-47b8-ab50-7f3922b0a972",
+        "field": "cover",
+        "label": "What Is React useImperativeHandle? A Guide with Examples",
+        "href": "/admin/blog/62beaefc-2e3e-47b8-ab50-7f3922b0a972",
+        "created_at": "2026-11-05T12:33:29.855599+00:00"
+      }
+    ]
+  }
+}

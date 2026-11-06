@@ -76,6 +76,11 @@ export const siteSettings = pgTable("site_settings", {
     .$type<HomeSectionsSettings>()
     .notNull()
     .default({}),
+  /**
+   * When the content in `seed/` was applied (or skipped because the database
+   * already had content). Set once, so the seed never runs again.
+   */
+  contentSeededAt: timestamp("content_seeded_at", { withTimezone: true }),
   ...timestamps,
 })
 

@@ -36,6 +36,16 @@ The whole stack (app + Postgres + uploads volume) is defined in `compose.yaml`.
    - `SITE_NOINDEX=true` on non-production deployments (e.g. `dev.mehmetsahin.dev`): robots.txt blocks all crawlers and pages get `noindex`
 4. Add a domain pointing to service `app`, port `3000`, and deploy.
 
+### Initial content
+
+A fresh database is filled from `seed/` on its first start: `seed/data.json` (profile, career, projects, tech stack, bookmarks, blog posts) and `seed/media/` (the files they use). It runs once per database and never overwrites existing content. To refresh it from your local database:
+
+```bash
+pnpm db:seed:export
+```
+
+Media files that nothing uses are left out. Commit the `seed/` folder afterwards.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

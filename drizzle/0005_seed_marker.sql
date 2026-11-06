@@ -1,0 +1,1 @@
+ALTER TABLE "site_settings" ADD COLUMN "content_seeded_at" timestamp with time zone;

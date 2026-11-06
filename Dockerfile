@@ -35,6 +35,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 # SQL migrations, applied on server start (see src/instrumentation.ts).
 COPY --from=builder --chown=nextjs:nodejs /app/drizzle ./drizzle
+# Content for a fresh database, applied once on first start (src/db/seed.ts).
+COPY --from=builder --chown=nextjs:nodejs /app/seed ./seed
 
 RUN mkdir -p /app/uploads && chown nextjs:nodejs /app/uploads
 

@@ -36,6 +36,13 @@
       "when": 1793874141882,
       "tag": "0004_blog",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793947124058,
+      "tag": "0005_seed_marker",
+      "breakpoints": true
     }
   ]
 }
