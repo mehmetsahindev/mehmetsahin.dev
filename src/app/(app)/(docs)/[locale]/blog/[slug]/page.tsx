@@ -43,7 +43,6 @@ import {
   DocLeftCol,
   DocRightCol,
 } from "@/features/doc/components/doc-layout"
-import { LLMCopyButtonWithViewOptions } from "@/features/doc/components/doc-page-actions"
 import { DocPageRoot } from "@/features/doc/components/doc-page-root"
 import { DocShareMenu } from "@/features/doc/components/doc-share-menu"
 
@@ -177,7 +176,6 @@ export default async function PostPage({ params }: Props) {
             />
 
             <div className="flex items-center gap-2">
-              <LLMCopyButtonWithViewOptions markdownUrl={`${path}.md`} />
               <DocShareMenu title={post.title} url={path} />
               <NeighbourButton
                 post={previous}
