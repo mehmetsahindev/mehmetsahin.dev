@@ -1,4 +1,4 @@
-# Local development database. Production uses compose.yaml.
+# Local development database. Production uses docker-compose.yml.
 services:
   db:
     image: postgres:17-alpine
