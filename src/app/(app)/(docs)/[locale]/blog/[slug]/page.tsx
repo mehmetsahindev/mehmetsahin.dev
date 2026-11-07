@@ -176,6 +176,11 @@ export default async function PostPage({ params }: Props) {
             />
 
             <div className="flex items-center gap-2">
+              <PostLanguageSwitcher
+                locale={post.locale}
+                translations={post.translations}
+                label={t.readIn}
+              />
               <DocShareMenu title={post.title} url={path} />
               <NeighbourButton
                 post={previous}
@@ -203,14 +208,6 @@ export default async function PostPage({ params }: Props) {
 
           <DocContentCol>
             <Prose className="px-(--page-padding) pt-8 [--page-padding:--spacing(4)]">
-              <div className="not-prose mb-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                <PostLanguageSwitcher
-                  locale={post.locale}
-                  translations={post.translations}
-                  label={t.readIn}
-                />
-              </div>
-
               {post.description && (
                 <p className="text-muted-foreground">{post.description}</p>
               )}

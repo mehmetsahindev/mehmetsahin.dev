@@ -1,12 +1,16 @@
 import Link from "next/link"
 import { LOCALE_LABELS, LOCALE_TAGS, type Locale } from "@/i18n/config"
-import { LanguagesIcon } from "lucide-react"
+
+import { cn } from "@/lib/utils"
 
 import { postPath } from "../lib/paths"
 
+// Display order in the switch.
+const SWITCH_ORDER: Locale[] = ["en", "tr"]
+
 /**
- * Links to the other published languages of a post. Renders nothing when
- * the post exists in a single language.
+ * Segmented TR/EN switch between the published languages of a post. Renders
+ * nothing when the post exists in a single language.
  */
 export function PostLanguageSwitcher({
   locale,
@@ -17,30 +21,49 @@ export function PostLanguageSwitcher({
   translations: { locale: Locale; slug: string }[]
   label: string
 }) {
-  const others = translations.filter((item) => item.locale !== locale)
-  if (others.length === 0) return null
+  if (!translations.some((item) => item.locale !== locale)) return null
+
+  const items = [...translations].sort(
+    (a, b) => SWITCH_ORDER.indexOf(a.locale) - SWITCH_ORDER.indexOf(b.locale)
+  )
 
   return (
     <nav
       aria-label={label}
-      className="flex items-center gap-2 text-sm text-muted-foreground"
+      className="flex h-7 items-center rounded-md bg-secondary p-0.5"
     >
-      <LanguagesIcon className="size-4" aria-hidden />
-      <span className="sr-only sm:not-sr-only">{label}</span>
-      <ul className="flex items-center gap-1">
-        {others.map((item) => (
-          <li key={item.locale}>
-            <Link
-              href={postPath(item.locale, item.slug)}
-              hrefLang={LOCALE_TAGS[item.locale]}
-              lang={LOCALE_TAGS[item.locale]}
-              className="rounded-md px-1.5 py-0.5 font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              {LOCALE_LABELS[item.locale]}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {items.map((item) => {
+        const isCurrent = item.locale === locale
+        const className = cn(
+          "flex h-6 items-center rounded-[5px] px-2 text-xs font-medium transition-colors",
+          isCurrent
+            ? "bg-background text-foreground shadow-xs dark:bg-foreground/15"
+            : "text-muted-foreground hover:text-foreground"
+        )
+
+        return isCurrent ? (
+          <span
+            key={item.locale}
+            aria-current="page"
+            title={LOCALE_LABELS[item.locale]}
+            className={className}
+          >
+            {item.locale.toUpperCase()}
+          </span>
+        ) : (
+          <Link
+            key={item.locale}
+            href={postPath(item.locale, item.slug)}
+            hrefLang={LOCALE_TAGS[item.locale]}
+            lang={LOCALE_TAGS[item.locale]}
+            title={LOCALE_LABELS[item.locale]}
+            aria-label={LOCALE_LABELS[item.locale]}
+            className={className}
+          >
+            {item.locale.toUpperCase()}
+          </Link>
+        )
+      })}
     </nav>
   )
 }
