@@ -4,11 +4,11 @@
  */
 export const HOME_SECTIONS = [
   { id: "hello", label: "About" },
-  { id: "blog", label: "Blog" },
   { id: "stack", label: "Tech stack" },
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "projects", label: "Projects" },
+  { id: "blog", label: "Blog" },
 ] as const
 
 export type HomeSectionId = (typeof HOME_SECTIONS)[number]["id"]
