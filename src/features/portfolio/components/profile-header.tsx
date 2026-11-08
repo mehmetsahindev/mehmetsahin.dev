@@ -9,8 +9,13 @@ export async function ProfileHeader() {
 
   return (
     <div className="screen-line-bottom grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] overflow-y-clip border-x border-x-line after:z-1">
-      <figure className="relative col-span-2 p-2 sm:col-span-1 sm:col-start-2 sm:p-4">
-        <ProfileMark />
+      <figure className="relative col-span-2 p-2 sm:static sm:col-span-1 sm:col-start-2 sm:p-4">
+        {/* Sets the cover height. The mark is centred in the open area above
+            the line at the top of the avatar, across the full width. */}
+        <div className="aspect-11/6" />
+        <div className="absolute inset-0 flex items-center justify-center sm:bottom-40">
+          <ProfileMark className="w-[30%]" />
+        </div>
       </figure>
 
       <div className="flex flex-col sm:row-span-2 sm:row-start-1">
